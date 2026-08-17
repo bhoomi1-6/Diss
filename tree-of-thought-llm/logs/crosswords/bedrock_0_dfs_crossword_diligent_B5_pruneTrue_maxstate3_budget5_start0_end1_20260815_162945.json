@@ -1,0 +1,251 @@
+[
+    {
+        "nodes_explored": 5,
+        "candidates_evaluated": 34,
+        "candidates_pruned": 29,
+        "backtracks": [
+            {
+                "from_depth": 2,
+                "to_depth": 1,
+                "jump": 1,
+                "degenerate": true,
+                "reason": "no candidates proposed",
+                "rejected_action": "v5. drier",
+                "beta_raw_response": "I need to find the deepest recoverable prefix - the deepest step from which a different word choice could lead to a valid complete board.\n\nLet me analyze the situation:\n\n**Step 1: h2 = MOTOR**\n- This fills row 2: M O T O R\n- The crossing vertical words get: v1[2]=M, v2[2]=O, v3[2]=T, v4[2]=O, v5[2]=R\n\n**Step 2: v5 = DRIER**\n- This fills column 5: D, R, I, E, R\n- But v5[2] must equal h2[5] = R \u2713 (DRIER[2] = R, position 2 in DRIER is 'R') \u2713\n- So column 5: D(row1), R(row2), I(row3), E(row4), R(row5)\n\nThe failure is at step 2. Let me check if MOTOR (step 1) is recoverable - i.e., can a different v5 word work?\n\nv5 clue: \"Desiccator; more dry\" - the answer must be 5 letters, with v5[2]=R (from MOTOR).\n\nWords meaning \"more dry\" or \"desiccator\": DRIER (D-R-I-E-R) - position 2 is 'R' \u2713. \nOther options: DRYER (D-R-Y-E-R) - position 2 is 'R' \u2713.\n\nLet me check if DRYER works better:\n- Column 5 would be: D, R, Y, E, R\n- h3[5]=Y, h4[5]=E, h5[5]=R, h1[5]=D\n\nh3 clue: \"Pretentious; flowery\" - 5 letters ending in Y. Could be WORDY, SHOWY, GAUDY, FANCY, PROSY, FLOSY... \nh4 clue: \"A salon; a hall\" - 5 letters ending in E. FOYER? No, that's 5 letters: F-O-Y-E-R. SALON=5 but ends in N. ATELIER? No. SUITE? No E at end... wait SUITE ends in E! S-U-I-T-E. Or LOUNGE? No. FOYER ends in R. SALLE? S-A-L-L-E - ends in E \u2713\nh5 clue: \"To mock; to sneer\" - 5 letters ending in R. SNEER=S-N-E-E-R \u2713, JEER? No, 4 letters. SCOFF? No. SNEER ends in R \u2713.\n\nWith DRIER: h3[5]=I, h4[5]=E, h5[5]=R\n- h3 ending in I: WORDI? No. Pretentious/flowery ending in I - hard.\n- That's likely why DRIER failed.\n\nWith DRYER: h3[5]=Y, h4[5]=E, h5[5]=R\n- h3 ending in Y: WORDY, GAUDY, PROSY, SHOWY, FANCY, ORNATE? No. WORDY=pretentious \u2713, GAUDY=showy \u2713\n- h4 ending in E: SALLE, SUITE, AISLE...\n- h5 ending in R: SNEER, JEER(4)...\n\nThis seems more promising. So MOTOR (step 1) might be recoverable with DRYER instead of DRIER at step 2.\n\nTherefore, step 1 is the deepest recoverable prefix - we should restart from step 1 with a different choice for v5.\n\nWait, the question asks for the deepest step from which a DIFFERENT word choice could still lead to a fully correct board. Step 2 failed with DRIER, but DRYER might work. So step 1 is recoverable (keep MOTOR, try DRYER for v5).\n\nThe deepest recoverable prefix is step 1 - we keep h2=MOTOR and try a different v5.\n\nANSWER: 1",
+                "beta_parse_method": "structured",
+                "beta_model_call": true,
+                "cascade": false,
+                "cascade_id": 1,
+                "cascade_position": 1,
+                "explored_since_previous_beta": null,
+                "parent_fallback": true
+            },
+            {
+                "from_depth": 3,
+                "to_depth": 2,
+                "jump": 1,
+                "degenerate": true,
+                "reason": "pruned: 4 word(s) marked impossible",
+                "rejected_action": "h3. tumid",
+                "beta_raw_response": "I need to find the deepest step from which a different word choice could lead to a valid complete board.\n\nLet me analyze the constraints:\n\n**Step 1: h2 = MOTOR**\n- M(1,1), O(1,2), T(1,3), O(1,4), R(1,5)\n- This seems reasonable for \"an engine\"\n\n**Step 2: h5 = TAUNT**\n- T(5,1), A(5,2), U(5,3), N(5,4), T(5,5)\n- This seems reasonable for \"to mock; to sneer\"\n\n**Step 3: h3 = TUMID**\n- T(3,1), U(3,2), M(3,3), I(3,4), D(3,5)\n- This seems reasonable for \"pretentious; flowery\"\n\nNow let me check the vertical constraints with these three words filled:\n- v1: _,M,T,_,T - column 1: ?,M,T,?,T\n- v2: _,O,U,_,A - column 2: ?,O,U,?,A\n- v3: _,T,M,_,U - column 3: ?,T,M,?,U\n- v4: _,O,I,_,N - column 4: ?,O,I,?,N\n- v5: _,R,D,_,T - column 5: ?,R,D,?,T\n\nLet me check if these vertical patterns are satisfiable:\n\n**v1** (to heap): _,M,T,_,T - needs a 5-letter word for \"to heap\" with M at pos2, T at pos3, T at pos5. Hard to find... AMASS doesn't work. STACK? No. HUMMIT? No clear word.\n\n**v2** (Indian antelope): _,O,U,_,A - needs antelope with O at 2, U at 3, A at 5. Could be KOURA? GOUDA? Not an antelope clearly. SAIGA has S,A,I,G,A - no. CHIRU? No. BEIRA? No. Hmm.\n\n**v3** (to intend/plan/devise/nettle/guess): _,T,M,_,U - with T at 2, M at 3, U at 5. Hard...\n\n**v4** (a nozzle): _,O,I,_,N - with O at 2, I at 3, N at 5. SPIGOT? No. NOSIN? ROBIN? Not a nozzle. \n\n**v5** (desiccator; more dry): _,R,D,_,T - with R at 2, D at 3, T at 5. ARID + ? DRIEST? No. \n\nThe combination of h2=MOTOR and h3=TUMID creates very difficult vertical constraints. Let me check if h3=TUMID is the problem.\n\nWith just MOTOR (h2) and TAUNT (h5):\n- v1: ?,M,?,?,T\n- v2: ?,O,?,?,A\n- v3: ?,T,?,?,U\n- v4: ?,O,?,?,N\n- v5: ?,R,?,?,T\n\nThese are more flexible. The failure seems to come from adding TUMID at step 3.\n\nBut could MOTOR + TAUNT also be a dead end? Let me think about h3 alternatives. \"Pretentious; flowery\" = TUMID, TURGID (6 letters), ORNATE (6), FLORID (6), SHOWY... TUMID is the best 5-letter fit.\n\nActually, let me reconsider h2. Could \"an engine\" be something other than MOTOR? STEAM? TURBO? These are less direct. MOTOR is very clean.\n\nCould h5 be something other than TAUNT? \"To mock; to sneer\" = SCOFF, SNEER, JEER+S? TAUNT works well but SCOFF or SNEER could work too.\n\nThe issue is that MOTOR + TUMID creates very constrained verticals. If TAUNT is kept, the v columns with MOTOR+TUMID seem very hard. Step 3 (TUMID) is likely the problem, but could step 2 (TAUNT) also foreclose things?\n\nGiven that MOTOR seems solid and TAUNT seems solid, but their combination with TUMID fails, the deepest recoverable prefix is step 2 - we can try a different h3 word. But if TUMID is the only valid answer for h3, then step 2 might be the issue.\n\nSince TUMID is the standard answer for \"pretentious; flowery\" in 5 letters, and it fails, the issue might be with step 2 (TAUNT) or step 1 (MOTOR). Step 2 is the deepest recoverable prefix.\n\nANSWER: 2",
+                "beta_parse_method": "structured",
+                "beta_model_call": true,
+                "cascade": false,
+                "cascade_id": 2,
+                "cascade_position": 1,
+                "explored_since_previous_beta": 2,
+                "parent_fallback": true
+            },
+            {
+                "from_depth": 3,
+                "to_depth": 1,
+                "jump": 2,
+                "degenerate": false,
+                "reason": "pruned: 5 word(s) marked impossible",
+                "rejected_action": "h4. foyer",
+                "beta_raw_response": "I need to find the deepest step from which a different word choice could lead to a valid board.\n\nLet me analyze the constraints:\n\n**Step 1: h2 = MOTOR**\n- M(1,1), O(1,2), T(1,3), O(1,4), R(1,5)\n- This seems reasonable for \"an engine\"\n\n**Step 2: h5 = TAUNT**\n- T(5,1), A(5,2), U(5,3), N(5,4), T(5,5)\n- This seems reasonable for \"to mock; to sneer\"\n\n**Step 3: h4 = FOYER**\n- F(4,1), O(4,2), Y(4,3), E(4,4), R(4,5)\n- This seems reasonable for \"a salon; a hall\"\n\nNow let me check the vertical constraints with these three words filled:\n- v1: _,M,_,F,T - needs a 5-letter word with M at position 2, F at position 4, T at position 5\n- v2: _,O,_,O,A - needs a 5-letter word with O at position 2, O at position 4, A at position 5\n- v3: _,T,_,Y,U - needs a 5-letter word with T at position 2, Y at position 4, U at position 5\n- v4: _,O,_,E,N - needs a 5-letter word with O at position 2, E at position 4, N at position 5\n- v5: _,R,_,R,T - needs a 5-letter word with R at position 2, R at position 4, T at position 5\n\nLet me check v5: _R_RT - \"desiccator; more dry\" - DRYER? No, that's D,R,Y,E,R. What about DRART? No. This is very constrained. _R_RT doesn't easily give \"more dry.\" DRYER is 5 letters but pattern is D,R,Y,E,R not _,R,_,R,T.\n\nLet me check v2: _OOA_ wait - v2 col 2: row1=O, row2=O, row3=?, row4=O, row5=A. Pattern: O,O,_,O,A - \"an Indian antelope\" - GOORA? KOOKA? This seems very hard.\n\nLet me check v4: col4: row1=?, row2=O, row3=?, row4=E, row5=N - _O_EN - \"a nozzle\" - TOKEN? No. ROVEN? LUMEN? No. BOKEN? WOKEN? These don't mean nozzle. NOZZLE is 6 letters. SPOUT, SNOUT... _O_EN doesn't fit well.\n\nSo FOYER at step 3 seems to be the problem. Let me check if FOYER is recoverable - can a different h4 word work?\n\nWith MOTOR (row2) and TAUNT (row5), the vertical constraints for v4 (col4) are: ?,O,?,?,N and v5 (col5) are: ?,R,?,?,T.\n\nFor h4, col4 must work with v4 and col5 must work with v5. FOYER gives E at (4,4) and R at (4,5).\n\nv5 pattern with FOYER: ?,R,?,R,T - \"desiccator; more dry\" - DRYER? D,R,Y,E,R - no. DRART? Hmm. Actually wait - could it be DRIER? D,R,I,E,R - no R at position 4... \n\nWhat about step 2 (TAUNT)? With v5 needing \"more dry\" ending in T at row5... DRIEST is 6 letters. DRIER ends in R. If h5 were different, v5 col5 wouldn't need to end in T.\n\nLet me reconsider step 2. If TAUNT is wrong, then v5 just needs to end in something else. \"More dry\" = DRIER (5 letters) - that would put R at row5,col5, meaning h5 ends in R.\n\nWords meaning \"to mock/sneer\" ending in R: SNEER (5 letters)! S,N,E,E,R.\n\nWith h5=SNEER: v5 col5: ?,R,?,?,R - DRIER fits! D,R,I,E,R \u2713\n\nSo step 2 (TAUNT) is the issue. Step 1 (MOTOR) might still be valid.\n\nANSWER: 1",
+                "beta_parse_method": "structured",
+                "beta_model_call": true,
+                "cascade": false,
+                "cascade_id": 3,
+                "cascade_position": 1,
+                "explored_since_previous_beta": 1,
+                "parent_fallback": false
+            },
+            {
+                "from_depth": 1,
+                "to_depth": 0,
+                "jump": 1,
+                "degenerate": true,
+                "reason": "all candidates exhausted",
+                "rejected_action": "h2. motor",
+                "beta_raw_response": "Looking at this problem, I need to determine if step 1 (filling h2 with \"MOTOR\") is recoverable or if we need to go back to step 0.\n\nLet me analyze the constraints. With \"MOTOR\" in row 2:\n- v1[2] = M\n- v2[2] = O\n- v3[2] = T\n- v4[2] = O\n- v5[2] = R\n\nNow let me check if the crossing vertical clues can work with these letters:\n\n**v1 (to heap):** needs M in position 2. \"AMASS\" - no M in pos 2. \"STACK\" - no. \"MOUND\" - M is in pos 1. \"EMBANK\" - too long. \"PILE\" - 4 letters. Hmm, 5-letter words meaning \"to heap\" with M in position 2: \"AMASS\" has A-M-A-S-S, M in pos 2. Yes! That works.\n\n**v2 (Indian antelope):** needs O in position 2. \"BONGO\" - B-O-N-G-O, O in pos 2. \"GORAL\" - G-O-R-A-L, O in pos 2. \"KORIN\" - no. \"CHIRU\" - no. \"SAIGA\" - no. \"GORAL\" works with O in pos 2.\n\n**v3 (to intend/plan/devise/nettle/guess):** needs T in position 2. \"ETTLE\" - E-T-T-L-E, T in pos 2. That's a dialectal word meaning to intend/plan. Works!\n\n**v4 (a nozzle):** needs O in position 2. \"SPOUT\" - S-P-O-U-T, O in pos 3. \"SNOUT\" - S-N-O-U-T, O in pos 3. \"NOSEL\" - N-O-S-E-L, O in pos 2. \"NOZLE\" - not standard. Hmm. What about \"SPILE\"? No. \"TOUSE\"? No. This is tricky - need O in position 2.\n\nLet me think more carefully. A nozzle with O in position 2: \"BOCAL\"? No. \"NOSEL\" (archaic nozzle) = N-O-S-E-L. That has O in position 2!\n\n**v5 (desiccator; more dry):** needs R in position 2. \"DRIER\" - D-R-I-E-R, R in pos 2. Yes! That works perfectly.\n\nSo it seems MOTOR could potentially work with the right crossing words. The branch failed, but that might be because the specific search path couldn't find completions for the horizontal words given the vertical constraints.\n\nLet me check if the horizontals can work:\n- h1 (agendum): crosses v1[1], v2[1], v3[1], v4[1], v5[1] = A, G, E, N, D \u2192 \"AGEND\" - that's not quite right, but \"AGENDA\" is 6 letters. Wait: A-G-E-N-D = positions from AMASS[1]=A, GORAL[1]=G, ETTLE[1]=E, NOSEL[1]=N, DRIER[1]=D \u2192 \"AGEND\" - hmm, not a word. \n\nActually \"ITEM\" is 4 letters. What about \"THING\"? The answer for h1 needs to be a 5-letter word. With these crossings giving A_G_E_N_D - that spells AGEND which isn't standard.\n\nThe branch failed, suggesting MOTOR doesn't work. Since step 1 is the only step taken and it failed, the deepest recoverable prefix is step 0 (the root).\n\nANSWER: 0",
+                "beta_parse_method": "structured",
+                "beta_model_call": true,
+                "cascade": true,
+                "cascade_id": 3,
+                "cascade_position": 2,
+                "explored_since_previous_beta": 0,
+                "parent_fallback": true
+            }
+        ],
+        "solution": {
+            "actions": [
+                "h2. motor"
+            ],
+            "board": "_____MOTOR_______________",
+            "r_word": 0.1,
+            "r_letter": 0.2,
+            "r_game": false
+        },
+        "method": "dfs_crossword_diligent",
+        "num_backtracks": 4,
+        "mean_jump_size": 1.25,
+        "pct_jumps_gt1": 0.25,
+        "num_backtracks_raw": 4,
+        "mean_jump_size_raw": 1.25,
+        "pct_jumps_gt1_raw": 0.25,
+        "num_logical_backtracks": 3,
+        "mean_jump_size_merged": 1.6666666666666667,
+        "pct_jumps_gt1_merged": 0.3333333333333333,
+        "beta_calls": 4,
+        "num_cascaded_calls": 1,
+        "pct_cascaded_calls": 0.25,
+        "cascade_chain_length_histogram": {
+            "1": 2,
+            "2": 1
+        },
+        "backtracks_merged": [
+            {
+                "origin_depth": 2,
+                "final_target_depth": 1,
+                "jump": 1,
+                "degenerate": true,
+                "cascade_chain_length": 1,
+                "reasons": [
+                    "no candidates proposed"
+                ],
+                "raw_events": [
+                    {
+                        "from_depth": 2,
+                        "to_depth": 1,
+                        "jump": 1,
+                        "degenerate": true,
+                        "reason": "no candidates proposed",
+                        "rejected_action": "v5. drier",
+                        "beta_raw_response": "I need to find the deepest recoverable prefix - the deepest step from which a different word choice could lead to a valid complete board.\n\nLet me analyze the situation:\n\n**Step 1: h2 = MOTOR**\n- This fills row 2: M O T O R\n- The crossing vertical words get: v1[2]=M, v2[2]=O, v3[2]=T, v4[2]=O, v5[2]=R\n\n**Step 2: v5 = DRIER**\n- This fills column 5: D, R, I, E, R\n- But v5[2] must equal h2[5] = R \u2713 (DRIER[2] = R, position 2 in DRIER is 'R') \u2713\n- So column 5: D(row1), R(row2), I(row3), E(row4), R(row5)\n\nThe failure is at step 2. Let me check if MOTOR (step 1) is recoverable - i.e., can a different v5 word work?\n\nv5 clue: \"Desiccator; more dry\" - the answer must be 5 letters, with v5[2]=R (from MOTOR).\n\nWords meaning \"more dry\" or \"desiccator\": DRIER (D-R-I-E-R) - position 2 is 'R' \u2713. \nOther options: DRYER (D-R-Y-E-R) - position 2 is 'R' \u2713.\n\nLet me check if DRYER works better:\n- Column 5 would be: D, R, Y, E, R\n- h3[5]=Y, h4[5]=E, h5[5]=R, h1[5]=D\n\nh3 clue: \"Pretentious; flowery\" - 5 letters ending in Y. Could be WORDY, SHOWY, GAUDY, FANCY, PROSY, FLOSY... \nh4 clue: \"A salon; a hall\" - 5 letters ending in E. FOYER? No, that's 5 letters: F-O-Y-E-R. SALON=5 but ends in N. ATELIER? No. SUITE? No E at end... wait SUITE ends in E! S-U-I-T-E. Or LOUNGE? No. FOYER ends in R. SALLE? S-A-L-L-E - ends in E \u2713\nh5 clue: \"To mock; to sneer\" - 5 letters ending in R. SNEER=S-N-E-E-R \u2713, JEER? No, 4 letters. SCOFF? No. SNEER ends in R \u2713.\n\nWith DRIER: h3[5]=I, h4[5]=E, h5[5]=R\n- h3 ending in I: WORDI? No. Pretentious/flowery ending in I - hard.\n- That's likely why DRIER failed.\n\nWith DRYER: h3[5]=Y, h4[5]=E, h5[5]=R\n- h3 ending in Y: WORDY, GAUDY, PROSY, SHOWY, FANCY, ORNATE? No. WORDY=pretentious \u2713, GAUDY=showy \u2713\n- h4 ending in E: SALLE, SUITE, AISLE...\n- h5 ending in R: SNEER, JEER(4)...\n\nThis seems more promising. So MOTOR (step 1) might be recoverable with DRYER instead of DRIER at step 2.\n\nTherefore, step 1 is the deepest recoverable prefix - we should restart from step 1 with a different choice for v5.\n\nWait, the question asks for the deepest step from which a DIFFERENT word choice could still lead to a fully correct board. Step 2 failed with DRIER, but DRYER might work. So step 1 is recoverable (keep MOTOR, try DRYER for v5).\n\nThe deepest recoverable prefix is step 1 - we keep h2=MOTOR and try a different v5.\n\nANSWER: 1",
+                        "beta_parse_method": "structured",
+                        "beta_model_call": true,
+                        "cascade": false,
+                        "cascade_id": 1,
+                        "cascade_position": 1,
+                        "explored_since_previous_beta": null,
+                        "parent_fallback": true
+                    }
+                ]
+            },
+            {
+                "origin_depth": 3,
+                "final_target_depth": 2,
+                "jump": 1,
+                "degenerate": true,
+                "cascade_chain_length": 1,
+                "reasons": [
+                    "pruned: 4 word(s) marked impossible"
+                ],
+                "raw_events": [
+                    {
+                        "from_depth": 3,
+                        "to_depth": 2,
+                        "jump": 1,
+                        "degenerate": true,
+                        "reason": "pruned: 4 word(s) marked impossible",
+                        "rejected_action": "h3. tumid",
+                        "beta_raw_response": "I need to find the deepest step from which a different word choice could lead to a valid complete board.\n\nLet me analyze the constraints:\n\n**Step 1: h2 = MOTOR**\n- M(1,1), O(1,2), T(1,3), O(1,4), R(1,5)\n- This seems reasonable for \"an engine\"\n\n**Step 2: h5 = TAUNT**\n- T(5,1), A(5,2), U(5,3), N(5,4), T(5,5)\n- This seems reasonable for \"to mock; to sneer\"\n\n**Step 3: h3 = TUMID**\n- T(3,1), U(3,2), M(3,3), I(3,4), D(3,5)\n- This seems reasonable for \"pretentious; flowery\"\n\nNow let me check the vertical constraints with these three words filled:\n- v1: _,M,T,_,T - column 1: ?,M,T,?,T\n- v2: _,O,U,_,A - column 2: ?,O,U,?,A\n- v3: _,T,M,_,U - column 3: ?,T,M,?,U\n- v4: _,O,I,_,N - column 4: ?,O,I,?,N\n- v5: _,R,D,_,T - column 5: ?,R,D,?,T\n\nLet me check if these vertical patterns are satisfiable:\n\n**v1** (to heap): _,M,T,_,T - needs a 5-letter word for \"to heap\" with M at pos2, T at pos3, T at pos5. Hard to find... AMASS doesn't work. STACK? No. HUMMIT? No clear word.\n\n**v2** (Indian antelope): _,O,U,_,A - needs antelope with O at 2, U at 3, A at 5. Could be KOURA? GOUDA? Not an antelope clearly. SAIGA has S,A,I,G,A - no. CHIRU? No. BEIRA? No. Hmm.\n\n**v3** (to intend/plan/devise/nettle/guess): _,T,M,_,U - with T at 2, M at 3, U at 5. Hard...\n\n**v4** (a nozzle): _,O,I,_,N - with O at 2, I at 3, N at 5. SPIGOT? No. NOSIN? ROBIN? Not a nozzle. \n\n**v5** (desiccator; more dry): _,R,D,_,T - with R at 2, D at 3, T at 5. ARID + ? DRIEST? No. \n\nThe combination of h2=MOTOR and h3=TUMID creates very difficult vertical constraints. Let me check if h3=TUMID is the problem.\n\nWith just MOTOR (h2) and TAUNT (h5):\n- v1: ?,M,?,?,T\n- v2: ?,O,?,?,A\n- v3: ?,T,?,?,U\n- v4: ?,O,?,?,N\n- v5: ?,R,?,?,T\n\nThese are more flexible. The failure seems to come from adding TUMID at step 3.\n\nBut could MOTOR + TAUNT also be a dead end? Let me think about h3 alternatives. \"Pretentious; flowery\" = TUMID, TURGID (6 letters), ORNATE (6), FLORID (6), SHOWY... TUMID is the best 5-letter fit.\n\nActually, let me reconsider h2. Could \"an engine\" be something other than MOTOR? STEAM? TURBO? These are less direct. MOTOR is very clean.\n\nCould h5 be something other than TAUNT? \"To mock; to sneer\" = SCOFF, SNEER, JEER+S? TAUNT works well but SCOFF or SNEER could work too.\n\nThe issue is that MOTOR + TUMID creates very constrained verticals. If TAUNT is kept, the v columns with MOTOR+TUMID seem very hard. Step 3 (TUMID) is likely the problem, but could step 2 (TAUNT) also foreclose things?\n\nGiven that MOTOR seems solid and TAUNT seems solid, but their combination with TUMID fails, the deepest recoverable prefix is step 2 - we can try a different h3 word. But if TUMID is the only valid answer for h3, then step 2 might be the issue.\n\nSince TUMID is the standard answer for \"pretentious; flowery\" in 5 letters, and it fails, the issue might be with step 2 (TAUNT) or step 1 (MOTOR). Step 2 is the deepest recoverable prefix.\n\nANSWER: 2",
+                        "beta_parse_method": "structured",
+                        "beta_model_call": true,
+                        "cascade": false,
+                        "cascade_id": 2,
+                        "cascade_position": 1,
+                        "explored_since_previous_beta": 2,
+                        "parent_fallback": true
+                    }
+                ]
+            },
+            {
+                "origin_depth": 3,
+                "final_target_depth": 0,
+                "jump": 3,
+                "degenerate": false,
+                "cascade_chain_length": 2,
+                "reasons": [
+                    "pruned: 5 word(s) marked impossible",
+                    "all candidates exhausted"
+                ],
+                "raw_events": [
+                    {
+                        "from_depth": 3,
+                        "to_depth": 1,
+                        "jump": 2,
+                        "degenerate": false,
+                        "reason": "pruned: 5 word(s) marked impossible",
+                        "rejected_action": "h4. foyer",
+                        "beta_raw_response": "I need to find the deepest step from which a different word choice could lead to a valid board.\n\nLet me analyze the constraints:\n\n**Step 1: h2 = MOTOR**\n- M(1,1), O(1,2), T(1,3), O(1,4), R(1,5)\n- This seems reasonable for \"an engine\"\n\n**Step 2: h5 = TAUNT**\n- T(5,1), A(5,2), U(5,3), N(5,4), T(5,5)\n- This seems reasonable for \"to mock; to sneer\"\n\n**Step 3: h4 = FOYER**\n- F(4,1), O(4,2), Y(4,3), E(4,4), R(4,5)\n- This seems reasonable for \"a salon; a hall\"\n\nNow let me check the vertical constraints with these three words filled:\n- v1: _,M,_,F,T - needs a 5-letter word with M at position 2, F at position 4, T at position 5\n- v2: _,O,_,O,A - needs a 5-letter word with O at position 2, O at position 4, A at position 5\n- v3: _,T,_,Y,U - needs a 5-letter word with T at position 2, Y at position 4, U at position 5\n- v4: _,O,_,E,N - needs a 5-letter word with O at position 2, E at position 4, N at position 5\n- v5: _,R,_,R,T - needs a 5-letter word with R at position 2, R at position 4, T at position 5\n\nLet me check v5: _R_RT - \"desiccator; more dry\" - DRYER? No, that's D,R,Y,E,R. What about DRART? No. This is very constrained. _R_RT doesn't easily give \"more dry.\" DRYER is 5 letters but pattern is D,R,Y,E,R not _,R,_,R,T.\n\nLet me check v2: _OOA_ wait - v2 col 2: row1=O, row2=O, row3=?, row4=O, row5=A. Pattern: O,O,_,O,A - \"an Indian antelope\" - GOORA? KOOKA? This seems very hard.\n\nLet me check v4: col4: row1=?, row2=O, row3=?, row4=E, row5=N - _O_EN - \"a nozzle\" - TOKEN? No. ROVEN? LUMEN? No. BOKEN? WOKEN? These don't mean nozzle. NOZZLE is 6 letters. SPOUT, SNOUT... _O_EN doesn't fit well.\n\nSo FOYER at step 3 seems to be the problem. Let me check if FOYER is recoverable - can a different h4 word work?\n\nWith MOTOR (row2) and TAUNT (row5), the vertical constraints for v4 (col4) are: ?,O,?,?,N and v5 (col5) are: ?,R,?,?,T.\n\nFor h4, col4 must work with v4 and col5 must work with v5. FOYER gives E at (4,4) and R at (4,5).\n\nv5 pattern with FOYER: ?,R,?,R,T - \"desiccator; more dry\" - DRYER? D,R,Y,E,R - no. DRART? Hmm. Actually wait - could it be DRIER? D,R,I,E,R - no R at position 4... \n\nWhat about step 2 (TAUNT)? With v5 needing \"more dry\" ending in T at row5... DRIEST is 6 letters. DRIER ends in R. If h5 were different, v5 col5 wouldn't need to end in T.\n\nLet me reconsider step 2. If TAUNT is wrong, then v5 just needs to end in something else. \"More dry\" = DRIER (5 letters) - that would put R at row5,col5, meaning h5 ends in R.\n\nWords meaning \"to mock/sneer\" ending in R: SNEER (5 letters)! S,N,E,E,R.\n\nWith h5=SNEER: v5 col5: ?,R,?,?,R - DRIER fits! D,R,I,E,R \u2713\n\nSo step 2 (TAUNT) is the issue. Step 1 (MOTOR) might still be valid.\n\nANSWER: 1",
+                        "beta_parse_method": "structured",
+                        "beta_model_call": true,
+                        "cascade": false,
+                        "cascade_id": 3,
+                        "cascade_position": 1,
+                        "explored_since_previous_beta": 1,
+                        "parent_fallback": false
+                    },
+                    {
+                        "from_depth": 1,
+                        "to_depth": 0,
+                        "jump": 1,
+                        "degenerate": true,
+                        "reason": "all candidates exhausted",
+                        "rejected_action": "h2. motor",
+                        "beta_raw_response": "Looking at this problem, I need to determine if step 1 (filling h2 with \"MOTOR\") is recoverable or if we need to go back to step 0.\n\nLet me analyze the constraints. With \"MOTOR\" in row 2:\n- v1[2] = M\n- v2[2] = O\n- v3[2] = T\n- v4[2] = O\n- v5[2] = R\n\nNow let me check if the crossing vertical clues can work with these letters:\n\n**v1 (to heap):** needs M in position 2. \"AMASS\" - no M in pos 2. \"STACK\" - no. \"MOUND\" - M is in pos 1. \"EMBANK\" - too long. \"PILE\" - 4 letters. Hmm, 5-letter words meaning \"to heap\" with M in position 2: \"AMASS\" has A-M-A-S-S, M in pos 2. Yes! That works.\n\n**v2 (Indian antelope):** needs O in position 2. \"BONGO\" - B-O-N-G-O, O in pos 2. \"GORAL\" - G-O-R-A-L, O in pos 2. \"KORIN\" - no. \"CHIRU\" - no. \"SAIGA\" - no. \"GORAL\" works with O in pos 2.\n\n**v3 (to intend/plan/devise/nettle/guess):** needs T in position 2. \"ETTLE\" - E-T-T-L-E, T in pos 2. That's a dialectal word meaning to intend/plan. Works!\n\n**v4 (a nozzle):** needs O in position 2. \"SPOUT\" - S-P-O-U-T, O in pos 3. \"SNOUT\" - S-N-O-U-T, O in pos 3. \"NOSEL\" - N-O-S-E-L, O in pos 2. \"NOZLE\" - not standard. Hmm. What about \"SPILE\"? No. \"TOUSE\"? No. This is tricky - need O in position 2.\n\nLet me think more carefully. A nozzle with O in position 2: \"BOCAL\"? No. \"NOSEL\" (archaic nozzle) = N-O-S-E-L. That has O in position 2!\n\n**v5 (desiccator; more dry):** needs R in position 2. \"DRIER\" - D-R-I-E-R, R in pos 2. Yes! That works perfectly.\n\nSo it seems MOTOR could potentially work with the right crossing words. The branch failed, but that might be because the specific search path couldn't find completions for the horizontal words given the vertical constraints.\n\nLet me check if the horizontals can work:\n- h1 (agendum): crosses v1[1], v2[1], v3[1], v4[1], v5[1] = A, G, E, N, D \u2192 \"AGEND\" - that's not quite right, but \"AGENDA\" is 6 letters. Wait: A-G-E-N-D = positions from AMASS[1]=A, GORAL[1]=G, ETTLE[1]=E, NOSEL[1]=N, DRIER[1]=D \u2192 \"AGEND\" - hmm, not a word. \n\nActually \"ITEM\" is 4 letters. What about \"THING\"? The answer for h1 needs to be a 5-letter word. With these crossings giving A_G_E_N_D - that spells AGEND which isn't standard.\n\nThe branch failed, suggesting MOTOR doesn't work. Since step 1 is the only step taken and it failed, the deepest recoverable prefix is step 0 (the root).\n\nANSWER: 0",
+                        "beta_parse_method": "structured",
+                        "beta_model_call": true,
+                        "cascade": true,
+                        "cascade_id": 3,
+                        "cascade_position": 2,
+                        "explored_since_previous_beta": 0,
+                        "parent_fallback": true
+                    }
+                ]
+            }
+        ],
+        "num_unrecoverable": 0,
+        "selection_method": "best_r_word",
+        "max_depth": 3,
+        "selected_depth": 1,
+        "selection_tie": true,
+        "idx": 0,
+        "ys": [
+            "_ _ _ _ _\nM O T O R\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _"
+        ],
+        "infos": [
+            {
+                "r_letter": 0.2,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            }
+        ],
+        "usage_this_puzzle": {
+            "completion_tokens": 26455,
+            "prompt_tokens": 23784,
+            "cost": 0.156059
+        },
+        "usage_so_far": {
+            "completion_tokens": 26455,
+            "prompt_tokens": 23784,
+            "cost": 0.156059
+        },
+        "config": {
+            "backend": "bedrock",
+            "temperature": 0,
+            "task": "crosswords",
+            "task_start_index": 0,
+            "task_end_index": 1,
+            "naive_run": false,
+            "prompt_sample": null,
+            "method_generate": null,
+            "method_evaluate": null,
+            "method_select": "greedy",
+            "n_generate_sample": 5,
+            "n_evaluate_sample": 1,
+            "n_select_sample": 1,
+            "method_search": "dfs_crossword_nonparent",
+            "v_th": 0.5,
+            "node_budget": 5,
+            "verbose": true,
+            "max_per_state": 3,
+            "no_prune": false,
+            "selection_method": "best_r_word"
+        }
+    }
+]

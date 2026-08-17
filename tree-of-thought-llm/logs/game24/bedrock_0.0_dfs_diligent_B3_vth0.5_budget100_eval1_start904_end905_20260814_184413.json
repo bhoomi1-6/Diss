@@ -1,0 +1,111 @@
+[
+    {
+        "steps": [],
+        "nodes_explored": 22,
+        "candidates_evaluated": 54,
+        "candidates_pruned": 32,
+        "backtracks": [
+            {
+                "from_depth": 2,
+                "to_depth": 0,
+                "jump": 2,
+                "degenerate": false,
+                "reason": "all pruned",
+                "rejected_proposal": "7 + 9 = 16 (left: 6 8 16)\n8 + 16 = 24 (left: 6 24)\n",
+                "beta_raw_response": "I need to find the deepest step from which a different continuation could reach a correct solution for the numbers 6, 7, 8, 9 (target 24).\n\nLet me first verify the failed path:\n- Step 1: 7 + 9 = 16, leaving {6, 8, 16}\n- Step 2: 8 + 16 = 24, leaving {6, 24} \u2014 this fails because we still have 6 left and need to use all numbers.\n\nNow let me check if Step 1 (having {6, 8, 16}) is recoverable \u2014 can we reach 24 from {6, 8, 16}?\n\nPossible operations with {6, 8, 16}:\n- 6 + 8 = 14, then 14 + 16 = 30, 16 - 14 = 2, 14 * 16 = 224, 16/14 no\n- 6 * 8 = 48, then 48 - 16 = 32, 48/16 = 3, 48 + 16 = 64, 16 - 48 no\n- 6 + 16 = 22, then 22 + 8 = 30, 22 - 8 = 14, 22 * 8 = 176, 8 - 22 no\n- 6 * 16 = 96, then 96/8 = 12, 96 - 8 = 88, 96 + 8 = 104\n- 8 + 16 = 24, then 24 + 6 = 30, 24 - 6 = 18, 24 * 6 = 144, 24/6 = 4 \u2717\n- 8 * 16 = 128, too big\n- 16 - 8 = 8, then 8 * 6 = 48, 8 + 6 = 14, 8 - 6 = 2, 8/6 no\n- 16/8 = 2, then 2 * 6 = 12, 2 + 6 = 8, 6 - 2 = 4, 6/2 = 3\n- 8 - 6 = 2, then 2 * 16 = 32, 2 + 16 = 18, 16 - 2 = 14, 16/2 = 8\n- 6 - 8 = -2, then -2 + 16 = 14, 16 - (-2) = 18, -2 * 16 = -32\n\nNone of these give 24 from {6, 8, 16}. So Step 1 is a dead end.\n\nLet me verify the root is recoverable by checking if 6,7,8,9 can make 24:\n- 8 * (9 - 6) = 8 * 3 = 24 \u2713\n\nYes, the root is recoverable.\n\nANSWER: 0",
+                "beta_parse_method": "structured",
+                "beta_model_call": true,
+                "cascade": false,
+                "cascade_id": 1,
+                "cascade_position": 1,
+                "explored_since_previous_beta": null
+            }
+        ],
+        "solution": "9 - 7 = 2 (left: 2 6 8)\n8 / 2 = 4 (left: 4 6)\n4 * 6 = 24 (left: 24)\n",
+        "method": "dfs_diligent",
+        "num_backtracks": 1,
+        "mean_jump_size": 2.0,
+        "pct_jumps_gt1": 1.0,
+        "num_backtracks_raw": 1,
+        "mean_jump_size_raw": 2.0,
+        "pct_jumps_gt1_raw": 1.0,
+        "num_logical_backtracks": 1,
+        "mean_jump_size_merged": 2.0,
+        "pct_jumps_gt1_merged": 1.0,
+        "beta_calls": 1,
+        "num_cascaded_calls": 0,
+        "pct_cascaded_calls": 0.0,
+        "cascade_chain_length_histogram": {
+            "1": 1
+        },
+        "backtracks_merged": [
+            {
+                "origin_depth": 2,
+                "final_target_depth": 0,
+                "jump": 2,
+                "degenerate": false,
+                "cascade_chain_length": 1,
+                "reasons": [
+                    "all pruned"
+                ],
+                "raw_events": [
+                    {
+                        "from_depth": 2,
+                        "to_depth": 0,
+                        "jump": 2,
+                        "degenerate": false,
+                        "reason": "all pruned",
+                        "rejected_proposal": "7 + 9 = 16 (left: 6 8 16)\n8 + 16 = 24 (left: 6 24)\n",
+                        "beta_raw_response": "I need to find the deepest step from which a different continuation could reach a correct solution for the numbers 6, 7, 8, 9 (target 24).\n\nLet me first verify the failed path:\n- Step 1: 7 + 9 = 16, leaving {6, 8, 16}\n- Step 2: 8 + 16 = 24, leaving {6, 24} \u2014 this fails because we still have 6 left and need to use all numbers.\n\nNow let me check if Step 1 (having {6, 8, 16}) is recoverable \u2014 can we reach 24 from {6, 8, 16}?\n\nPossible operations with {6, 8, 16}:\n- 6 + 8 = 14, then 14 + 16 = 30, 16 - 14 = 2, 14 * 16 = 224, 16/14 no\n- 6 * 8 = 48, then 48 - 16 = 32, 48/16 = 3, 48 + 16 = 64, 16 - 48 no\n- 6 + 16 = 22, then 22 + 8 = 30, 22 - 8 = 14, 22 * 8 = 176, 8 - 22 no\n- 6 * 16 = 96, then 96/8 = 12, 96 - 8 = 88, 96 + 8 = 104\n- 8 + 16 = 24, then 24 + 6 = 30, 24 - 6 = 18, 24 * 6 = 144, 24/6 = 4 \u2717\n- 8 * 16 = 128, too big\n- 16 - 8 = 8, then 8 * 6 = 48, 8 + 6 = 14, 8 - 6 = 2, 8/6 no\n- 16/8 = 2, then 2 * 6 = 12, 2 + 6 = 8, 6 - 2 = 4, 6/2 = 3\n- 8 - 6 = 2, then 2 * 16 = 32, 2 + 16 = 18, 16 - 2 = 14, 16/2 = 8\n- 6 - 8 = -2, then -2 + 16 = 14, 16 - (-2) = 18, -2 * 16 = -32\n\nNone of these give 24 from {6, 8, 16}. So Step 1 is a dead end.\n\nLet me verify the root is recoverable by checking if 6,7,8,9 can make 24:\n- 8 * (9 - 6) = 8 * 3 = 24 \u2713\n\nYes, the root is recoverable.\n\nANSWER: 0",
+                        "beta_parse_method": "structured",
+                        "beta_model_call": true,
+                        "cascade": false,
+                        "cascade_id": 1,
+                        "cascade_position": 1,
+                        "explored_since_previous_beta": null
+                    }
+                ]
+            }
+        ],
+        "idx": 904,
+        "ys": [
+            "9 - 7 = 2 (left: 2 6 8)\n8 / 2 = 4 (left: 4 6)\n4 * 6 = 24 (left: 24)\n"
+        ],
+        "infos": [
+            {
+                "r": 1
+            }
+        ],
+        "usage_this_puzzle": {
+            "completion_tokens": 8253,
+            "prompt_tokens": 25846,
+            "cost": 0.067111
+        },
+        "usage_so_far": {
+            "completion_tokens": 8253,
+            "prompt_tokens": 25846,
+            "cost": 0.067111
+        },
+        "config": {
+            "backend": "bedrock",
+            "temperature": 0.0,
+            "task": "game24",
+            "task_start_index": 904,
+            "task_end_index": 905,
+            "naive_run": false,
+            "prompt_sample": null,
+            "method_generate": null,
+            "method_evaluate": null,
+            "method_select": "greedy",
+            "n_generate_sample": 3,
+            "n_evaluate_sample": 1,
+            "n_select_sample": 1,
+            "method_search": "dfs_nonparent",
+            "v_th": 0.5,
+            "node_budget": 100,
+            "verbose": true,
+            "max_per_state": 3,
+            "no_prune": false
+        }
+    }
+]

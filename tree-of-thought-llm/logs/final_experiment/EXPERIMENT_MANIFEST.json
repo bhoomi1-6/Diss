@@ -1,0 +1,61 @@
+{
+  "_comment": "Intended matrix for the FINAL dissertation experiment. Game24 and Crosswords have SEPARATE configuration blocks -- they are deliberately NOT unified under one shared schema, because Game24 has no max_per_state parameter at all (the search has no per-state branching cap) and must never carry one, even as N/A-by-convention in a shared object. This file is NOT a launch trigger; no A/B/C/D batch has been run from it.",
+
+  "experiment_matrix": {
+    "game24": {
+      "A_parent":            { "puzzle_range": "900-999", "method_search": "dfs" },
+      "B_beta_c":             { "puzzle_range": "900-999", "method_search": "dfs_nonparent" },
+      "C_fixed_k2":           { "puzzle_range": "900-999", "method_search": "dfs_fixed_k2" },
+      "D_strict_nonparent":   { "puzzle_range": "900-999", "method_search": "dfs_nonparent_strict" }
+    },
+    "crosswords": {
+      "A_parent":            { "puzzle_count": 20, "method_search": "dfs_crossword" },
+      "B_beta_c":             { "puzzle_count": 20, "method_search": "dfs_crossword_nonparent" },
+      "C_fixed_k2":           { "puzzle_count": 20, "method_search": "dfs_crossword_fixed_k2" },
+      "D_strict_nonparent":   { "puzzle_count": 20, "method_search": "dfs_crossword_nonparent_strict" }
+    }
+  },
+
+  "game24_configuration": {
+    "_comment": "Game24 has NO max_per_state parameter -- the search has no per-state branching cap, so the key is deliberately absent from this block rather than set to a placeholder.",
+    "task_start_index": 900,
+    "task_end_index": 1000,
+    "puzzle_range_inclusive": "900-999",
+    "n_generate_sample": 3,
+    "n_evaluate_sample": 1,
+    "node_budget": 50,
+    "v_th": 0.5,
+    "pruning_enabled": true,
+    "temperature": 0,
+    "backend": "bedrock",
+    "selection_method": "N/A -- Game24 has no crossword-style final-state selection (the search returns the first correct terminal state found, or none)",
+    "cli_command_template": "python run.py --task game24 --method_search <A|B|C|D method_search value> --task_start_index 900 --task_end_index 1000 --n_generate_sample 3 --node_budget 50 --backend bedrock --verbose"
+  },
+
+  "crossword_configuration": {
+    "task_start_index": 0,
+    "task_end_index": 20,
+    "puzzle_count": 20,
+    "crossword_file": "mini0505_0_100_5.json",
+    "n_generate_sample": 5,
+    "n_evaluate_sample": 1,
+    "node_budget": 100,
+    "max_per_state": 3,
+    "v_th": 0.5,
+    "pruning_enabled": true,
+    "temperature": 0,
+    "backend": "bedrock",
+    "selection_method": "deepest",
+    "cli_command_template": "python run.py --task crosswords --method_search <A|B|C|D method_search value> --crossword_file mini0505_0_100_5.json --task_start_index 0 --task_end_index 20 --n_generate_sample 5 --node_budget 100 --max_per_state 3 --backend bedrock --verbose"
+  },
+
+  "_confirmed_decisions": {
+    "game24_n_generate_sample_and_node_budget": "Explicitly finalized in this session: n_generate_sample=3, node_budget=50 for all four Game24 conditions.",
+    "crossword_n_generate_sample_and_node_budget": "Explicitly finalized in this session: n_generate_sample=5, node_budget=100, max_per_state=3 for all four Crossword conditions -- matches the original ToT paper's stated crossword setup.",
+    "v_th": "Explicitly confirmed earlier this session: 'Keep v_th=0.5 ... treat v_th as a fixed common parameter rather than introduce another experimental variable.'",
+    "n_evaluate_sample": "Explicitly confirmed alongside v_th in the same decision (both benchmarks: 1).",
+    "backend_and_temperature": "bedrock / temperature=0 have been used consistently and without exception across every pilot/dev run in this project; never overridden.",
+    "pruning_enabled": "Pruning has never been disabled (--no_prune never used) in any run this session; this is the mechanism under study, so disabling it would be a different experiment.",
+    "selection_method": "Explicitly corrected this session -- 'deepest' (first-on-tie) is the main-experiment default for crosswords; 'best_r_word' remains available as an opt-in oracle ablation, not part of the main A/B/C/D comparison. Does not apply to Game24."
+  }
+}

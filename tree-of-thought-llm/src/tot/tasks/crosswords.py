@@ -3,7 +3,7 @@ import os
 import json
 from tot.tasks.base import Task, DATA_PATH
 from tot.prompts.crosswords import * 
-from tot.models import gpt
+from tot.models import claude_prompt
 
 class MiniCrosswordsEnv:
     def __init__(self, file='mini0505.json'):
@@ -48,7 +48,7 @@ class MiniCrosswordsEnv:
             if prompt in self.prompt_status_cache:
                 res = self.prompt_status_cache[prompt]
             else:
-                res = gpt(prompt)[0]
+                res = claude_prompt(prompt)[0]
                 self.prompt_status_cache[prompt] = res
             # print(line)
             # print(res)
@@ -247,7 +247,7 @@ class MiniCrosswordsTask(Task):
             ans = ' '.join(ans.lower())
             line = f'{data}: {ans}'
             prompt = value_prompt.format(input=line)
-            res = gpt(prompt)[0]
+            res = claude_prompt(prompt)[0]
             print(line)
             print(res)
             print()

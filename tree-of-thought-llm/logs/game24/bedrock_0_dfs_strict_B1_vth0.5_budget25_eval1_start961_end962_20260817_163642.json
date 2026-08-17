@@ -1,0 +1,69 @@
+[
+    {
+        "steps": [],
+        "nodes_explored": 10,
+        "candidates_evaluated": 25,
+        "candidates_pruned": 15,
+        "backtracks": [],
+        "solution": "12 - 10 = 2 (left: 2 8 8)\n2 * 8 = 16 (left: 8 16)\n8 + 16 = 24 (left: 24)\n",
+        "method": "dfs_nonparent_strict",
+        "_live_explore_counter": 3,
+        "num_backtracks": 0,
+        "mean_jump_size": 0.0,
+        "pct_jumps_gt1": 0.0,
+        "num_backtracks_raw": 0,
+        "mean_jump_size_raw": 0.0,
+        "pct_jumps_gt1_raw": 0.0,
+        "num_logical_backtracks": 0,
+        "mean_jump_size_merged": 0.0,
+        "pct_jumps_gt1_merged": 0.0,
+        "beta_calls": 0,
+        "num_cascaded_calls": 0,
+        "pct_cascaded_calls": 0.0,
+        "cascade_chain_length_histogram": {},
+        "backtracks_merged": [],
+        "num_unrecoverable": 0,
+        "idx": 961,
+        "ys": [
+            "12 - 10 = 2 (left: 2 8 8)\n2 * 8 = 16 (left: 8 16)\n8 + 16 = 24 (left: 24)\n"
+        ],
+        "infos": [
+            {
+                "r": 1
+            }
+        ],
+        "usage_this_puzzle": {
+            "completion_tokens": 2703,
+            "prompt_tokens": 11215,
+            "cost": 0.02473
+        },
+        "usage_so_far": {
+            "completion_tokens": 2703,
+            "prompt_tokens": 11215,
+            "cost": 0.02473
+        },
+        "config": {
+            "backend": "bedrock",
+            "temperature": 0,
+            "task": "game24",
+            "task_start_index": 961,
+            "task_end_index": 962,
+            "naive_run": false,
+            "prompt_sample": null,
+            "method_generate": null,
+            "method_evaluate": null,
+            "method_select": "greedy",
+            "n_generate_sample": 1,
+            "n_evaluate_sample": 1,
+            "n_select_sample": 1,
+            "method_search": "dfs_nonparent_strict",
+            "v_th": 0.5,
+            "node_budget": 25,
+            "verbose": true,
+            "max_per_state": 3,
+            "no_prune": false,
+            "crossword_file": "mini0505.json",
+            "selection_method": "deepest"
+        }
+    }
+]

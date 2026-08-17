@@ -1,0 +1,122 @@
+[
+    {
+        "nodes_explored": 0,
+        "candidates_evaluated": 0,
+        "candidates_pruned": 0,
+        "backtracks": [
+            {
+                "from_depth": 0,
+                "to_depth": 0,
+                "jump": 0,
+                "degenerate": false,
+                "reason": "no candidates proposed",
+                "rejected_action": null,
+                "beta_model_call": false,
+                "strict_nonparent": true,
+                "parent_forbidden": true,
+                "no_legal_nonparent": true,
+                "fallback_to_root": true,
+                "nonparent_target_selected": false,
+                "model_unrecoverable": false,
+                "invalid_target": false,
+                "fallback_to_parent": false
+            }
+        ],
+        "solution": null,
+        "method": "dfs_crossword_nonparent_strict",
+        "num_backtracks": 1,
+        "mean_jump_size": 0.0,
+        "pct_jumps_gt1": 0.0,
+        "num_backtracks_raw": 1,
+        "mean_jump_size_raw": 0.0,
+        "pct_jumps_gt1_raw": 0.0,
+        "num_logical_backtracks": 1,
+        "mean_jump_size_merged": 0.0,
+        "pct_jumps_gt1_merged": 0.0,
+        "beta_calls": 0,
+        "num_cascaded_calls": 0,
+        "pct_cascaded_calls": 0.0,
+        "cascade_chain_length_histogram": {},
+        "backtracks_merged": [
+            {
+                "origin_depth": 0,
+                "final_target_depth": 0,
+                "jump": 0,
+                "degenerate": false,
+                "cascade_chain_length": 1,
+                "reasons": [
+                    "no candidates proposed"
+                ],
+                "raw_events": [
+                    {
+                        "from_depth": 0,
+                        "to_depth": 0,
+                        "jump": 0,
+                        "degenerate": false,
+                        "reason": "no candidates proposed",
+                        "rejected_action": null,
+                        "beta_model_call": false,
+                        "strict_nonparent": true,
+                        "parent_forbidden": true,
+                        "no_legal_nonparent": true,
+                        "fallback_to_root": true,
+                        "nonparent_target_selected": false,
+                        "model_unrecoverable": false,
+                        "invalid_target": false,
+                        "fallback_to_parent": false
+                    }
+                ]
+            }
+        ],
+        "num_unrecoverable": 0,
+        "selection_method": "deepest",
+        "max_depth": null,
+        "selected_depth": null,
+        "selection_tie": null,
+        "idx": 0,
+        "ys": [
+            "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _"
+        ],
+        "infos": [
+            {
+                "r_letter": 0.0,
+                "r_word": 0.0,
+                "r_game": false,
+                "r": 0.0
+            }
+        ],
+        "usage_this_puzzle": {
+            "completion_tokens": 4401,
+            "prompt_tokens": 1355,
+            "cost": 0.02336
+        },
+        "usage_so_far": {
+            "completion_tokens": 4401,
+            "prompt_tokens": 1355,
+            "cost": 0.02336
+        },
+        "config": {
+            "backend": "bedrock",
+            "temperature": 0,
+            "task": "crosswords",
+            "task_start_index": 0,
+            "task_end_index": 1,
+            "naive_run": false,
+            "prompt_sample": null,
+            "method_generate": null,
+            "method_evaluate": null,
+            "method_select": "greedy",
+            "n_generate_sample": 5,
+            "n_evaluate_sample": 1,
+            "n_select_sample": 1,
+            "method_search": "dfs_crossword_nonparent_strict",
+            "v_th": 0.5,
+            "node_budget": 15,
+            "verbose": true,
+            "max_per_state": 3,
+            "no_prune": false,
+            "crossword_file": "mini0505.json",
+            "selection_method": "deepest"
+        }
+    }
+]

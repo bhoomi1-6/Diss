@@ -1,0 +1,393 @@
+[
+    {
+        "steps": [],
+        "nodes_explored": 22,
+        "candidates_evaluated": 63,
+        "candidates_pruned": 41,
+        "backtracks": [
+            {
+                "from_depth": 2,
+                "to_depth": 1,
+                "jump": 1,
+                "degenerate": true,
+                "reason": "subtree exhausted",
+                "rejected_proposal": "7 + 9 = 16 (left: 6 8 16)\n6 / 8 = 3/4 (left: 16 3/4)\n"
+            },
+            {
+                "from_depth": 1,
+                "to_depth": 0,
+                "jump": 1,
+                "degenerate": true,
+                "reason": "subtree exhausted",
+                "rejected_proposal": "7 + 9 = 16 (left: 6 8 16)\n"
+            }
+        ],
+        "solution": "9 - 7 = 2 (left: 2 6 8)\n8 / 2 = 4 (left: 4 6)\n4 * 6 = 24 (left: 24)\n",
+        "method": "dfs_parent",
+        "num_backtracks": 2,
+        "mean_jump_size": 1.0,
+        "pct_jumps_gt1": 0.0,
+        "num_backtracks_raw": 2,
+        "mean_jump_size_raw": 1.0,
+        "pct_jumps_gt1_raw": 0.0,
+        "num_logical_backtracks": 2,
+        "mean_jump_size_merged": 1.0,
+        "pct_jumps_gt1_merged": 0.0,
+        "beta_calls": 0,
+        "num_cascaded_calls": 0,
+        "pct_cascaded_calls": 0.0,
+        "cascade_chain_length_histogram": {},
+        "backtracks_merged": [
+            {
+                "origin_depth": 2,
+                "final_target_depth": 1,
+                "jump": 1,
+                "degenerate": true,
+                "cascade_chain_length": 1,
+                "reasons": [
+                    "subtree exhausted"
+                ],
+                "raw_events": [
+                    {
+                        "from_depth": 2,
+                        "to_depth": 1,
+                        "jump": 1,
+                        "degenerate": true,
+                        "reason": "subtree exhausted",
+                        "rejected_proposal": "7 + 9 = 16 (left: 6 8 16)\n6 / 8 = 3/4 (left: 16 3/4)\n"
+                    }
+                ]
+            },
+            {
+                "origin_depth": 1,
+                "final_target_depth": 0,
+                "jump": 1,
+                "degenerate": true,
+                "cascade_chain_length": 1,
+                "reasons": [
+                    "subtree exhausted"
+                ],
+                "raw_events": [
+                    {
+                        "from_depth": 1,
+                        "to_depth": 0,
+                        "jump": 1,
+                        "degenerate": true,
+                        "reason": "subtree exhausted",
+                        "rejected_proposal": "7 + 9 = 16 (left: 6 8 16)\n"
+                    }
+                ]
+            }
+        ],
+        "idx": 904,
+        "ys": [
+            "9 - 7 = 2 (left: 2 6 8)\n8 / 2 = 4 (left: 4 6)\n4 * 6 = 24 (left: 24)\n"
+        ],
+        "infos": [
+            {
+                "r": 1
+            }
+        ],
+        "usage_this_puzzle": {
+            "completion_tokens": 8666,
+            "prompt_tokens": 28094,
+            "cost": 0.071424
+        },
+        "usage_so_far": {
+            "completion_tokens": 8666,
+            "prompt_tokens": 28094,
+            "cost": 0.071424
+        },
+        "config": {
+            "backend": "bedrock",
+            "temperature": 0.0,
+            "task": "game24",
+            "task_start_index": 904,
+            "task_end_index": 907,
+            "naive_run": false,
+            "prompt_sample": null,
+            "method_generate": null,
+            "method_evaluate": null,
+            "method_select": "greedy",
+            "n_generate_sample": 3,
+            "n_evaluate_sample": 1,
+            "n_select_sample": 1,
+            "method_search": "dfs",
+            "v_th": 0.5,
+            "node_budget": 30,
+            "verbose": true,
+            "max_per_state": 3,
+            "no_prune": false
+        }
+    },
+    {
+        "steps": [],
+        "nodes_explored": 3,
+        "candidates_evaluated": 25,
+        "candidates_pruned": 22,
+        "backtracks": [
+            {
+                "from_depth": 3,
+                "to_depth": 2,
+                "jump": 1,
+                "degenerate": true,
+                "reason": "terminal fail (wrong answer at left: 24)",
+                "rejected_proposal": "11 - 1 = 10 (left: 10 11 13)\n11 + 13 = 24 (left: 10 24)\n10 * 24 = 240 (left: 240)\n"
+            },
+            {
+                "from_depth": 2,
+                "to_depth": 1,
+                "jump": 1,
+                "degenerate": true,
+                "reason": "subtree exhausted",
+                "rejected_proposal": "11 - 1 = 10 (left: 10 11 13)\n11 + 13 = 24 (left: 10 24)\n"
+            },
+            {
+                "from_depth": 1,
+                "to_depth": 0,
+                "jump": 1,
+                "degenerate": true,
+                "reason": "subtree exhausted",
+                "rejected_proposal": "11 - 1 = 10 (left: 10 11 13)\n"
+            }
+        ],
+        "solution": null,
+        "method": "dfs_parent",
+        "num_backtracks": 3,
+        "mean_jump_size": 1.0,
+        "pct_jumps_gt1": 0.0,
+        "num_backtracks_raw": 3,
+        "mean_jump_size_raw": 1.0,
+        "pct_jumps_gt1_raw": 0.0,
+        "num_logical_backtracks": 3,
+        "mean_jump_size_merged": 1.0,
+        "pct_jumps_gt1_merged": 0.0,
+        "beta_calls": 0,
+        "num_cascaded_calls": 0,
+        "pct_cascaded_calls": 0.0,
+        "cascade_chain_length_histogram": {},
+        "backtracks_merged": [
+            {
+                "origin_depth": 3,
+                "final_target_depth": 2,
+                "jump": 1,
+                "degenerate": true,
+                "cascade_chain_length": 1,
+                "reasons": [
+                    "terminal fail (wrong answer at left: 24)"
+                ],
+                "raw_events": [
+                    {
+                        "from_depth": 3,
+                        "to_depth": 2,
+                        "jump": 1,
+                        "degenerate": true,
+                        "reason": "terminal fail (wrong answer at left: 24)",
+                        "rejected_proposal": "11 - 1 = 10 (left: 10 11 13)\n11 + 13 = 24 (left: 10 24)\n10 * 24 = 240 (left: 240)\n"
+                    }
+                ]
+            },
+            {
+                "origin_depth": 2,
+                "final_target_depth": 1,
+                "jump": 1,
+                "degenerate": true,
+                "cascade_chain_length": 1,
+                "reasons": [
+                    "subtree exhausted"
+                ],
+                "raw_events": [
+                    {
+                        "from_depth": 2,
+                        "to_depth": 1,
+                        "jump": 1,
+                        "degenerate": true,
+                        "reason": "subtree exhausted",
+                        "rejected_proposal": "11 - 1 = 10 (left: 10 11 13)\n11 + 13 = 24 (left: 10 24)\n"
+                    }
+                ]
+            },
+            {
+                "origin_depth": 1,
+                "final_target_depth": 0,
+                "jump": 1,
+                "degenerate": true,
+                "cascade_chain_length": 1,
+                "reasons": [
+                    "subtree exhausted"
+                ],
+                "raw_events": [
+                    {
+                        "from_depth": 1,
+                        "to_depth": 0,
+                        "jump": 1,
+                        "degenerate": true,
+                        "reason": "subtree exhausted",
+                        "rejected_proposal": "11 - 1 = 10 (left: 10 11 13)\n"
+                    }
+                ]
+            }
+        ],
+        "idx": 905,
+        "ys": [
+            ""
+        ],
+        "infos": [
+            {
+                "r": 0
+            }
+        ],
+        "usage_this_puzzle": {
+            "completion_tokens": 3140,
+            "prompt_tokens": 12444,
+            "cost": 0.02814399999999999
+        },
+        "usage_so_far": {
+            "completion_tokens": 11806,
+            "prompt_tokens": 40538,
+            "cost": 0.09956799999999999
+        },
+        "config": {
+            "backend": "bedrock",
+            "temperature": 0.0,
+            "task": "game24",
+            "task_start_index": 904,
+            "task_end_index": 907,
+            "naive_run": false,
+            "prompt_sample": null,
+            "method_generate": null,
+            "method_evaluate": null,
+            "method_select": "greedy",
+            "n_generate_sample": 3,
+            "n_evaluate_sample": 1,
+            "n_select_sample": 1,
+            "method_search": "dfs",
+            "v_th": 0.5,
+            "node_budget": 30,
+            "verbose": true,
+            "max_per_state": 3,
+            "no_prune": false
+        }
+    },
+    {
+        "steps": [],
+        "nodes_explored": 21,
+        "candidates_evaluated": 56,
+        "candidates_pruned": 35,
+        "backtracks": [
+            {
+                "from_depth": 1,
+                "to_depth": 0,
+                "jump": 1,
+                "degenerate": true,
+                "reason": "subtree exhausted",
+                "rejected_proposal": "1 + 8 = 9 (left: 9 10 11)\n"
+            },
+            {
+                "from_depth": 1,
+                "to_depth": 0,
+                "jump": 1,
+                "degenerate": true,
+                "reason": "subtree exhausted",
+                "rejected_proposal": "1 + 10 = 11 (left: 8 11 11)\n"
+            }
+        ],
+        "solution": "1 + 11 = 12 (left: 8 10 12)\n10 - 8 = 2 (left: 2 12)\n2 * 12 = 24 (left: 24)\n",
+        "method": "dfs_parent",
+        "num_backtracks": 2,
+        "mean_jump_size": 1.0,
+        "pct_jumps_gt1": 0.0,
+        "num_backtracks_raw": 2,
+        "mean_jump_size_raw": 1.0,
+        "pct_jumps_gt1_raw": 0.0,
+        "num_logical_backtracks": 2,
+        "mean_jump_size_merged": 1.0,
+        "pct_jumps_gt1_merged": 0.0,
+        "beta_calls": 0,
+        "num_cascaded_calls": 0,
+        "pct_cascaded_calls": 0.0,
+        "cascade_chain_length_histogram": {},
+        "backtracks_merged": [
+            {
+                "origin_depth": 1,
+                "final_target_depth": 0,
+                "jump": 1,
+                "degenerate": true,
+                "cascade_chain_length": 1,
+                "reasons": [
+                    "subtree exhausted"
+                ],
+                "raw_events": [
+                    {
+                        "from_depth": 1,
+                        "to_depth": 0,
+                        "jump": 1,
+                        "degenerate": true,
+                        "reason": "subtree exhausted",
+                        "rejected_proposal": "1 + 8 = 9 (left: 9 10 11)\n"
+                    }
+                ]
+            },
+            {
+                "origin_depth": 1,
+                "final_target_depth": 0,
+                "jump": 1,
+                "degenerate": true,
+                "cascade_chain_length": 1,
+                "reasons": [
+                    "subtree exhausted"
+                ],
+                "raw_events": [
+                    {
+                        "from_depth": 1,
+                        "to_depth": 0,
+                        "jump": 1,
+                        "degenerate": true,
+                        "reason": "subtree exhausted",
+                        "rejected_proposal": "1 + 10 = 11 (left: 8 11 11)\n"
+                    }
+                ]
+            }
+        ],
+        "idx": 906,
+        "ys": [
+            "1 + 11 = 12 (left: 8 10 12)\n10 - 8 = 2 (left: 2 12)\n2 * 12 = 24 (left: 24)\n"
+        ],
+        "infos": [
+            {
+                "r": 1
+            }
+        ],
+        "usage_this_puzzle": {
+            "completion_tokens": 6622,
+            "prompt_tokens": 22172,
+            "cost": 0.055282
+        },
+        "usage_so_far": {
+            "completion_tokens": 18428,
+            "prompt_tokens": 62710,
+            "cost": 0.15485
+        },
+        "config": {
+            "backend": "bedrock",
+            "temperature": 0.0,
+            "task": "game24",
+            "task_start_index": 904,
+            "task_end_index": 907,
+            "naive_run": false,
+            "prompt_sample": null,
+            "method_generate": null,
+            "method_evaluate": null,
+            "method_select": "greedy",
+            "n_generate_sample": 3,
+            "n_evaluate_sample": 1,
+            "n_select_sample": 1,
+            "method_search": "dfs",
+            "v_th": 0.5,
+            "node_budget": 30,
+            "verbose": true,
+            "max_per_state": 3,
+            "no_prune": false
+        }
+    }
+]

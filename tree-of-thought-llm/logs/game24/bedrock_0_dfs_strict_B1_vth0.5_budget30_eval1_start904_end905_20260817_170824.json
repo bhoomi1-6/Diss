@@ -1,0 +1,123 @@
+[
+    {
+        "steps": [],
+        "nodes_explored": 24,
+        "candidates_evaluated": 53,
+        "candidates_pruned": 29,
+        "backtracks": [
+            {
+                "from_depth": 2,
+                "to_depth": 0,
+                "jump": 2,
+                "degenerate": false,
+                "reason": "all pruned",
+                "rejected_proposal": "7 + 9 = 16 (left: 6 8 16)\n8 + 16 = 24 (left: 6 24)\n",
+                "beta_raw_response": "I need to find the deepest recoverable non-parent ancestor of the failed step.\n\nThe problem is to use numbers 6, 7, 8, 9 with arithmetic operations to reach 24.\n\nLet me trace the reasoning path:\n- Step 0: Start with [6, 7, 8, 9]\n- Step 1: 7 + 9 = 16, leaving [6, 8, 16]\n- Step 2: 8 + 16 = 24, leaving [6, 24] \u2014 FAILED (still need to combine 6 and 24 to get 24, which would require 6\u00d724/6 or similar, but we need exactly 24 from [6, 24])\n\nWait, [6, 24] means we need to combine 6 and 24 to get 24. That's possible: 24 \u00d7 (6/6)... no wait, we only have two numbers left: 6 and 24. We need one final operation: 6+24=30, 24-6=18, 6-24=-18, 6\u00d724=144, 24/6=4, 6/24=0.25. None give 24. So Step 2 with [6, 24] is indeed failed.\n\nThe immediate parent is Step 2 (the one showing 8+16=24, leaving [6,24]) \u2014 wait, let me re-read.\n\nThe immediate parent of the failed Step 2 is Step 1 (since Step 2 builds on Step 1). Actually, looking again:\n\n- Step 1: [6, 8, 16] \u2014 this is the immediate parent of Step 2\n- Step 2: FAILED\n\nThe immediate parent is Step 1 (7+9=16, left: [6, 8, 16]).\n\nI need to find recoverable non-parent ancestors strictly above Step 1, so Step 0.\n\nCan Step 0 lead to a solution via a different path? Starting with [6, 7, 8, 9], can we make 24?\n\nYes! For example:\n- 8 \u00d7 (9 - 6) = 8 \u00d7 3 = 24\n- 6 \u00d7 (9 - 7) \u00d7 ... let me check: 6 \u00d7 (9-7) = 12, not 24\n- (6-7+9) \u00d7 8 = 8 \u00d7 8 = 64, no\n- 8 \u00d7 9 - 6 \u00d7 ... \n- 7 - 6 + 9 + ... \n- 8 \u00d7 (9 - 6) = 24 \u2713 (using 8, 9, 6, and 7 needs to be used too)\n- Actually need to use all four: 8 \u00d7 (9 - 6) + 7... no that's 31\n- (7-6) \u00d7 8 \u00d7 ... wait: (7-6) \u00d7 (8+9) = 17, no\n- 6/(1-7/8)... \n- 8 \u00d7 9 / (7-4)... 4 not available\n- 9 \u00d7 8 / (7-... ) \n- (9-7) \u00d7 (8+... ) = 2 \u00d7 12 = 24, need 8+4 but only have 6: (9-7)\u00d7(8+6)=2\u00d714=28, no\n- (9-7) \u00d7 6 \u00d7 ... = 12 \u00d7 something, need \u00d72 from 8: not straightforward\n- 6 \u00d7 7 - 8 - 9 = 42-17 = 25, no\n- 6 \u00d7 7 - 8 \u00d7 ... = 42 - 18 = 24! 6\u00d77 - 8\u00d7(9-8)... wait: 6\u00d77=42, 42-18=24, need 18 from 8 and 9: 8+9=17, 9-8=1... \n- Actually: (8-6) \u00d7 (9+... ) hmm\n- 8 + 7 + 9 = 24, but that's only 3 numbers, need to use 6 too: 8+7+9+6=30\n- 6\u00d7(7-... ) \n- Let me try: 6/(7-9+8) = 6/6 = 1, no\n- (6+9-7)\u00d7... = 8\u00d7... = 8\u00d78=64\n- 9\u00d78/(7-... ) = 72/3 = 24, need 7-something=3, so something=4, but 6\u22604\n- 6\u00d78/(9-7) = 48/2 = 24 \u2713 Uses 6,8,9,7 \u2014 all four numbers!\n\nYes, Step 0 is recoverable.\n\nSince the immediate parent is Step 1, I cannot return Step 1. The deepest non-parent ancestor above Step 1 is Step 0.\n\nANSWER: 0",
+                "beta_parse_method": "structured",
+                "beta_model_call": true,
+                "strict_nonparent": true,
+                "parent_forbidden": true,
+                "no_legal_nonparent": false,
+                "fallback_to_root": false,
+                "nonparent_target_selected": true,
+                "model_unrecoverable": false,
+                "invalid_target": false,
+                "fallback_to_deepest_nonparent": false
+            }
+        ],
+        "solution": "9 - 7 = 2 (left: 2 6 8)\n6 * 8 = 48 (left: 2 48)\n48 / 2 = 24 (left: 24)\n",
+        "method": "dfs_nonparent_strict",
+        "_live_explore_counter": 5,
+        "num_backtracks": 1,
+        "mean_jump_size": 2.0,
+        "pct_jumps_gt1": 1.0,
+        "num_backtracks_raw": 1,
+        "mean_jump_size_raw": 2.0,
+        "pct_jumps_gt1_raw": 1.0,
+        "num_logical_backtracks": 1,
+        "mean_jump_size_merged": 2.0,
+        "pct_jumps_gt1_merged": 1.0,
+        "beta_calls": 1,
+        "num_cascaded_calls": 0,
+        "pct_cascaded_calls": 0.0,
+        "cascade_chain_length_histogram": {
+            "1": 1
+        },
+        "backtracks_merged": [
+            {
+                "origin_depth": 2,
+                "final_target_depth": 0,
+                "jump": 2,
+                "degenerate": false,
+                "cascade_chain_length": 1,
+                "reasons": [
+                    "all pruned"
+                ],
+                "raw_events": [
+                    {
+                        "from_depth": 2,
+                        "to_depth": 0,
+                        "jump": 2,
+                        "degenerate": false,
+                        "reason": "all pruned",
+                        "rejected_proposal": "7 + 9 = 16 (left: 6 8 16)\n8 + 16 = 24 (left: 6 24)\n",
+                        "beta_raw_response": "I need to find the deepest recoverable non-parent ancestor of the failed step.\n\nThe problem is to use numbers 6, 7, 8, 9 with arithmetic operations to reach 24.\n\nLet me trace the reasoning path:\n- Step 0: Start with [6, 7, 8, 9]\n- Step 1: 7 + 9 = 16, leaving [6, 8, 16]\n- Step 2: 8 + 16 = 24, leaving [6, 24] \u2014 FAILED (still need to combine 6 and 24 to get 24, which would require 6\u00d724/6 or similar, but we need exactly 24 from [6, 24])\n\nWait, [6, 24] means we need to combine 6 and 24 to get 24. That's possible: 24 \u00d7 (6/6)... no wait, we only have two numbers left: 6 and 24. We need one final operation: 6+24=30, 24-6=18, 6-24=-18, 6\u00d724=144, 24/6=4, 6/24=0.25. None give 24. So Step 2 with [6, 24] is indeed failed.\n\nThe immediate parent is Step 2 (the one showing 8+16=24, leaving [6,24]) \u2014 wait, let me re-read.\n\nThe immediate parent of the failed Step 2 is Step 1 (since Step 2 builds on Step 1). Actually, looking again:\n\n- Step 1: [6, 8, 16] \u2014 this is the immediate parent of Step 2\n- Step 2: FAILED\n\nThe immediate parent is Step 1 (7+9=16, left: [6, 8, 16]).\n\nI need to find recoverable non-parent ancestors strictly above Step 1, so Step 0.\n\nCan Step 0 lead to a solution via a different path? Starting with [6, 7, 8, 9], can we make 24?\n\nYes! For example:\n- 8 \u00d7 (9 - 6) = 8 \u00d7 3 = 24\n- 6 \u00d7 (9 - 7) \u00d7 ... let me check: 6 \u00d7 (9-7) = 12, not 24\n- (6-7+9) \u00d7 8 = 8 \u00d7 8 = 64, no\n- 8 \u00d7 9 - 6 \u00d7 ... \n- 7 - 6 + 9 + ... \n- 8 \u00d7 (9 - 6) = 24 \u2713 (using 8, 9, 6, and 7 needs to be used too)\n- Actually need to use all four: 8 \u00d7 (9 - 6) + 7... no that's 31\n- (7-6) \u00d7 8 \u00d7 ... wait: (7-6) \u00d7 (8+9) = 17, no\n- 6/(1-7/8)... \n- 8 \u00d7 9 / (7-4)... 4 not available\n- 9 \u00d7 8 / (7-... ) \n- (9-7) \u00d7 (8+... ) = 2 \u00d7 12 = 24, need 8+4 but only have 6: (9-7)\u00d7(8+6)=2\u00d714=28, no\n- (9-7) \u00d7 6 \u00d7 ... = 12 \u00d7 something, need \u00d72 from 8: not straightforward\n- 6 \u00d7 7 - 8 - 9 = 42-17 = 25, no\n- 6 \u00d7 7 - 8 \u00d7 ... = 42 - 18 = 24! 6\u00d77 - 8\u00d7(9-8)... wait: 6\u00d77=42, 42-18=24, need 18 from 8 and 9: 8+9=17, 9-8=1... \n- Actually: (8-6) \u00d7 (9+... ) hmm\n- 8 + 7 + 9 = 24, but that's only 3 numbers, need to use 6 too: 8+7+9+6=30\n- 6\u00d7(7-... ) \n- Let me try: 6/(7-9+8) = 6/6 = 1, no\n- (6+9-7)\u00d7... = 8\u00d7... = 8\u00d78=64\n- 9\u00d78/(7-... ) = 72/3 = 24, need 7-something=3, so something=4, but 6\u22604\n- 6\u00d78/(9-7) = 48/2 = 24 \u2713 Uses 6,8,9,7 \u2014 all four numbers!\n\nYes, Step 0 is recoverable.\n\nSince the immediate parent is Step 1, I cannot return Step 1. The deepest non-parent ancestor above Step 1 is Step 0.\n\nANSWER: 0",
+                        "beta_parse_method": "structured",
+                        "beta_model_call": true,
+                        "strict_nonparent": true,
+                        "parent_forbidden": true,
+                        "no_legal_nonparent": false,
+                        "fallback_to_root": false,
+                        "nonparent_target_selected": true,
+                        "model_unrecoverable": false,
+                        "invalid_target": false,
+                        "fallback_to_deepest_nonparent": false
+                    }
+                ]
+            }
+        ],
+        "num_unrecoverable": 0,
+        "idx": 904,
+        "ys": [
+            "9 - 7 = 2 (left: 2 6 8)\n6 * 8 = 48 (left: 2 48)\n48 / 2 = 24 (left: 24)\n"
+        ],
+        "infos": [
+            {
+                "r": 1
+            }
+        ],
+        "usage_this_puzzle": {
+            "completion_tokens": 6586,
+            "prompt_tokens": 23834,
+            "cost": 0.056764
+        },
+        "usage_so_far": {
+            "completion_tokens": 6586,
+            "prompt_tokens": 23834,
+            "cost": 0.056764
+        },
+        "config": {
+            "backend": "bedrock",
+            "temperature": 0,
+            "task": "game24",
+            "task_start_index": 904,
+            "task_end_index": 905,
+            "naive_run": false,
+            "prompt_sample": null,
+            "method_generate": null,
+            "method_evaluate": null,
+            "method_select": "greedy",
+            "n_generate_sample": 1,
+            "n_evaluate_sample": 1,
+            "n_select_sample": 1,
+            "method_search": "dfs_nonparent_strict",
+            "v_th": 0.5,
+            "node_budget": 30,
+            "verbose": true,
+            "max_per_state": 3,
+            "no_prune": false,
+            "crossword_file": "mini0505.json",
+            "selection_method": "deepest"
+        }
+    }
+]

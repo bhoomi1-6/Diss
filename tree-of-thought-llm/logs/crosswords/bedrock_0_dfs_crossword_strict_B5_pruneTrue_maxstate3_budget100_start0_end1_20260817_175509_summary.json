@@ -1,0 +1,29 @@
+[
+  {
+    "puzzle_id": 0,
+    "condition": "dfs_crossword_nonparent_strict",
+    "solved": false,
+    "r_game": false,
+    "r_word": 0.1,
+    "r_letter": 0.2,
+    "nodes_explored": 4,
+    "candidates_evaluated": 13,
+    "candidates_passed": 4,
+    "candidates_pruned": 9,
+    "pruning_rate": 0.6923076923076923,
+    "backtracks": 4,
+    "logical_backtracks": 4,
+    "mean_jump": 1.0,
+    "pct_jumps_gt1": 0.25,
+    "max_depth": 2,
+    "selected_depth": 2,
+    "selection_method": "deepest",
+    "completion_tokens": 21565,
+    "prompt_tokens": 13291,
+    "total_tokens": 34856,
+    "cost": 0.121116,
+    "beta_calls": 1,
+    "cascade_calls": 0,
+    "cascade_percentage": 0.0
+  }
+]

@@ -1,0 +1,371 @@
+[
+    {
+        "steps": [],
+        "nodes_explored": 24,
+        "candidates_evaluated": 56,
+        "candidates_pruned": 32,
+        "backtracks": [
+            {
+                "from_depth": 2,
+                "to_depth": 0,
+                "jump": 2,
+                "degenerate": false,
+                "reason": "all pruned",
+                "rejected_proposal": "7 + 9 = 16 (left: 6 8 16)\n8 + 16 = 24 (left: 6 24)\n",
+                "beta_raw_response": "I need to find the deepest step from which a different continuation could reach a correct solution for the numbers 6, 7, 8, 9.\n\nThe goal is to reach 24 using these four numbers with basic arithmetic operations.\n\nLet me first check what solutions exist for 6, 7, 8, 9:\n- 6 \u00d7 (8 - 7 + 9) = 6 \u00d7 10 = 60, no\n- 8 \u00d7 (9 - 7 + 6) = 8 \u00d7 8 = 64, no\n- 6 \u00d7 7 - 8 \u00d7 (9-8)... let me think differently\n- 8 \u00d7 9 - 7 \u00d7 6 = 72 - 42 = 30, no\n- (6 + 9 - 7) \u00d7 (8/...) \n- 6 \u00d7 (7 - 9 + 8) = 6 \u00d7 6 = 36, no\n- (9 - 7) \u00d7 (6 + 8) = 2 \u00d7 14 = 28, no... wait, that's close\n- (9 - 7) \u00d7 8 + 6 = 16 + 6 = 22, no\n- 9 - 7 + 8 \u00d7 ... \n- 6 \u00d7 8 / (9 - 7) = 48/2 = 24! Yes!\n- Also: (8 - 6) \u00d7 (9 + 7) = 2 \u00d7 16 = 32, no\n- 7 - 6 + 8 + 9 = 18, no\n- 6 + 7 + 8 + 9 = 30, no\n- 9 \u00d7 8 / (7 - 6) = 72/1 = 72... wait, 9 \u00d7 8 / (7-6) = 72, no\n- Actually 6 \u00d7 8 / (9-7) = 24 \u2713\n\nNow let me check the reasoning path:\n\nStep 1: 7 + 9 = 16, leaving {6, 8, 16}\nStep 2: 8 + 16 = 24, leaving {6, 24}\n\nFrom {6, 24}, we need to get 24. We have 6 and 24:\n- 6 + 24 = 30, no\n- 24 - 6 = 18, no\n- 6 \u00d7 24 = 144, no\n- 24 / 6 = 4, no\n- 24 \u00d7 6... no\n\nSo Step 2 is indeed a dead end (can't get 24 from {6, 24}).\n\nCan Step 1 be recovered? From {6, 8, 16}, can we get 24?\n- 6 + 8 + 16 = 30, no\n- 6 \u00d7 8 - 16 = 32, no\n- 16 + 8 = 24, then 24 and 6... same problem\n- 16 - 8 = 8, then 6 and 8: 6+8=14, 6\u00d78=48, no\n- 8 \u00d7 6 / 16 = 3, no\n- 16 \u00d7 6 / 8 = 12, no\n- (16 - 6) \u00d7 8 = 80, no... wait: no\n- 16 + 6 + 8 = 30, no\n- 16 \u00d7 (8 - 6) = 32, no\n- 16 / (8 - 6) = 8, then... no\n- 8 - 6 = 2, 16 \u00d7 2 = 32... no wait: 16 / 2 = 8... no\n- 6 \u00d7 (16 - 8) = 6 \u00d7 8 = 48, no\n- (16 + 8) \u00d7 6 = 144, no\n- 16 \u00d7 8 / 6... not integer\n- 6 + 16 + 8 = 30, no\n- 16 - 6 - 8 = 2, no\n- (8 + 16) / 6 = 4, no\n\nHmm, it seems like {6, 8, 16} cannot reach 24 either. So Step 1 is also a dead end.\n\nTherefore, we should return to Step 0 (root).\n\nANSWER: 0",
+                "beta_parse_method": "structured",
+                "beta_model_call": true,
+                "cascade": false,
+                "cascade_id": 1,
+                "cascade_position": 1,
+                "explored_since_previous_beta": null
+            }
+        ],
+        "solution": "9 - 7 = 2 (left: 2 6 8)\n8 / 2 = 4 (left: 4 6)\n4 * 6 = 24 (left: 24)\n",
+        "method": "dfs_diligent",
+        "num_backtracks": 1,
+        "mean_jump_size": 2.0,
+        "pct_jumps_gt1": 1.0,
+        "num_backtracks_raw": 1,
+        "mean_jump_size_raw": 2.0,
+        "pct_jumps_gt1_raw": 1.0,
+        "num_logical_backtracks": 1,
+        "mean_jump_size_merged": 2.0,
+        "pct_jumps_gt1_merged": 1.0,
+        "beta_calls": 1,
+        "num_cascaded_calls": 0,
+        "pct_cascaded_calls": 0.0,
+        "cascade_chain_length_histogram": {
+            "1": 1
+        },
+        "backtracks_merged": [
+            {
+                "origin_depth": 2,
+                "final_target_depth": 0,
+                "jump": 2,
+                "degenerate": false,
+                "cascade_chain_length": 1,
+                "reasons": [
+                    "all pruned"
+                ],
+                "raw_events": [
+                    {
+                        "from_depth": 2,
+                        "to_depth": 0,
+                        "jump": 2,
+                        "degenerate": false,
+                        "reason": "all pruned",
+                        "rejected_proposal": "7 + 9 = 16 (left: 6 8 16)\n8 + 16 = 24 (left: 6 24)\n",
+                        "beta_raw_response": "I need to find the deepest step from which a different continuation could reach a correct solution for the numbers 6, 7, 8, 9.\n\nThe goal is to reach 24 using these four numbers with basic arithmetic operations.\n\nLet me first check what solutions exist for 6, 7, 8, 9:\n- 6 \u00d7 (8 - 7 + 9) = 6 \u00d7 10 = 60, no\n- 8 \u00d7 (9 - 7 + 6) = 8 \u00d7 8 = 64, no\n- 6 \u00d7 7 - 8 \u00d7 (9-8)... let me think differently\n- 8 \u00d7 9 - 7 \u00d7 6 = 72 - 42 = 30, no\n- (6 + 9 - 7) \u00d7 (8/...) \n- 6 \u00d7 (7 - 9 + 8) = 6 \u00d7 6 = 36, no\n- (9 - 7) \u00d7 (6 + 8) = 2 \u00d7 14 = 28, no... wait, that's close\n- (9 - 7) \u00d7 8 + 6 = 16 + 6 = 22, no\n- 9 - 7 + 8 \u00d7 ... \n- 6 \u00d7 8 / (9 - 7) = 48/2 = 24! Yes!\n- Also: (8 - 6) \u00d7 (9 + 7) = 2 \u00d7 16 = 32, no\n- 7 - 6 + 8 + 9 = 18, no\n- 6 + 7 + 8 + 9 = 30, no\n- 9 \u00d7 8 / (7 - 6) = 72/1 = 72... wait, 9 \u00d7 8 / (7-6) = 72, no\n- Actually 6 \u00d7 8 / (9-7) = 24 \u2713\n\nNow let me check the reasoning path:\n\nStep 1: 7 + 9 = 16, leaving {6, 8, 16}\nStep 2: 8 + 16 = 24, leaving {6, 24}\n\nFrom {6, 24}, we need to get 24. We have 6 and 24:\n- 6 + 24 = 30, no\n- 24 - 6 = 18, no\n- 6 \u00d7 24 = 144, no\n- 24 / 6 = 4, no\n- 24 \u00d7 6... no\n\nSo Step 2 is indeed a dead end (can't get 24 from {6, 24}).\n\nCan Step 1 be recovered? From {6, 8, 16}, can we get 24?\n- 6 + 8 + 16 = 30, no\n- 6 \u00d7 8 - 16 = 32, no\n- 16 + 8 = 24, then 24 and 6... same problem\n- 16 - 8 = 8, then 6 and 8: 6+8=14, 6\u00d78=48, no\n- 8 \u00d7 6 / 16 = 3, no\n- 16 \u00d7 6 / 8 = 12, no\n- (16 - 6) \u00d7 8 = 80, no... wait: no\n- 16 + 6 + 8 = 30, no\n- 16 \u00d7 (8 - 6) = 32, no\n- 16 / (8 - 6) = 8, then... no\n- 8 - 6 = 2, 16 \u00d7 2 = 32... no wait: 16 / 2 = 8... no\n- 6 \u00d7 (16 - 8) = 6 \u00d7 8 = 48, no\n- (16 + 8) \u00d7 6 = 144, no\n- 16 \u00d7 8 / 6... not integer\n- 6 + 16 + 8 = 30, no\n- 16 - 6 - 8 = 2, no\n- (8 + 16) / 6 = 4, no\n\nHmm, it seems like {6, 8, 16} cannot reach 24 either. So Step 1 is also a dead end.\n\nTherefore, we should return to Step 0 (root).\n\nANSWER: 0",
+                        "beta_parse_method": "structured",
+                        "beta_model_call": true,
+                        "cascade": false,
+                        "cascade_id": 1,
+                        "cascade_position": 1,
+                        "explored_since_previous_beta": null
+                    }
+                ]
+            }
+        ],
+        "idx": 904,
+        "ys": [
+            "9 - 7 = 2 (left: 2 6 8)\n8 / 2 = 4 (left: 4 6)\n4 * 6 = 24 (left: 24)\n"
+        ],
+        "infos": [
+            {
+                "r": 1
+            }
+        ],
+        "usage_this_puzzle": {
+            "completion_tokens": 8570,
+            "prompt_tokens": 26694,
+            "cost": 0.069544
+        },
+        "usage_so_far": {
+            "completion_tokens": 8570,
+            "prompt_tokens": 26694,
+            "cost": 0.069544
+        },
+        "config": {
+            "backend": "bedrock",
+            "temperature": 0.0,
+            "task": "game24",
+            "task_start_index": 904,
+            "task_end_index": 907,
+            "naive_run": false,
+            "prompt_sample": null,
+            "method_generate": null,
+            "method_evaluate": null,
+            "method_select": "greedy",
+            "n_generate_sample": 3,
+            "n_evaluate_sample": 1,
+            "n_select_sample": 1,
+            "method_search": "dfs_nonparent",
+            "v_th": 0.5,
+            "node_budget": 30,
+            "verbose": true,
+            "max_per_state": 3,
+            "no_prune": false
+        }
+    },
+    {
+        "steps": [],
+        "nodes_explored": 3,
+        "candidates_evaluated": 25,
+        "candidates_pruned": 22,
+        "backtracks": [
+            {
+                "from_depth": 3,
+                "to_depth": 0,
+                "jump": 3,
+                "degenerate": false,
+                "reason": "terminal fail (wrong answer at left: 24)",
+                "rejected_proposal": "11 - 1 = 10 (left: 10 11 13)\n11 + 13 = 24 (left: 10 24)\n10 * 24 = 240 (left: 240)\n",
+                "beta_raw_response": "I need to find the deepest step from which a different continuation could reach 24.\n\nThe problem is: 1, 11, 11, 13 \u2192 make 24.\n\nLet me analyze each step:\n\n**Step 2: left: 10, 24**\nFrom 10 and 24, can I make 24? \n- 10 + 24 = 34 \u2717\n- 24 - 10 = 14 \u2717\n- 10 * 24 = 240 \u2717\n- 24 / 10 = 2.4 \u2717\nNo way to make 24 from {10, 24}. This is a dead end.\n\n**Step 1: left: 10, 11, 13**\nFrom 10, 11, 13, can I make 24?\n- 10 + 11 + 13 = 34 \u2717\n- 13 + 11 = 24, then 24 + 10? No, but 13 + 11 = 24 directly! Then I need to use 10 somehow... wait, I have three numbers: 10, 11, 13.\n  - 13 + 11 = 24, but then I still have 10 left. I need to combine all three.\n  - 10 + 13 = 23, 23 + 11 = 34 \u2717\n  - 10 * 13 = 130 \u2717\n  - 13 - 10 = 3, 3 * 11 = 33 \u2717\n  - 11 - 10 = 1, 1 * 13 = 13 \u2717\n  - 10 + 11 = 21, 21 + 13 = 34 \u2717\n  - 13 * (11 - 10) = 13 \u2717\n  - 11 * (13 - 10) = 33 \u2717\n  - (10 - 11) * 13 = -13 \u2717\n  - 10 * (13 - 11) = 20 \u2717\n  - 13 + 11 = 24, need 10 to be identity... 24 * (10/10)? No, only one 10.\n  - 11 + 13 = 24, but can't ignore 10.\n  \n  Hmm, no valid combination from {10, 11, 13} seems to give 24.\n\n**Step 0: root \u2014 original: 1, 11, 11, 13**\nLet me try other approaches:\n- 1 + 11 = 12, 12 * (13 - 11) = 24 \u2713 Yes!\n- 11 + 13 = 24, 11 - 1 = 10... need to use all four\n- (11 - 1) * (13 - 11) = 10 * 2 = 20 \u2717\n- 1 * 11 + 13 = 24, but need to use both 11s: 1 * 11 + 13 = 24, still have one 11 left \u2717\n- (1 + 11) * (13 - 11) = 12 * 2 = 24 \u2713 Yes!\n\nSo from Step 0, there's a valid solution. \n\nStep 1 used 11 - 1 = 10, leaving {10, 11, 13}. I showed this seems to be a dead end.\n\nLet me verify Step 1 more carefully with {10, 11, 13}:\n- All combinations... none seem to work as shown above.\n\nSo Step 1 is a dead end, and we should return to Step 0.\n\nANSWER: 0",
+                "beta_parse_method": "structured",
+                "beta_model_call": true,
+                "cascade": false,
+                "cascade_id": 1,
+                "cascade_position": 1,
+                "explored_since_previous_beta": null
+            }
+        ],
+        "solution": null,
+        "method": "dfs_diligent",
+        "num_backtracks": 1,
+        "mean_jump_size": 3.0,
+        "pct_jumps_gt1": 1.0,
+        "num_backtracks_raw": 1,
+        "mean_jump_size_raw": 3.0,
+        "pct_jumps_gt1_raw": 1.0,
+        "num_logical_backtracks": 1,
+        "mean_jump_size_merged": 3.0,
+        "pct_jumps_gt1_merged": 1.0,
+        "beta_calls": 1,
+        "num_cascaded_calls": 0,
+        "pct_cascaded_calls": 0.0,
+        "cascade_chain_length_histogram": {
+            "1": 1
+        },
+        "backtracks_merged": [
+            {
+                "origin_depth": 3,
+                "final_target_depth": 0,
+                "jump": 3,
+                "degenerate": false,
+                "cascade_chain_length": 1,
+                "reasons": [
+                    "terminal fail (wrong answer at left: 24)"
+                ],
+                "raw_events": [
+                    {
+                        "from_depth": 3,
+                        "to_depth": 0,
+                        "jump": 3,
+                        "degenerate": false,
+                        "reason": "terminal fail (wrong answer at left: 24)",
+                        "rejected_proposal": "11 - 1 = 10 (left: 10 11 13)\n11 + 13 = 24 (left: 10 24)\n10 * 24 = 240 (left: 240)\n",
+                        "beta_raw_response": "I need to find the deepest step from which a different continuation could reach 24.\n\nThe problem is: 1, 11, 11, 13 \u2192 make 24.\n\nLet me analyze each step:\n\n**Step 2: left: 10, 24**\nFrom 10 and 24, can I make 24? \n- 10 + 24 = 34 \u2717\n- 24 - 10 = 14 \u2717\n- 10 * 24 = 240 \u2717\n- 24 / 10 = 2.4 \u2717\nNo way to make 24 from {10, 24}. This is a dead end.\n\n**Step 1: left: 10, 11, 13**\nFrom 10, 11, 13, can I make 24?\n- 10 + 11 + 13 = 34 \u2717\n- 13 + 11 = 24, then 24 + 10? No, but 13 + 11 = 24 directly! Then I need to use 10 somehow... wait, I have three numbers: 10, 11, 13.\n  - 13 + 11 = 24, but then I still have 10 left. I need to combine all three.\n  - 10 + 13 = 23, 23 + 11 = 34 \u2717\n  - 10 * 13 = 130 \u2717\n  - 13 - 10 = 3, 3 * 11 = 33 \u2717\n  - 11 - 10 = 1, 1 * 13 = 13 \u2717\n  - 10 + 11 = 21, 21 + 13 = 34 \u2717\n  - 13 * (11 - 10) = 13 \u2717\n  - 11 * (13 - 10) = 33 \u2717\n  - (10 - 11) * 13 = -13 \u2717\n  - 10 * (13 - 11) = 20 \u2717\n  - 13 + 11 = 24, need 10 to be identity... 24 * (10/10)? No, only one 10.\n  - 11 + 13 = 24, but can't ignore 10.\n  \n  Hmm, no valid combination from {10, 11, 13} seems to give 24.\n\n**Step 0: root \u2014 original: 1, 11, 11, 13**\nLet me try other approaches:\n- 1 + 11 = 12, 12 * (13 - 11) = 24 \u2713 Yes!\n- 11 + 13 = 24, 11 - 1 = 10... need to use all four\n- (11 - 1) * (13 - 11) = 10 * 2 = 20 \u2717\n- 1 * 11 + 13 = 24, but need to use both 11s: 1 * 11 + 13 = 24, still have one 11 left \u2717\n- (1 + 11) * (13 - 11) = 12 * 2 = 24 \u2713 Yes!\n\nSo from Step 0, there's a valid solution. \n\nStep 1 used 11 - 1 = 10, leaving {10, 11, 13}. I showed this seems to be a dead end.\n\nLet me verify Step 1 more carefully with {10, 11, 13}:\n- All combinations... none seem to work as shown above.\n\nSo Step 1 is a dead end, and we should return to Step 0.\n\nANSWER: 0",
+                        "beta_parse_method": "structured",
+                        "beta_model_call": true,
+                        "cascade": false,
+                        "cascade_id": 1,
+                        "cascade_position": 1,
+                        "explored_since_previous_beta": null
+                    }
+                ]
+            }
+        ],
+        "idx": 905,
+        "ys": [
+            ""
+        ],
+        "infos": [
+            {
+                "r": 0
+            }
+        ],
+        "usage_this_puzzle": {
+            "completion_tokens": 4019,
+            "prompt_tokens": 12812,
+            "cost": 0.032907000000000006
+        },
+        "usage_so_far": {
+            "completion_tokens": 12589,
+            "prompt_tokens": 39506,
+            "cost": 0.102451
+        },
+        "config": {
+            "backend": "bedrock",
+            "temperature": 0.0,
+            "task": "game24",
+            "task_start_index": 904,
+            "task_end_index": 907,
+            "naive_run": false,
+            "prompt_sample": null,
+            "method_generate": null,
+            "method_evaluate": null,
+            "method_select": "greedy",
+            "n_generate_sample": 3,
+            "n_evaluate_sample": 1,
+            "n_select_sample": 1,
+            "method_search": "dfs_nonparent",
+            "v_th": 0.5,
+            "node_budget": 30,
+            "verbose": true,
+            "max_per_state": 3,
+            "no_prune": false
+        }
+    },
+    {
+        "steps": [],
+        "nodes_explored": 21,
+        "candidates_evaluated": 56,
+        "candidates_pruned": 35,
+        "backtracks": [
+            {
+                "from_depth": 1,
+                "to_depth": 0,
+                "jump": 1,
+                "degenerate": true,
+                "reason": "all pruned",
+                "rejected_proposal": "1 + 8 = 9 (left: 9 10 11)\n",
+                "beta_raw_response": "I need to find the deepest step from which a different continuation could reach a correct solution for the problem 1, 8, 10, 11.\n\nThe goal is to use the numbers 1, 8, 10, 11 with arithmetic operations to make 24.\n\nLet me first check if Step 1 (1 + 8 = 9, leaving 9, 10, 11) can lead to a solution:\n- 9 + 10 + 11 = 30, no\n- 9 \u00d7 10 - 11 = 79, no\n- 9 + 10 \u00d7 11 = 119, no\n- (9 + 11) \u00d7 10 = 200, no... wait, that's not right: (9+11)\u00d710 = 200? No, 20\u00d710=200. No.\n- 11 \u00d7 10 / 9 \u2248 12.2, no\n- (10 - 9) \u00d7 11 = 11, no... wait: hmm\n- 9 \u00d7 11 - 10 = 99 - 10 = 89, no\n- (11 - 9) \u00d7 10 = 20, no\n- 10 + 11 + 9 = 30, no\n- 10 \u00d7 11 - 9\u00d7... wait, only three numbers left\n- 10 - 9 + 11 = 12, no\n- 11 - 10 + 9 = 10, no\n- (10 + 11) \u00d7 9 = 189, no\n- 9 \u00d7 (11 - 10) = 9, no... \n- Hmm, seems like 9, 10, 11 can't make 24 easily.\n\nSo Step 1 is a dead end. Let me check if Step 0 (root) can lead to a solution with different first steps:\n\nTry other operations with 1, 8, 10, 11:\n- 8 \u00d7 (11 - 10 + 1) = 8 \u00d7 2 = 16, no\n- (10 - 1) \u00d7 8 / ... wait: (10-1) = 9, 9\u00d78=72, 72/11? no\n- 11 \u00d7 8 / (10 - 1\u00d7... hmm: 11\u00d78=88, 88/(10-... ) \n- 8 / (1 - 10/11)... let me think: 10/11, 1 - 10/11 = 1/11, 8/(1/11) = 88, no\n- (11 - 8) \u00d7 (10 - 1\u00d7... wait: (11-8)=3, 3\u00d78=24? but I used 8 twice\n- 1 \u00d7 8 \u00d7 (11 - 10) = 8, no\n- (11 + 1) \u00d7 (10 - 8) = 12 \u00d7 2 = 24! Yes!\n\nSo (11 + 1) \u00d7 (10 - 8) = 24 works. This means from Step 0, a different path works.\n\nNow, can Step 1 (1 + 8 = 9) lead anywhere? I showed it seems unlikely. So Step 1 is a dead end.\n\nThe deepest recoverable step is Step 0 (root), since Step 1 is a dead end.\n\nANSWER: 0",
+                "beta_parse_method": "structured",
+                "beta_model_call": true,
+                "cascade": false,
+                "cascade_id": 1,
+                "cascade_position": 1,
+                "explored_since_previous_beta": null
+            },
+            {
+                "from_depth": 1,
+                "to_depth": 0,
+                "jump": 1,
+                "degenerate": true,
+                "reason": "all pruned",
+                "rejected_proposal": "1 + 10 = 11 (left: 8 11 11)\n",
+                "beta_raw_response": "I need to find the deepest recoverable prefix - the deepest step from which a different continuation could reach a correct solution.\n\nThe problem is: using numbers 1, 8, 10, 11 with arithmetic operations to make 24.\n\nLet me first check if there's a solution to this problem at all, and then evaluate the reasoning path.\n\n**Finding solutions to 1, 8, 10, 11 = 24:**\n\nLet me try various combinations:\n- 8 \u00d7 (11 - 10 + 1) = 8 \u00d7 2 = 16 \u2717\n- 8 \u00d7 (10 - 11 + 1) = 8 \u00d7 0 = 0 \u2717\n- (11 - 8) \u00d7 (10 - 1) = 3 \u00d7 9 = 27 \u2717\n- (11 - 8) \u00d7 10 - 1 = 30 - 1 = 29 \u2717\n- (11 + 1) \u00d7 (10 - 8) = 12 \u00d7 2 = 24 \u2713\n\nSo a solution exists: (11 + 1) \u00d7 (10 - 8) = 24\n\n**Evaluating the reasoning path:**\n\nStep 0: Root (start)\nStep 1: 1 + 10 = 11, leaving {8, 11, 11}\n\nNow I need to check if {8, 11, 11} can make 24:\n- 8 + 11 + 11 = 30 \u2717\n- 8 \u00d7 11 - 11 = 88 - 11 = 77 \u2717\n- 11 + 11 + 8 = 30 \u2717\n- 11 \u00d7 11 - 8 = 121 - 8 = 113 \u2717\n- (11 + 11) \u00d7 8 = 176 \u2717\n- 11 - 11 + 8 = 8 \u2717\n- (11 - 8) \u00d7 11 = 33 \u2717\n- 8 \u00d7 (11 - 11) = 0 \u2717\n- 11 \u00d7 (11 - 8) = 33 \u2717\n- 8 / (11 - 11) = undefined \u2717\n- (11 + 11) / 8 = 2.75 \u2717\n- 8 + 11 - 11 = 8 \u2717\n- 8 \u00d7 11 / 11 = 8 \u2717\n- 11 \u00d7 8 / 11 = 8 \u2717\n\nIt seems {8, 11, 11} cannot make 24. So Step 1 is a dead end.\n\nThe solution requires a different first step. Step 0 (root) is recoverable since we can try 11 + 1 = 12 first, then 12 \u00d7 (10 - 8) = 24.\n\nStep 1 is a dead end (no continuation works), so the deepest recoverable step is Step 0.\n\nANSWER: 0",
+                "beta_parse_method": "structured",
+                "beta_model_call": true,
+                "cascade": false,
+                "cascade_id": 2,
+                "cascade_position": 1,
+                "explored_since_previous_beta": 1
+            }
+        ],
+        "solution": "1 + 11 = 12 (left: 8 10 12)\n10 - 8 = 2 (left: 2 12)\n2 * 12 = 24 (left: 24)\n",
+        "method": "dfs_diligent",
+        "num_backtracks": 2,
+        "mean_jump_size": 1.0,
+        "pct_jumps_gt1": 0.0,
+        "num_backtracks_raw": 2,
+        "mean_jump_size_raw": 1.0,
+        "pct_jumps_gt1_raw": 0.0,
+        "num_logical_backtracks": 2,
+        "mean_jump_size_merged": 1.0,
+        "pct_jumps_gt1_merged": 0.0,
+        "beta_calls": 2,
+        "num_cascaded_calls": 0,
+        "pct_cascaded_calls": 0.0,
+        "cascade_chain_length_histogram": {
+            "1": 2
+        },
+        "backtracks_merged": [
+            {
+                "origin_depth": 1,
+                "final_target_depth": 0,
+                "jump": 1,
+                "degenerate": true,
+                "cascade_chain_length": 1,
+                "reasons": [
+                    "all pruned"
+                ],
+                "raw_events": [
+                    {
+                        "from_depth": 1,
+                        "to_depth": 0,
+                        "jump": 1,
+                        "degenerate": true,
+                        "reason": "all pruned",
+                        "rejected_proposal": "1 + 8 = 9 (left: 9 10 11)\n",
+                        "beta_raw_response": "I need to find the deepest step from which a different continuation could reach a correct solution for the problem 1, 8, 10, 11.\n\nThe goal is to use the numbers 1, 8, 10, 11 with arithmetic operations to make 24.\n\nLet me first check if Step 1 (1 + 8 = 9, leaving 9, 10, 11) can lead to a solution:\n- 9 + 10 + 11 = 30, no\n- 9 \u00d7 10 - 11 = 79, no\n- 9 + 10 \u00d7 11 = 119, no\n- (9 + 11) \u00d7 10 = 200, no... wait, that's not right: (9+11)\u00d710 = 200? No, 20\u00d710=200. No.\n- 11 \u00d7 10 / 9 \u2248 12.2, no\n- (10 - 9) \u00d7 11 = 11, no... wait: hmm\n- 9 \u00d7 11 - 10 = 99 - 10 = 89, no\n- (11 - 9) \u00d7 10 = 20, no\n- 10 + 11 + 9 = 30, no\n- 10 \u00d7 11 - 9\u00d7... wait, only three numbers left\n- 10 - 9 + 11 = 12, no\n- 11 - 10 + 9 = 10, no\n- (10 + 11) \u00d7 9 = 189, no\n- 9 \u00d7 (11 - 10) = 9, no... \n- Hmm, seems like 9, 10, 11 can't make 24 easily.\n\nSo Step 1 is a dead end. Let me check if Step 0 (root) can lead to a solution with different first steps:\n\nTry other operations with 1, 8, 10, 11:\n- 8 \u00d7 (11 - 10 + 1) = 8 \u00d7 2 = 16, no\n- (10 - 1) \u00d7 8 / ... wait: (10-1) = 9, 9\u00d78=72, 72/11? no\n- 11 \u00d7 8 / (10 - 1\u00d7... hmm: 11\u00d78=88, 88/(10-... ) \n- 8 / (1 - 10/11)... let me think: 10/11, 1 - 10/11 = 1/11, 8/(1/11) = 88, no\n- (11 - 8) \u00d7 (10 - 1\u00d7... wait: (11-8)=3, 3\u00d78=24? but I used 8 twice\n- 1 \u00d7 8 \u00d7 (11 - 10) = 8, no\n- (11 + 1) \u00d7 (10 - 8) = 12 \u00d7 2 = 24! Yes!\n\nSo (11 + 1) \u00d7 (10 - 8) = 24 works. This means from Step 0, a different path works.\n\nNow, can Step 1 (1 + 8 = 9) lead anywhere? I showed it seems unlikely. So Step 1 is a dead end.\n\nThe deepest recoverable step is Step 0 (root), since Step 1 is a dead end.\n\nANSWER: 0",
+                        "beta_parse_method": "structured",
+                        "beta_model_call": true,
+                        "cascade": false,
+                        "cascade_id": 1,
+                        "cascade_position": 1,
+                        "explored_since_previous_beta": null
+                    }
+                ]
+            },
+            {
+                "origin_depth": 1,
+                "final_target_depth": 0,
+                "jump": 1,
+                "degenerate": true,
+                "cascade_chain_length": 1,
+                "reasons": [
+                    "all pruned"
+                ],
+                "raw_events": [
+                    {
+                        "from_depth": 1,
+                        "to_depth": 0,
+                        "jump": 1,
+                        "degenerate": true,
+                        "reason": "all pruned",
+                        "rejected_proposal": "1 + 10 = 11 (left: 8 11 11)\n",
+                        "beta_raw_response": "I need to find the deepest recoverable prefix - the deepest step from which a different continuation could reach a correct solution.\n\nThe problem is: using numbers 1, 8, 10, 11 with arithmetic operations to make 24.\n\nLet me first check if there's a solution to this problem at all, and then evaluate the reasoning path.\n\n**Finding solutions to 1, 8, 10, 11 = 24:**\n\nLet me try various combinations:\n- 8 \u00d7 (11 - 10 + 1) = 8 \u00d7 2 = 16 \u2717\n- 8 \u00d7 (10 - 11 + 1) = 8 \u00d7 0 = 0 \u2717\n- (11 - 8) \u00d7 (10 - 1) = 3 \u00d7 9 = 27 \u2717\n- (11 - 8) \u00d7 10 - 1 = 30 - 1 = 29 \u2717\n- (11 + 1) \u00d7 (10 - 8) = 12 \u00d7 2 = 24 \u2713\n\nSo a solution exists: (11 + 1) \u00d7 (10 - 8) = 24\n\n**Evaluating the reasoning path:**\n\nStep 0: Root (start)\nStep 1: 1 + 10 = 11, leaving {8, 11, 11}\n\nNow I need to check if {8, 11, 11} can make 24:\n- 8 + 11 + 11 = 30 \u2717\n- 8 \u00d7 11 - 11 = 88 - 11 = 77 \u2717\n- 11 + 11 + 8 = 30 \u2717\n- 11 \u00d7 11 - 8 = 121 - 8 = 113 \u2717\n- (11 + 11) \u00d7 8 = 176 \u2717\n- 11 - 11 + 8 = 8 \u2717\n- (11 - 8) \u00d7 11 = 33 \u2717\n- 8 \u00d7 (11 - 11) = 0 \u2717\n- 11 \u00d7 (11 - 8) = 33 \u2717\n- 8 / (11 - 11) = undefined \u2717\n- (11 + 11) / 8 = 2.75 \u2717\n- 8 + 11 - 11 = 8 \u2717\n- 8 \u00d7 11 / 11 = 8 \u2717\n- 11 \u00d7 8 / 11 = 8 \u2717\n\nIt seems {8, 11, 11} cannot make 24. So Step 1 is a dead end.\n\nThe solution requires a different first step. Step 0 (root) is recoverable since we can try 11 + 1 = 12 first, then 12 \u00d7 (10 - 8) = 24.\n\nStep 1 is a dead end (no continuation works), so the deepest recoverable step is Step 0.\n\nANSWER: 0",
+                        "beta_parse_method": "structured",
+                        "beta_model_call": true,
+                        "cascade": false,
+                        "cascade_id": 2,
+                        "cascade_position": 1,
+                        "explored_since_previous_beta": 1
+                    }
+                ]
+            }
+        ],
+        "idx": 906,
+        "ys": [
+            "1 + 11 = 12 (left: 8 10 12)\n10 - 8 = 2 (left: 2 12)\n2 * 12 = 24 (left: 24)\n"
+        ],
+        "infos": [
+            {
+                "r": 1
+            }
+        ],
+        "usage_this_puzzle": {
+            "completion_tokens": 8210,
+            "prompt_tokens": 22694,
+            "cost": 0.06374400000000001
+        },
+        "usage_so_far": {
+            "completion_tokens": 20799,
+            "prompt_tokens": 62200,
+            "cost": 0.166195
+        },
+        "config": {
+            "backend": "bedrock",
+            "temperature": 0.0,
+            "task": "game24",
+            "task_start_index": 904,
+            "task_end_index": 907,
+            "naive_run": false,
+            "prompt_sample": null,
+            "method_generate": null,
+            "method_evaluate": null,
+            "method_select": "greedy",
+            "n_generate_sample": 3,
+            "n_evaluate_sample": 1,
+            "n_select_sample": 1,
+            "method_search": "dfs_nonparent",
+            "v_th": 0.5,
+            "node_budget": 30,
+            "verbose": true,
+            "max_per_state": 3,
+            "no_prune": false
+        }
+    }
+]

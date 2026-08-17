@@ -1,0 +1,355 @@
+[
+    {
+        "steps": [],
+        "nodes_explored": 23,
+        "candidates_evaluated": 56,
+        "candidates_pruned": 33,
+        "backtracks": [
+            {
+                "from_depth": 2,
+                "to_depth": 0,
+                "jump": 2,
+                "degenerate": false,
+                "reason": "all pruned",
+                "rejected_proposal": "7 + 9 = 16 (left: 6 8 16)\n8 - 6 = 2 (left: 2 16)\n",
+                "beta_raw_response": "I need to find the deepest recoverable non-parent ancestor of the failed branch.\n\nThe failed path is:\n- Step 0: Start\n- Step 1: 7 + 9 = 16 (left: 6 8 16)\n- Step 2: 8 - 6 = 2 (left: 2 16) \u2014 FAILED\n\nThe immediate parent is Step 1 (Step 2 - 1 = Step 1), which I cannot return.\n\nSo I need to look at ancestors strictly above Step 1, which is only Step 0.\n\nBut first, let me check if Step 1 itself is recoverable (just to understand the structure), and then check Step 0.\n\n**Checking Step 1 (left: 6 8 16):**\nThe immediate parent is Step 1, so I can't return it. But let me verify if Step 0 is recoverable.\n\n**Checking Step 0 (left: 6 7 8 9):**\nI need to determine if there's any way to make 24 from {6, 7, 8, 9}.\n\nLet me try various combinations:\n- 8 \u00d7 (9 - 6) = 8 \u00d7 3 = 24 \u2713\n\nYes! 8 \u00d7 (9 - 6) = 24 works. So from Step 0, a different continuation (not starting with 7 + 9 = 16) could reach a solution.\n\nSince Step 0 is recoverable and it's the only ancestor strictly above the immediate parent (Step 1), Step 0 is the answer.\n\nANSWER: 0",
+                "beta_parse_method": "structured",
+                "beta_model_call": true,
+                "strict_nonparent": true,
+                "parent_forbidden": true,
+                "unrecoverable": false
+            }
+        ],
+        "solution": "9 - 7 = 2 (left: 2 6 8)\n8 / 2 = 4 (left: 4 6)\n4 * 6 = 24 (left: 24)\n",
+        "method": "dfs_nonparent_strict",
+        "_live_explore_counter": 5,
+        "num_backtracks": 1,
+        "mean_jump_size": 2.0,
+        "pct_jumps_gt1": 1.0,
+        "num_backtracks_raw": 1,
+        "mean_jump_size_raw": 2.0,
+        "pct_jumps_gt1_raw": 1.0,
+        "num_logical_backtracks": 1,
+        "mean_jump_size_merged": 2.0,
+        "pct_jumps_gt1_merged": 1.0,
+        "beta_calls": 1,
+        "num_cascaded_calls": 0,
+        "pct_cascaded_calls": 0.0,
+        "cascade_chain_length_histogram": {
+            "1": 1
+        },
+        "backtracks_merged": [
+            {
+                "origin_depth": 2,
+                "final_target_depth": 0,
+                "jump": 2,
+                "degenerate": false,
+                "cascade_chain_length": 1,
+                "reasons": [
+                    "all pruned"
+                ],
+                "raw_events": [
+                    {
+                        "from_depth": 2,
+                        "to_depth": 0,
+                        "jump": 2,
+                        "degenerate": false,
+                        "reason": "all pruned",
+                        "rejected_proposal": "7 + 9 = 16 (left: 6 8 16)\n8 - 6 = 2 (left: 2 16)\n",
+                        "beta_raw_response": "I need to find the deepest recoverable non-parent ancestor of the failed branch.\n\nThe failed path is:\n- Step 0: Start\n- Step 1: 7 + 9 = 16 (left: 6 8 16)\n- Step 2: 8 - 6 = 2 (left: 2 16) \u2014 FAILED\n\nThe immediate parent is Step 1 (Step 2 - 1 = Step 1), which I cannot return.\n\nSo I need to look at ancestors strictly above Step 1, which is only Step 0.\n\nBut first, let me check if Step 1 itself is recoverable (just to understand the structure), and then check Step 0.\n\n**Checking Step 1 (left: 6 8 16):**\nThe immediate parent is Step 1, so I can't return it. But let me verify if Step 0 is recoverable.\n\n**Checking Step 0 (left: 6 7 8 9):**\nI need to determine if there's any way to make 24 from {6, 7, 8, 9}.\n\nLet me try various combinations:\n- 8 \u00d7 (9 - 6) = 8 \u00d7 3 = 24 \u2713\n\nYes! 8 \u00d7 (9 - 6) = 24 works. So from Step 0, a different continuation (not starting with 7 + 9 = 16) could reach a solution.\n\nSince Step 0 is recoverable and it's the only ancestor strictly above the immediate parent (Step 1), Step 0 is the answer.\n\nANSWER: 0",
+                        "beta_parse_method": "structured",
+                        "beta_model_call": true,
+                        "strict_nonparent": true,
+                        "parent_forbidden": true,
+                        "unrecoverable": false
+                    }
+                ]
+            }
+        ],
+        "num_unrecoverable": 0,
+        "idx": 904,
+        "ys": [
+            "9 - 7 = 2 (left: 2 6 8)\n8 / 2 = 4 (left: 4 6)\n4 * 6 = 24 (left: 24)\n"
+        ],
+        "infos": [
+            {
+                "r": 1
+            }
+        ],
+        "usage_this_puzzle": {
+            "completion_tokens": 8003,
+            "prompt_tokens": 26738,
+            "cost": 0.066753
+        },
+        "usage_so_far": {
+            "completion_tokens": 8003,
+            "prompt_tokens": 26738,
+            "cost": 0.066753
+        },
+        "config": {
+            "backend": "bedrock",
+            "temperature": 0.0,
+            "task": "game24",
+            "task_start_index": 904,
+            "task_end_index": 907,
+            "naive_run": false,
+            "prompt_sample": null,
+            "method_generate": null,
+            "method_evaluate": null,
+            "method_select": "greedy",
+            "n_generate_sample": 3,
+            "n_evaluate_sample": 1,
+            "n_select_sample": 1,
+            "method_search": "dfs_nonparent_strict",
+            "v_th": 0.5,
+            "node_budget": 30,
+            "verbose": true,
+            "max_per_state": 3,
+            "no_prune": false
+        }
+    },
+    {
+        "steps": [],
+        "nodes_explored": 4,
+        "candidates_evaluated": 25,
+        "candidates_pruned": 21,
+        "backtracks": [
+            {
+                "from_depth": 3,
+                "to_depth": 0,
+                "jump": 3,
+                "degenerate": false,
+                "reason": "terminal fail (wrong answer at left: 24)",
+                "rejected_proposal": "11 - 1 = 10 (left: 10 11 13)\n11 + 13 = 24 (left: 10 24)\n10 * 24 = 240 (left: 240)\n",
+                "beta_raw_response": "I need to find the deepest recoverable non-parent ancestor (strictly above Step 2, which is the immediate parent of the failed Step 3).\n\nSo I need to look at Step 1 and Step 0, and find the deepest one that could lead to a solution.\n\nThe target is 24 (standard \"make 24\" puzzle).\n\nNumbers: 1, 11, 11, 13\n\n**Checking Step 2 (immediate parent - NOT allowed):**\nStep 2 has: 10, 24 \u2192 10 * 24 = 240 (failed), 10 + 24 = 34, 24 - 10 = 14, 24/10 = 2.4, 10/24... None give 24. So Step 2 is unrecoverable anyway.\n\n**Checking Step 1: left: 10, 11, 13**\n(came from 11 - 1 = 10)\nI need to make 24 from 10, 11, 13.\n- 10 + 11 + 13 = 34\n- 13 - 11 + 10 = 12\n- 11 + 13 = 24, then 24 + 10 = 34 or 24 - 10 = 14 or 24 * 10 = 240 or 24/10... \n- 13 - 10 = 3, 3 * 11 = 33\n- 11 - 10 = 1, 1 * 13 = 13\n- 10 * 13 = 130, 130 - 11 = 119\n- 13 + 11 = 24, but then need to combine with 10 to get 24... 24 + 10 \u2260 24, 24 - 10 \u2260 24, 24 * 10 \u2260 24\n- 10 + 13 = 23, 23 + 11 = 34, 23 - 11 = 12, 23 * 11 = 253\n- 11 * 13 = 143, 143 - 10 = 133\n- 10 / (13 - 11) = 10/2 = 5, not 24\n- (13 - 11) * 10 = 20, not 24\n- 13 * (11 - 10) = 13\n- 11 * (13 - 10) = 11 * 3 = 33\n- 10 * (13 - 11) = 20\n- (10 + 11) * 13 = 273\n- 13 / (11 - 10) = 13\n- 11 / (13 - 10) = 11/3\n- (13 + 11) / 10 = 2.4\n- 10 - 13 + 11 = 8\n- 13 * 11 / 10 = not integer nicely\n\nStep 1 with {10, 11, 13} seems unrecoverable.\n\n**Checking Step 0: left: 1, 11, 11, 13**\nNeed to make 24 from 1, 11, 11, 13.\n- 13 + 11 = 24, then 24 * 1 = 24, and 11 is left... wait, need to use all four numbers.\n- 13 + 11 + 1 - 11 = 14... no wait: 13 + 11 = 24, then 24 * (11 - 11 + 1)? That uses all: 13 + 11 = 24, 11 - 11 = 0, 0 + 1 = 1, 24 * 1 = 24. Yes!\n- Or: (13 + 11) * 1 * (11/11) = 24 * 1 * 1 = 24. Yes!\n- Or simply: 13 + 11 = 24, then \u00d71, then \u00d7(11/11) or +(11-11)\n\nSo from Step 0, a different continuation (not going through 11-1=10 first) can reach 24. For example: 11 + 13 = 24, then 11 - 11 = 0, then 24 + 0 = 24... but we need to use the 1 too. \n\nActually: 13 + 11 = 24, 11/11 = 1, 24 * 1 = 24. This uses all four numbers (1, 11, 11, 13). \u2713\n\nStep 0 is recoverable.\n\nANSWER: 0",
+                "beta_parse_method": "structured",
+                "beta_model_call": true,
+                "strict_nonparent": true,
+                "parent_forbidden": true,
+                "unrecoverable": false
+            },
+            {
+                "from_depth": 0,
+                "to_depth": null,
+                "jump": null,
+                "reason": "all candidates exhausted",
+                "rejected_proposal": "",
+                "beta_model_call": false,
+                "strict_nonparent": true,
+                "parent_forbidden": true,
+                "unrecoverable": true
+            }
+        ],
+        "solution": null,
+        "method": "dfs_nonparent_strict",
+        "_live_explore_counter": 3,
+        "num_backtracks": 2,
+        "mean_jump_size": 3.0,
+        "pct_jumps_gt1": 1.0,
+        "num_backtracks_raw": 2,
+        "mean_jump_size_raw": 3.0,
+        "pct_jumps_gt1_raw": 1.0,
+        "num_logical_backtracks": 2,
+        "mean_jump_size_merged": 3.0,
+        "pct_jumps_gt1_merged": 1.0,
+        "beta_calls": 1,
+        "num_cascaded_calls": 0,
+        "pct_cascaded_calls": 0.0,
+        "cascade_chain_length_histogram": {
+            "1": 1
+        },
+        "backtracks_merged": [
+            {
+                "origin_depth": 3,
+                "final_target_depth": 0,
+                "jump": 3,
+                "degenerate": false,
+                "cascade_chain_length": 1,
+                "reasons": [
+                    "terminal fail (wrong answer at left: 24)"
+                ],
+                "raw_events": [
+                    {
+                        "from_depth": 3,
+                        "to_depth": 0,
+                        "jump": 3,
+                        "degenerate": false,
+                        "reason": "terminal fail (wrong answer at left: 24)",
+                        "rejected_proposal": "11 - 1 = 10 (left: 10 11 13)\n11 + 13 = 24 (left: 10 24)\n10 * 24 = 240 (left: 240)\n",
+                        "beta_raw_response": "I need to find the deepest recoverable non-parent ancestor (strictly above Step 2, which is the immediate parent of the failed Step 3).\n\nSo I need to look at Step 1 and Step 0, and find the deepest one that could lead to a solution.\n\nThe target is 24 (standard \"make 24\" puzzle).\n\nNumbers: 1, 11, 11, 13\n\n**Checking Step 2 (immediate parent - NOT allowed):**\nStep 2 has: 10, 24 \u2192 10 * 24 = 240 (failed), 10 + 24 = 34, 24 - 10 = 14, 24/10 = 2.4, 10/24... None give 24. So Step 2 is unrecoverable anyway.\n\n**Checking Step 1: left: 10, 11, 13**\n(came from 11 - 1 = 10)\nI need to make 24 from 10, 11, 13.\n- 10 + 11 + 13 = 34\n- 13 - 11 + 10 = 12\n- 11 + 13 = 24, then 24 + 10 = 34 or 24 - 10 = 14 or 24 * 10 = 240 or 24/10... \n- 13 - 10 = 3, 3 * 11 = 33\n- 11 - 10 = 1, 1 * 13 = 13\n- 10 * 13 = 130, 130 - 11 = 119\n- 13 + 11 = 24, but then need to combine with 10 to get 24... 24 + 10 \u2260 24, 24 - 10 \u2260 24, 24 * 10 \u2260 24\n- 10 + 13 = 23, 23 + 11 = 34, 23 - 11 = 12, 23 * 11 = 253\n- 11 * 13 = 143, 143 - 10 = 133\n- 10 / (13 - 11) = 10/2 = 5, not 24\n- (13 - 11) * 10 = 20, not 24\n- 13 * (11 - 10) = 13\n- 11 * (13 - 10) = 11 * 3 = 33\n- 10 * (13 - 11) = 20\n- (10 + 11) * 13 = 273\n- 13 / (11 - 10) = 13\n- 11 / (13 - 10) = 11/3\n- (13 + 11) / 10 = 2.4\n- 10 - 13 + 11 = 8\n- 13 * 11 / 10 = not integer nicely\n\nStep 1 with {10, 11, 13} seems unrecoverable.\n\n**Checking Step 0: left: 1, 11, 11, 13**\nNeed to make 24 from 1, 11, 11, 13.\n- 13 + 11 = 24, then 24 * 1 = 24, and 11 is left... wait, need to use all four numbers.\n- 13 + 11 + 1 - 11 = 14... no wait: 13 + 11 = 24, then 24 * (11 - 11 + 1)? That uses all: 13 + 11 = 24, 11 - 11 = 0, 0 + 1 = 1, 24 * 1 = 24. Yes!\n- Or: (13 + 11) * 1 * (11/11) = 24 * 1 * 1 = 24. Yes!\n- Or simply: 13 + 11 = 24, then \u00d71, then \u00d7(11/11) or +(11-11)\n\nSo from Step 0, a different continuation (not going through 11-1=10 first) can reach 24. For example: 11 + 13 = 24, then 11 - 11 = 0, then 24 + 0 = 24... but we need to use the 1 too. \n\nActually: 13 + 11 = 24, 11/11 = 1, 24 * 1 = 24. This uses all four numbers (1, 11, 11, 13). \u2713\n\nStep 0 is recoverable.\n\nANSWER: 0",
+                        "beta_parse_method": "structured",
+                        "beta_model_call": true,
+                        "strict_nonparent": true,
+                        "parent_forbidden": true,
+                        "unrecoverable": false
+                    }
+                ]
+            },
+            {
+                "origin_depth": 0,
+                "final_target_depth": null,
+                "jump": null,
+                "degenerate": false,
+                "cascade_chain_length": 1,
+                "reasons": [
+                    "all candidates exhausted"
+                ],
+                "raw_events": [
+                    {
+                        "from_depth": 0,
+                        "to_depth": null,
+                        "jump": null,
+                        "reason": "all candidates exhausted",
+                        "rejected_proposal": "",
+                        "beta_model_call": false,
+                        "strict_nonparent": true,
+                        "parent_forbidden": true,
+                        "unrecoverable": true
+                    }
+                ]
+            }
+        ],
+        "num_unrecoverable": 1,
+        "idx": 905,
+        "ys": [
+            ""
+        ],
+        "infos": [
+            {
+                "r": 0
+            }
+        ],
+        "usage_this_puzzle": {
+            "completion_tokens": 4263,
+            "prompt_tokens": 12434,
+            "cost": 0.033749
+        },
+        "usage_so_far": {
+            "completion_tokens": 12266,
+            "prompt_tokens": 39172,
+            "cost": 0.10050200000000001
+        },
+        "config": {
+            "backend": "bedrock",
+            "temperature": 0.0,
+            "task": "game24",
+            "task_start_index": 904,
+            "task_end_index": 907,
+            "naive_run": false,
+            "prompt_sample": null,
+            "method_generate": null,
+            "method_evaluate": null,
+            "method_select": "greedy",
+            "n_generate_sample": 3,
+            "n_evaluate_sample": 1,
+            "n_select_sample": 1,
+            "method_search": "dfs_nonparent_strict",
+            "v_th": 0.5,
+            "node_budget": 30,
+            "verbose": true,
+            "max_per_state": 3,
+            "no_prune": false
+        }
+    },
+    {
+        "steps": [],
+        "nodes_explored": 16,
+        "candidates_evaluated": 30,
+        "candidates_pruned": 14,
+        "backtracks": [
+            {
+                "from_depth": 1,
+                "to_depth": null,
+                "jump": null,
+                "reason": "all pruned",
+                "rejected_proposal": "1 + 8 = 9 (left: 9 10 11)\n",
+                "beta_model_call": false,
+                "strict_nonparent": true,
+                "parent_forbidden": true,
+                "unrecoverable": true
+            }
+        ],
+        "solution": null,
+        "method": "dfs_nonparent_strict",
+        "_live_explore_counter": 1,
+        "num_backtracks": 1,
+        "mean_jump_size": 0.0,
+        "pct_jumps_gt1": 0.0,
+        "num_backtracks_raw": 1,
+        "mean_jump_size_raw": 0.0,
+        "pct_jumps_gt1_raw": 0.0,
+        "num_logical_backtracks": 1,
+        "mean_jump_size_merged": 0.0,
+        "pct_jumps_gt1_merged": 0.0,
+        "beta_calls": 0,
+        "num_cascaded_calls": 0,
+        "pct_cascaded_calls": 0.0,
+        "cascade_chain_length_histogram": {},
+        "backtracks_merged": [
+            {
+                "origin_depth": 1,
+                "final_target_depth": null,
+                "jump": null,
+                "degenerate": false,
+                "cascade_chain_length": 1,
+                "reasons": [
+                    "all pruned"
+                ],
+                "raw_events": [
+                    {
+                        "from_depth": 1,
+                        "to_depth": null,
+                        "jump": null,
+                        "reason": "all pruned",
+                        "rejected_proposal": "1 + 8 = 9 (left: 9 10 11)\n",
+                        "beta_model_call": false,
+                        "strict_nonparent": true,
+                        "parent_forbidden": true,
+                        "unrecoverable": true
+                    }
+                ]
+            }
+        ],
+        "num_unrecoverable": 1,
+        "idx": 906,
+        "ys": [
+            ""
+        ],
+        "infos": [
+            {
+                "r": 0
+            }
+        ],
+        "usage_this_puzzle": {
+            "completion_tokens": 4116,
+            "prompt_tokens": 12701,
+            "cost": 0.033281000000000005
+        },
+        "usage_so_far": {
+            "completion_tokens": 16382,
+            "prompt_tokens": 51873,
+            "cost": 0.133783
+        },
+        "config": {
+            "backend": "bedrock",
+            "temperature": 0.0,
+            "task": "game24",
+            "task_start_index": 904,
+            "task_end_index": 907,
+            "naive_run": false,
+            "prompt_sample": null,
+            "method_generate": null,
+            "method_evaluate": null,
+            "method_select": "greedy",
+            "n_generate_sample": 3,
+            "n_evaluate_sample": 1,
+            "n_select_sample": 1,
+            "method_search": "dfs_nonparent_strict",
+            "v_th": 0.5,
+            "node_budget": 30,
+            "verbose": true,
+            "max_per_state": 3,
+            "no_prune": false
+        }
+    }
+]

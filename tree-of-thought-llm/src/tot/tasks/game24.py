@@ -11,6 +11,72 @@ def get_current_numbers(y: str) -> str:
     return last_line.split('left: ')[-1].split(')')[0]
 
 
+_STEP_LINE = re.compile(r'^([-\d./]+)\s*([+\-*/])\s*([-\d./]+)\s*=\s*([-\d./]+)\s*\(left:')
+
+# Strips a leading bullet/dash marker ("- ", "• ", "* ") some samples prepend
+# to an otherwise-valid step line. Requires whitespace right after the
+# marker, so a genuine negative first operand ("-5 + ..." — no space) is
+# left untouched and still parses as a negative number, not stripped.
+_LEADING_MARKER = re.compile(r'^[-•*]\s+')
+
+_STEP_OPS = {
+    '+': lambda a, b: a + b,
+    '-': lambda a, b: a - b,
+    '*': lambda a, b: a * b,
+    '/': lambda a, b: (a / b) if b != 0 else None,
+}
+
+
+def verify_steps(problem: str, output: str):
+    """
+    Simulate the step-by-step number pool from the puzzle's original
+    numbers and check it against a 'Steps:' trace directly, instead of
+    trusting a separately-generated 'Answer: ...' summary line.
+
+    A summary line asks the model to re-derive the combined expression
+    from scratch in a second, independent call — which can hallucinate
+    (e.g. reusing the same value from two different pool slots) even when
+    the original step-by-step trace was completely valid. Simulating the
+    trace itself only trusts arithmetic that was already produced.
+
+    Returns True/False if a step trace ('... (left: ...)' lines) is
+    present, or None if there's nothing to verify (e.g. a naive/standard
+    baseline output with no step trace) so the caller can fall back to
+    checking the final expression line instead.
+    """
+    lines = [line.strip() for line in output.strip().split('\n') if line.strip()]
+    step_lines = [line for line in lines if '(left:' in line]
+    if not step_lines:
+        return None
+
+    pool = [sympy.Rational(n) for n in re.findall(r'\d+', problem)]
+    for line in step_lines:
+        match = _STEP_LINE.match(_LEADING_MARKER.sub('', line))
+        if not match:
+            return False
+        a_str, op, b_str, result_str = match.groups()
+        try:
+            a, b, result = sympy.Rational(a_str), sympy.Rational(b_str), sympy.Rational(result_str)
+        except Exception:
+            return False
+
+        remaining = pool.copy()
+        if a not in remaining:
+            return False
+        remaining.remove(a)
+        if b not in remaining:
+            return False
+        remaining.remove(b)
+
+        computed = _STEP_OPS[op](a, b)
+        if computed is None or computed != result:
+            return False
+
+        pool = remaining + [result]
+
+    return len(pool) == 1 and pool[0] == 24
+
+
 class Game24Task(Task):
     """
     Input (x)   : a string of 4 numbers
@@ -26,7 +92,7 @@ class Game24Task(Task):
     """
     def __init__(self, file='24.csv'):
         """
-        file: a csv file (fixed)
+        file is a csv file
         """
         super().__init__()
         path = os.path.join(DATA_PATH, '24', file)
@@ -35,6 +101,10 @@ class Game24Task(Task):
         self.steps = 4
         self.stops = ['\n'] * 4
 
+    def is_terminal(self, y: str) -> bool:
+        last_line = y.strip().split('\n')[-1]
+        return 'left: 24' in last_line
+
     def __len__(self) -> int:
         return len(self.data)
     
@@ -42,6 +112,12 @@ class Game24Task(Task):
         return self.data[idx]
 
     def test_output(self, idx: int, output: str):
+        verified = verify_steps(self.data[idx], output)
+        if verified is not None:
+            return {'r': int(verified)}
+
+        # No step trace present (e.g. naive/standard baseline output) —
+        # fall back to checking the final expression line directly.
         expression = output.strip().split('\n')[-1].lower().replace('answer: ', '').split('=')[0]
         numbers = re.findall(r'\d+', expression)
         problem_numbers = re.findall(r'\d+', self.data[idx])
@@ -71,14 +147,12 @@ class Game24Task(Task):
         else:
             prompt = propose_prompt.format(input=current_numbers)
         return prompt
-    
+
     @staticmethod
     def value_prompt_wrap(x: str, y: str) -> str:
-        last_line = y.strip().split('\n')[-1]
-        if 'left: ' not in last_line:  # last step
-            ans = last_line.lower().replace('answer: ', '')
-            # print([value_last_step_prompt.format(input=x, answer=ans)])
-            return value_last_step_prompt.format(input=x, answer=ans)
+        # dfs/dfs_nonparent only ever pass y built from get_proposals(), whose
+        # candidates always end in a '(left: ...)' line by construction — the
+        # last-step (no 'left:') branch is unreachable on that path.
         current_numbers = get_current_numbers(y)
         return value_prompt.format(input=current_numbers)
     

@@ -1,0 +1,101 @@
+[
+    {
+        "steps": [],
+        "nodes_explored": 3,
+        "backtracks": [],
+        "solution": "3 + 4 = 7 (left: 4 7 13)\n4 + 7 = 11 (left: 11 13)\n11 + 13 = 24 (left: 24)\n",
+        "method": "dfs_parent",
+        "num_backtracks": 0,
+        "mean_jump_size": 0.0,
+        "pct_jumps_gt1": 0.0,
+        "idx": 903,
+        "ys": [
+            "3 + 4 = 7 (left: 4 7 13)\n4 + 7 = 11 (left: 11 13)\n11 + 13 = 24 (left: 24)\n"
+        ],
+        "infos": [
+            {
+                "r": 1
+            }
+        ],
+        "usage_this_puzzle": {
+            "completion_tokens": 3425,
+            "prompt_tokens": 14141,
+            "cost": 0.031266
+        },
+        "usage_so_far": {
+            "completion_tokens": 3425,
+            "prompt_tokens": 14141,
+            "cost": 0.031266
+        }
+    },
+    {
+        "steps": [],
+        "nodes_explored": 50,
+        "backtracks": [
+            {
+                "from_depth": 2,
+                "to_depth": 1,
+                "jump": 1,
+                "degenerate": true,
+                "reason": "subtree exhausted",
+                "rejected_proposal": "7 + 9 = 16 (left: 6 8 16)\n8 - 6 = 2 (left: 2 16)\n"
+            },
+            {
+                "from_depth": 3,
+                "to_depth": 2,
+                "jump": 1,
+                "degenerate": true,
+                "reason": "subtree exhausted",
+                "rejected_proposal": "7 + 9 = 16 (left: 6 8 16)\n6 / 8 = 3/4 (left: 16 3/4)\n- 16 / 3 = 16/3 (left: 4 16/3)\n"
+            },
+            {
+                "from_depth": 3,
+                "to_depth": 2,
+                "jump": 1,
+                "degenerate": true,
+                "reason": "subtree exhausted",
+                "rejected_proposal": "7 + 9 = 16 (left: 6 8 16)\n6 / 8 = 3/4 (left: 16 3/4)\n- 4 / 3 = 4/3 (left: 16 4/3)\n"
+            },
+            {
+                "from_depth": 2,
+                "to_depth": 1,
+                "jump": 1,
+                "degenerate": true,
+                "reason": "subtree exhausted",
+                "rejected_proposal": "7 + 9 = 16 (left: 6 8 16)\n6 / 8 = 3/4 (left: 16 3/4)\n"
+            },
+            {
+                "from_depth": 1,
+                "to_depth": 0,
+                "jump": 1,
+                "degenerate": true,
+                "reason": "subtree exhausted",
+                "rejected_proposal": "7 + 9 = 16 (left: 6 8 16)\n"
+            }
+        ],
+        "solution": null,
+        "method": "dfs_parent",
+        "num_backtracks": 5,
+        "mean_jump_size": 1.0,
+        "pct_jumps_gt1": 0.0,
+        "idx": 904,
+        "ys": [
+            ""
+        ],
+        "infos": [
+            {
+                "r": 0
+            }
+        ],
+        "usage_this_puzzle": {
+            "completion_tokens": 10182,
+            "prompt_tokens": 31241,
+            "cost": 0.08215099999999999
+        },
+        "usage_so_far": {
+            "completion_tokens": 13607,
+            "prompt_tokens": 45382,
+            "cost": 0.11341699999999999
+        }
+    }
+]
