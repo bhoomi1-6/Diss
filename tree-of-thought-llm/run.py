@@ -16,82 +16,96 @@ from tot.methods.dfs_crossward import (solve_dfs_crossword, solve_dfs_crossword_
 def run(args):
     task = get_task(args.task, crossword_file=getattr(args, 'crossword_file', None))
     logs, cnt_avg, cnt_any = [], 0, 0
-
-    # Build log filename — timestamped so reruns with identical params
-    # never overwrite a previous run, and sorting the folder by name
-    # also sorts runs chronologically (most recent last).
     timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
     if args.naive_run:
-        file = (f'./logs/{args.task}/{args.backend}_{args.temperature}'
+        base = (f'./logs/{args.task}/{args.backend}_{args.temperature}'
                 f'_naive_{args.prompt_sample}_sample_{args.n_generate_sample}'
-                f'_start{args.task_start_index}_end{args.task_end_index}'
-                f'_{timestamp}.json')
+                f'_start{args.task_start_index}_end{args.task_end_index}')
     elif args.method_search == 'dfs':
-        file = (f'./logs/{args.task}/{args.backend}_{args.temperature}'
+        base = (f'./logs/{args.task}/{args.backend}_{args.temperature}'
                 f'_dfs_parent_vth{args.v_th}_budget{args.node_budget}'
                 f'_eval{args.n_evaluate_sample}'
-                f'_start{args.task_start_index}_end{args.task_end_index}'
-                f'_{timestamp}.json')
+                f'_start{args.task_start_index}_end{args.task_end_index}')
     elif args.method_search == 'dfs_nonparent':
-        file = (f'./logs/{args.task}/{args.backend}_{args.temperature}'
+        base = (f'./logs/{args.task}/{args.backend}_{args.temperature}'
                 f'_dfs_diligent_B{args.n_generate_sample}_vth{args.v_th}_budget{args.node_budget}'
                 f'_eval{args.n_evaluate_sample}'
-                f'_start{args.task_start_index}_end{args.task_end_index}'
-                f'_{timestamp}.json')
+                f'_start{args.task_start_index}_end{args.task_end_index}')
     elif args.method_search == 'dfs_fixed_k2':
-        file = (f'./logs/{args.task}/{args.backend}_{args.temperature}'
+        base = (f'./logs/{args.task}/{args.backend}_{args.temperature}'
                 f'_dfs_fixedk2_B{args.n_generate_sample}_vth{args.v_th}_budget{args.node_budget}'
                 f'_eval{args.n_evaluate_sample}'
-                f'_start{args.task_start_index}_end{args.task_end_index}'
-                f'_{timestamp}.json')
+                f'_start{args.task_start_index}_end{args.task_end_index}')
     elif args.method_search == 'dfs_nonparent_strict':
-        file = (f'./logs/{args.task}/{args.backend}_{args.temperature}'
+        base = (f'./logs/{args.task}/{args.backend}_{args.temperature}'
                 f'_dfs_strict_B{args.n_generate_sample}_vth{args.v_th}_budget{args.node_budget}'
                 f'_eval{args.n_evaluate_sample}'
-                f'_start{args.task_start_index}_end{args.task_end_index}'
-                f'_{timestamp}.json')
+                f'_start{args.task_start_index}_end{args.task_end_index}')
     elif args.method_search == 'dfs_crossword':
-        file = (f'./logs/{args.task}/{args.backend}_{args.temperature}'
+        base = (f'./logs/{args.task}/{args.backend}_{args.temperature}'
                 f'_dfs_crossword_prune{not args.no_prune}_maxstate{args.max_per_state}'
                 f'_budget{args.node_budget}'
-                f'_start{args.task_start_index}_end{args.task_end_index}'
-                f'_{timestamp}.json')
+                f'_start{args.task_start_index}_end{args.task_end_index}')
     elif args.method_search == 'dfs_crossword_nonparent':
-        file = (f'./logs/{args.task}/{args.backend}_{args.temperature}'
+        base = (f'./logs/{args.task}/{args.backend}_{args.temperature}'
                 f'_dfs_crossword_diligent_B{args.n_generate_sample}_prune{not args.no_prune}'
                 f'_maxstate{args.max_per_state}_budget{args.node_budget}'
-                f'_start{args.task_start_index}_end{args.task_end_index}'
-                f'_{timestamp}.json')
+                f'_start{args.task_start_index}_end{args.task_end_index}')
     elif args.method_search == 'dfs_crossword_fixed_k2':
-        file = (f'./logs/{args.task}/{args.backend}_{args.temperature}'
+        base = (f'./logs/{args.task}/{args.backend}_{args.temperature}'
                 f'_dfs_crossword_fixedk2_B{args.n_generate_sample}_prune{not args.no_prune}'
                 f'_maxstate{args.max_per_state}_budget{args.node_budget}'
-                f'_start{args.task_start_index}_end{args.task_end_index}'
-                f'_{timestamp}.json')
+                f'_start{args.task_start_index}_end{args.task_end_index}')
     elif args.method_search == 'dfs_crossword_nonparent_strict':
-        file = (f'./logs/{args.task}/{args.backend}_{args.temperature}'
+        base = (f'./logs/{args.task}/{args.backend}_{args.temperature}'
                 f'_dfs_crossword_strict_B{args.n_generate_sample}_prune{not args.no_prune}'
                 f'_maxstate{args.max_per_state}_budget{args.node_budget}'
-                f'_start{args.task_start_index}_end{args.task_end_index}'
-                f'_{timestamp}.json')
+                f'_start{args.task_start_index}_end{args.task_end_index}')
     else:
-        file = (f'./logs/{args.task}/{args.backend}_{args.temperature}'
+        base = (f'./logs/{args.task}/{args.backend}_{args.temperature}'
                 f'_BFS_{args.method_generate}{args.n_generate_sample}'
                 f'_{args.method_evaluate}{args.n_evaluate_sample}'
                 f'_{args.method_select}{args.n_select_sample}'
-                f'_start{args.task_start_index}_end{args.task_end_index}'
-                f'_{timestamp}.json')
+                f'_start{args.task_start_index}_end{args.task_end_index}')
+    file = f'{base}_{timestamp}.json'
+    checkpoint_file = f'{base}_checkpoint.jsonl'
     os.makedirs(os.path.dirname(file), exist_ok=True)
 
-    # Concise pandas-friendly per-puzzle summary, crossword conditions only —
-    # additive-only: the detailed `logs` file above is unchanged, this is a
-    # separate sibling file with a `_summary` suffix so it never overwrites
-    # or interferes with the existing detailed log.
+  
     is_crossword_run = args.method_search.startswith('dfs_crossword')
     summary_file = file.replace('.json', '_summary.json') if is_crossword_run else None
     summaries = []
 
+   
+    completed_indices = set()
+    if args.resume and os.path.exists(checkpoint_file):
+        print(f'[checkpoint] --resume: found {checkpoint_file}, loading completed puzzles...')
+        with open(checkpoint_file, 'r') as cf:
+            for line in cf:
+                line = line.strip()
+                if not line:
+                    continue
+                rec = json.loads(line)
+                idx = rec['idx']
+                info_rec = rec['info']
+                completed_indices.add(idx)
+                logs.append(info_rec)
+                if is_crossword_run:
+                    summaries.append(build_concise_summary(
+                        info_rec, args, idx, info_rec.get('usage_this_puzzle', {})))
+                accs = [x['r'] for x in info_rec.get('infos', [])]
+                if accs:
+                    cnt_avg += sum(accs) / len(accs)
+                    cnt_any += any(accs)
+        print(f'[checkpoint] loaded {len(completed_indices)} already-completed puzzle(s) '
+              f'from {checkpoint_file}; they will be skipped.')
+
     for i in range(args.task_start_index, args.task_end_index):
+        if i in completed_indices:
+            if args.verbose:
+                print(f'[checkpoint] skipping puzzle {i} (already completed, found in {checkpoint_file})')
+            continue
+
         # Solve
         usage_before = claude_usage(args.backend)
   
@@ -139,6 +153,13 @@ def run(args):
             summaries.append(build_concise_summary(info, args, i, usage_this_puzzle))
             with open(summary_file, 'w') as f:
                 json.dump(summaries, f, indent=2)
+
+        checkpoint_record = {'idx': i, 'info': info, 'ys': ys}
+        with open(checkpoint_file, 'a') as cf:
+            cf.write(json.dumps(checkpoint_record) + '\n')
+            cf.flush()
+        if args.verbose:
+            print(f'[checkpoint] saved puzzle {i} to {checkpoint_file}')
 
         # Print metrics
         accs = [info['r'] for info in infos]
@@ -210,6 +231,13 @@ def parse_args():
                       help='Max nodes to explore per problem in DFS')
     args.add_argument('--verbose', action='store_true', default=True,
                       help='Print step-by-step DFS trace (off by default for large runs)')
+    args.add_argument('--resume', action='store_true',
+                      help='If a checkpoint file already exists for this exact run config '
+                           '(same task/method/backend/budget/etc. — the checkpoint filename is '
+                           'timestamp-independent, so re-running the identical command finds it), '
+                           'skip puzzle indices already recorded in it instead of re-solving '
+                           '(and re-spending tokens on) them. Off by default so a normal run never '
+                           'silently skips puzzles because a stale checkpoint file happens to exist.')
 
     # dfs_crossword args
     args.add_argument('--max_per_state', type=int, default=3,
