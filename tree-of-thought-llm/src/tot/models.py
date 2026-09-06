@@ -1,16 +1,22 @@
 import json
+import os
 import boto3
 import threading
 from botocore.config import Config
+from dotenv import load_dotenv
+
+load_dotenv()
 
 completion_tokens = 0
 prompt_tokens = 0
 _usage_lock = threading.Lock()
 
+BEDROCK_MODEL_ARN = os.environ.get("BEDROCK_MODEL_ARN")
+
 # Bedrock client with timeout and retry config
 client = boto3.client(
     "bedrock-runtime",
-    region_name="us-east-1",
+    region_name=os.environ.get("BEDROCK_REGION", "us-east-1"),
     config=Config(
         connect_timeout=30,
         read_timeout=120,
@@ -19,14 +25,23 @@ client = boto3.client(
 )
 print("calling claude model on bedrock...")
 
-def claude_prompt(prompt, model="arn:aws:bedrock:us-east-1:340325702211:application-inference-profile/zp8vw056ctc0", temperature=0.7, max_tokens=1000, n=1, stop=None):
+def _require_model_arn(model):
+    if model is None:
+        raise RuntimeError(
+            "No Bedrock model ARN configured. Set the BEDROCK_MODEL_ARN "
+            "environment variable (see .env.example)."
+        )
+    return model
+
+def claude_prompt(prompt, model=None, temperature=0.7, max_tokens=1000, n=1, stop=None):
     messages = [{"role": "user", "content": prompt}]
-    model = "arn:aws:bedrock:us-east-1:340325702211:application-inference-profile/zp8vw056ctc0"
+    model = _require_model_arn(model or BEDROCK_MODEL_ARN)
     return claude_haiku(messages, model=model, temperature=temperature, max_tokens=max_tokens, n=n, stop=stop)
 
 
-def claude_haiku(messages, model="arn:aws:bedrock:us-east-1:340325702211:application-inference-profile/zp8vw056ctc0", temperature=0.7, max_tokens=1000, n=1, stop=None):
+def claude_haiku(messages, model=None, temperature=0.7, max_tokens=1000, n=1, stop=None):
     global completion_tokens, prompt_tokens
+    model = _require_model_arn(model or BEDROCK_MODEL_ARN)
     outputs = []
 
     prompt = messages[-1]["content"]
