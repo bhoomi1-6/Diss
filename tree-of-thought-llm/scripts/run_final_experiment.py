@@ -1,31 +1,4 @@
 #!/usr/bin/env python3
-"""
-Wrapper around run.py for FINAL-EXPERIMENT runs only.
-
-Does NOT modify run.py, any search logic, or the logging internals inside
-run.py -- it calls run.py exactly as-is, via subprocess, with whatever
-arguments you pass through. Pilot/dev runs are completely unaffected by
-this script's existence; keep calling `python run.py ...` directly for
-those, exactly as before.
-
-What this script adds, purely as external housekeeping:
-  1. Records the file listing in logs/<task>/ before the run.
-  2. Invokes `python run.py <args...>` (all args forwarded verbatim).
-  3. Diffs the directory afterward to find the newly-created log file(s)
-     (the detailed log, and for crossword conditions the sibling
-     `_summary.json` -- both are picked up automatically by the diff).
-  4. COPIES (never moves) them into
-     logs/final_experiment/<task>/<condition_dir>/, renamed to the
-     FINAL-EXPERIMENT naming convention documented in
-     logs/final_experiment/NAMING.md. The original file in logs/<task>/
-     is left untouched.
-
-Usage: identical to `python run.py ...` -- just invoke this script instead.
-
-    python scripts/run_final_experiment.py --task game24 \\
-        --method_search dfs --task_start_index 900 --task_end_index 1000 \\
-        --node_budget 30 --backend bedrock
-"""
 import glob
 import json
 import os
@@ -34,6 +7,8 @@ import shutil
 import subprocess
 import sys
 
+
+# Map each method name to the condition folder used in the final results.
 METHOD_TO_CONDITION_DIR = {
     'dfs':                              'A_parent',
     'dfs_crossword':                    'A_parent',
@@ -45,10 +20,14 @@ METHOD_TO_CONDITION_DIR = {
     'dfs_crossword_nonparent_strict':   'D_strict_nonparent',
 }
 
+
+# Used to keep the timestamp from the original log filename.
 _TIMESTAMP_PATTERN = re.compile(r'(\d{8}_\d{6})')
 
 
 def parse_task_and_method(argv):
+
+    #pick out the task and the method from the command line arguments
     task = method = None
     for i, a in enumerate(argv):
         if a == '--task' and i + 1 < len(argv):
@@ -60,13 +39,10 @@ def parse_task_and_method(argv):
 
 def _load_config(detail_json_path):
     """
-    Read the actual `config` dict (vars(args), written by run.py on every
-    puzzle) out of the detail log itself -- the authoritative source of
-    what values were really used for this run. Never regex-parses the
-    filename for these values: some conditions (e.g. Condition A) don't
-    embed every field in their filename at all (n_generate_sample is
-    absent from Condition A's template), so filename-parsing would have to
-    guess or silently default -- this reads the true value instead.
+    Read the config saved inside the detail log.
+
+    This is the actual configuration used for the run, so it is safer
+    than trying to work out the settings from the filename.
     """
     with open(detail_json_path) as f:
         data = json.load(f)
@@ -77,12 +53,8 @@ def _load_config(detail_json_path):
 
 def rename_to_convention(detail_json_path, cond_dir):
     """
-    Build the FINAL-EXPERIMENT filename for the detail log at
-    detail_json_path, using ONLY values read from its own embedded
-    `config` dict (see _load_config) plus the puzzle range/timestamp
-    (also authoritative: task_start_index/task_end_index are in config
-    too; the timestamp is pulled from run.py's own filename since it
-    isn't otherwise recorded in the JSON body).
+    Create the final filename for a detail log using the settings
+    stored in that log, together with the original run timestamp.
     """
     original_name = os.path.basename(detail_json_path)
     cfg = _load_config(detail_json_path)
@@ -91,6 +63,8 @@ def rename_to_convention(detail_json_path, cond_dir):
     ts_match = _TIMESTAMP_PATTERN.search(original_name)
     ts = ts_match.group(1) if ts_match else 'NOTIMESTAMP'
 
+
+     # Build the filename from the settings that were actually used.
     parts = [
         task, cond_dir,
         str(cfg.get('backend', 'unknownbackend')),
@@ -100,10 +74,8 @@ def rename_to_convention(detail_json_path, cond_dir):
         f"vth{cfg.get('v_th', 'NA')}",
     ]
     if task == 'crosswords':
-        # max_per_state / no_prune are always present in cfg (global argparse
-        # args) but are only semantically meaningful for crossword runs --
-        # Game24 never reads them, so omit them from Game24 filenames rather
-        # than implying a relevance they don't have.
+        # These settings only matter for the crossword experiments,
+        # so they are left out of the Game of 24 filenames.
         if 'max_per_state' in cfg:
             parts.append(f"maxstate{cfg['max_per_state']}")
         if 'no_prune' in cfg:
@@ -114,19 +86,25 @@ def rename_to_convention(detail_json_path, cond_dir):
 
 def main():
     argv = sys.argv[1:]
+
+    # Get the task and method from the command-line arguments.
     task, method = parse_task_and_method(argv)
+
     if not task or not method:
         print("ERROR: --task and --method_search are required", file=sys.stderr)
         sys.exit(1)
+
     if method not in METHOD_TO_CONDITION_DIR:
         print(f"ERROR: unrecognized --method_search {method!r}", file=sys.stderr)
         sys.exit(1)
 
+    # Work out where the original logs are and where the final copies go.
     cond_dir = METHOD_TO_CONDITION_DIR[method]
     src_dir = os.path.join('logs', task)
     dest_dir = os.path.join('logs', 'final_experiment', task, cond_dir)
     os.makedirs(dest_dir, exist_ok=True)
 
+    # Remember which files already exist before starting the run.
     before = set(glob.glob(os.path.join(src_dir, '*.json')))
 
     result = subprocess.run([sys.executable, 'run.py'] + argv)
@@ -134,6 +112,7 @@ def main():
         print("run.py exited non-zero -- not copying anything.", file=sys.stderr)
         sys.exit(result.returncode)
 
+     # Anything that appeared after the run is a new log file.
     after = set(glob.glob(os.path.join(src_dir, '*.json')))
     new_files = sorted(after - before)
     if not new_files:
@@ -141,13 +120,16 @@ def main():
               file=sys.stderr)
         sys.exit(1)
 
+    # Separate the normal detail logs from their summary files.
     detail_files = [f for f in new_files if not f.endswith('_summary.json')]
     summary_files = [f for f in new_files if f.endswith('_summary.json')]
 
     print(f"\nCopying {len(new_files)} new file(s) to {dest_dir}/ "
           f"(originals in {src_dir}/ left untouched):")
 
-    renamed_by_stem = {}  # original detail-file basename (no ext) -> new base name (no ext)
+    # Keep track of the new name for each detail file so that its
+    # matching summary file can use the same naming convention.
+    renamed_by_stem = {}  
     for f in detail_files:
         renamed = rename_to_convention(f, cond_dir)
         dest_path = os.path.join(dest_dir, renamed)
@@ -162,10 +144,7 @@ def main():
         if detail_stem in renamed_by_stem:
             renamed = renamed_by_stem[detail_stem] + '_summary.json'
         else:
-            # Paired detail file wasn't among the new files (unexpected) --
-            # fall back to reading this run's own config indirectly isn't
-            # possible (summaries don't carry it), so keep the original
-            # name rather than guess.
+           
             renamed = base
         dest_path = os.path.join(dest_dir, renamed)
         shutil.copy2(f, dest_path)
