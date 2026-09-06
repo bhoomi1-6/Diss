@@ -163,13 +163,14 @@ This work builds directly on the Tree of Thoughts paper and codebase.
 If you use this repository, please cite the original paper:
 
 ```bibtex
-@misc{yao2023tree,
-      title={{Tree of Thoughts}: Deliberate Problem Solving with Large Language Models}, 
+@misc{yao2023treethoughtsdeliberateproblem,
+      title={Tree of Thoughts: Deliberate Problem Solving with Large Language Models}, 
       author={Shunyu Yao and Dian Yu and Jeffrey Zhao and Izhak Shafran and Thomas L. Griffiths and Yuan Cao and Karthik Narasimhan},
       year={2023},
       eprint={2305.10601},
       archivePrefix={arXiv},
-      primaryClass={cs.CL}
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2305.10601}, 
 }
 ```
 
