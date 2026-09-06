@@ -5,7 +5,6 @@ from tot.models import claude_prompt
 from tot.prompts.crosswords import propose_prompt
 from tot.methods.dfs import summarize_backtracks
 
-# ── Crossword-specific Condition 1 (parent-only backtracking) DFS ────────────
 
 CONFIDENCE_TO_VALUE = {'certain': 1, 'high': 0.5, 'medium': 0.2, 'low': 0.1}
 _LINE_PATTERN = re.compile(r'^([hv][1-5])\. ([a-zA-Z]{5,5}) \((certain|high|medium|low)\).*$')
@@ -36,12 +35,16 @@ def _get_candidates_to_scores(env, n_propose):
     if obs in env.cache:
         return env.cache[obs]
 
-    # n_propose separate completions, same token/dollar cost as before — just
-    # fired concurrently instead of sequentially (mirrors get_values() in
-    # dfs.py), so wall-clock time doesn't scale linearly with n_propose.
+    # Generate several independent candidate solutions in parallel from the
+    # current board state. Parallel generation reduces the time required to
+    # obtain the set of proposals used to rank possible next moves.
     prompt = _prompt_wrap(obs)
     with ThreadPoolExecutor(max_workers=n_propose) as executor:
         responses = [r for r in executor.map(lambda _: claude_prompt(prompt, n=1)[0], range(n_propose))]
+
+    # Parse the model responses and combine scores for candidates that appear in
+    # multiple responses. A higher total score indicates stronger agreement
+    # across the generated proposals.
     candidates_to_scores = {}
     for response in responses:
         parsed = _parse_response(response)
@@ -55,18 +58,13 @@ def _get_candidates_to_scores(env, n_propose):
 
 def select_final_state(node_snapshots, method='deepest'):
     """
-    Select which explored node_snapshots entry is reported as the puzzle's
-    final board.
+    Picks which explored state is reported as the puzzle's final board.
 
-    method='deepest' (MAIN A/B/C/D selection): the state reached at the
-    greatest search depth (len(n['actions'])), first-encountered on ties.
-    Does NOT use r_word.
+    'deepest' (used by the main experiment): the state reached at the
+    greatest depth, first on ties. Doesn't look at r_word.
 
-    method='best_r_word' (preserved, NOT used by the main experiment): the
-    state with the highest ground-truth-informed r_word — the original
-    ToT paper's "+best state" oracle ablation. r_word is recorded on every
-    snapshot regardless of which method is selected, so it stays available
-    for that separate analysis later.
+    'best_r_word': the state with the highest ground-truth r_word - the
+    original ToT paper's oracle ablation, kept but not used.
     """
     if method == 'deepest':
         return max(node_snapshots, key=lambda n: len(n['actions']))
@@ -85,13 +83,7 @@ def _depth_stats(node_snapshots, selected):
 
 
 def build_concise_summary(info, args, idx, usage_this_puzzle):
-    """
-    Build a flat, pandas-friendly per-puzzle summary dict. Purely
-    instrumentation/output — reads already-computed info/usage fields and
-    invents nothing; does not affect search behavior. Detailed logs (the
-    full `info` dict, dumped by run.py) are unaffected and still written
-    in full alongside this.
-    """
+    """Builds a flat per-puzzle summary dict for pandas. Doesn't affect the search or the full info dict written by run.py."""
     candidates_evaluated = info.get('candidates_evaluated', 0)
     candidates_pruned = info.get('candidates_pruned', 0)
     candidates_passed = info.get('nodes_explored', 0)
@@ -128,10 +120,7 @@ def build_concise_summary(info, args, idx, usage_this_puzzle):
         'cost': usage_this_puzzle.get('cost'),
     }
 
-    # beta(c)/non-parent-specific fields. beta_calls is 0 for Condition A
-    # (parent-only) and Condition C (fixed k=2, no LLM call) without any
-    # special-casing, since summarize_backtracks() only counts events with
-    # beta_model_call=True and those conditions never set that flag.
+    # beta(c)/non-parent-specific fields, beta_calls  is 0 for Condition A
     if args.method_search in ('dfs_crossword_nonparent', 'dfs_crossword_nonparent_strict',
                                'dfs_crossword_fixed_k2'):
         summary['beta_calls'] = info.get('beta_calls', 0)
@@ -153,14 +142,7 @@ def _recurse_crossword(env, actions, node_budget, node_snapshots, info,
 
     board, status, steps = env.board.copy(), env.status.copy(), env.steps
     ranked = sorted(candidates_to_scores, key=candidates_to_scores.get, reverse=True)
-    # candidates_evaluated counts every distinct word this node's propose call
-    # scored, regardless of whether it later got committed to — the crossword
-    # analogue of Game24's get_values() step (here, the LLM's confidence vote
-    # *is* the evaluation, there's no separate scalar-threshold pass). It's
-    # recorded up front, unconditional of how the loop below exits, so
-    # candidates_evaluated == nodes_explored (this node's share) +
-    # candidates_pruned holds regardless of early breaks — same invariant as
-    # dfs.py's _recurse_parent/_diligent_recurse.
+
     info['candidates_evaluated'] += len(ranked)
     cnt_per_state = 0
 
@@ -170,28 +152,10 @@ def _recurse_crossword(env, actions, node_budget, node_snapshots, info,
 
         _, _, _, step_info = env.step(action)
 
-        # not violating any existing (already-filled) constraint — deliberately
-        # does NOT check env.steps < 10 here: that check used to be combined
-        # with this one, which meant the action that fills the 10th and final
-        # slot (env.steps going 9 -> 10) always failed this gate and the whole
-        # block below — including node_snapshots.append(), the one place a
-        # completed board's r_game gets recorded — was skipped entirely, so a
-        # perfectly solved board could never be reported as solved. Recursion
-        # (which genuinely should stop once the board is full) is gated
-        # separately below, after the snapshot is recorded.
         if node_budget[0] > 0 and not any(s == 2 for s in env.status):
-            # Cap check happens BEFORE incrementing cnt_per_state (fixed
-            # off-by-one): previously cnt_per_state was bumped for the
-            # capped-out candidate too, so it was silently excluded from
-            # BOTH nodes_explored (correctly) AND candidates_pruned
-            # (incorrectly, since candidates_pruned = len(ranked) -
-            # cnt_per_state used the inflated cnt_per_state). Checking the
-            # cap first means cnt_per_state ends the loop equal to the
-            # number of candidates actually explored at this node, so the
-            # capped-out candidate now correctly falls into
-            # len(ranked) - cnt_per_state. Explored candidates, their
-            # order, and node_budget consumption are unchanged — this is
-            # instrumentation-only.
+           # Limit the number of candidates explored from a single board state.
+           # The counter is updated only after a candidate passes this limit, so it
+           # records the number of candidates that were actually explored.
             if cnt_per_state >= max_per_state:
                 env.reset(env.idx, board=board.copy(), status=status.copy(), steps=steps)
                 break
@@ -239,11 +203,10 @@ def _recurse_crossword(env, actions, node_budget, node_snapshots, info,
 
 
 def solve_dfs_crossword(args, task, idx, to_print=True):
-    """Parent-only backtracking DFS for MiniCrosswords — Condition 1.
-
-    Always backtracks exactly one level (to the parent board state) and
-    tries the next-ranked candidate word, mirroring _recurse_parent in
-    dfs.py but operating on task.env's board/status instead of a text y.
+    """
+    Condition A: parent-only backtracking DFS for MiniCrosswords. Mirrors
+    _recurse_parent in dfs.py, but works on task.env's board/status
+    instead of a text y.
     """
     global claude_prompt
     claude_prompt = partial(claude_prompt, temperature=args.temperature)
@@ -299,7 +262,7 @@ def solve_dfs_crossword(args, task, idx, to_print=True):
 
 
 
-# ── shared β(c) machinery (crossword-specific) ───────────────────────────────
+# shared beta(c) machinery (crossword-specific)
 
 CROSSWORD_BACKTRACK_PROMPT = '''You are solving the following mini crossword:
 {input}
@@ -333,23 +296,16 @@ _ANSWER_PATTERN = re.compile(r'ANSWER:\s*(\d+)')
 
 def _beta_crossword(x, actions, board_history, info, to_print, reason=''):
     """
-    Crossword analogue of _beta() in dfs.py. actions/board_history describe
-    the current path (Step i+1 = actions[i], board after it =
-    board_history[i]); from_depth is derived as len(actions) so callers
-    don't have to track it separately — matching the invariant in dfs.py
-    that from_depth == len(ancestor_chain) - 1.
+    Crossword version of _beta() in dfs.py. Asks the model for beta(c)
+    using the fill history in actions/board_history, from_depth =
+    len(actions).
 
-    IMPORTANT: call this BEFORE popping the just-failed action off
-    actions/board_history when the dead end is a specific candidate
-    (pruned / board-complete cases) — this mirrors dead_chain =
-    new_ancestors + [proposal] in dfs.py, so the failed step is itself
-    part of what the model sees and can be selected as the recovery point.
-    For 'all candidates exhausted' / 'no candidates', call it with actions
-    already back to this frame's own depth (nothing extra appended).
+    Call this before popping the failed action off actions/board_history,
+    so the model can see it as a possible recovery point.
     """
     from_depth = len(actions)
     if from_depth == 0:
-        return 0  # can only go back to root
+        return 0  # At the root, there is no earlier state to recover to.
 
     lines = ["Step 0 (root): [empty board, no words filled]"]
     for i, (action, board) in enumerate(zip(actions, board_history)):
@@ -379,10 +335,8 @@ def _beta_crossword(x, actions, board_history, info, to_print, reason=''):
     jump = from_depth - target_depth
     degenerate = jump == 1
 
-    # cascade detection — identical mechanism to _beta() in dfs.py: a call is
-    # a cascade iff zero new node-budget-consuming candidates were explored
-    # (per '_live_explore_counter', incremented in _diligent_recurse_crossword's
-    # commit point) since the previous actual β(c) model call.
+    # Same cascade detection as _beta() in dfs.py: a cascade means no new
+    # candidates were explored since the previous beta(c) call.
     explore_count = info.get('_live_explore_counter', 0)
     prev_snapshot = info.get('_explore_snapshot_at_last_beta')
     explored_since_previous = None if prev_snapshot is None else explore_count - prev_snapshot
@@ -416,26 +370,23 @@ def _beta_crossword(x, actions, board_history, info, to_print, reason=''):
     if to_print:
         tag = ' [degenerate: same as parent-only]' if degenerate else ''
         cascade_tag = ' [CASCADE]' if cascade else ''
-        print(f"{'  ' * from_depth}[β(c) BACKTRACK] {reason} — "
-              f"depth {from_depth} → {target_depth}  (skipped {jump - 1} levels){tag}{cascade_tag}")
+        print(f"{'  ' * from_depth}[beta(c) BACKTRACK] {reason} — "
+              f"depth {from_depth} -> {target_depth}  (skipped {jump - 1} levels){tag}{cascade_tag}")
 
     return target_depth
 
 
-# ── Condition C: Fixed k=2 Backtracking (deterministic baseline, crossword) ──
+# Condition C: deterministic fixed-k=2 backtracking baseline.
 
 def _fixed_k2_crossword(x, actions, board_history, info, to_print, reason='', k=2):
     """
-    Crossword analogue of _fixed_k2() in dfs.py — same drop-in-replacement
-    role for _beta_crossword() that _fixed_k2 plays for _beta(). Deterministic
+    Crossword analogue of _fixed_k2() in dfs.py: deterministic
     target_depth = max(0, from_depth - k), no LLM call, no cascade concept
-    (see _fixed_k2's docstring in dfs.py for the full rationale, identical
-    here). from_depth derived the same way _beta_crossword does
-    (len(actions)), so the depth semantics match exactly.
+    (see _fixed_k2's docstring for the rationale).
     """
     from_depth = len(actions)
     if from_depth == 0:
-        return 0  # can only go back to root — same convention as _beta_crossword
+        return 0  
 
     target_depth = max(0, from_depth - k)
     jump = from_depth - target_depth
@@ -454,36 +405,26 @@ def _fixed_k2_crossword(x, actions, board_history, info, to_print, reason='', k=
     if to_print:
         tag = ' [degenerate: same as parent-only]' if degenerate else ''
         print(f"{'  ' * from_depth}[FIXED-k={k} BACKTRACK] {reason} — "
-              f"depth {from_depth} → {target_depth}  (skipped {jump - 1} levels){tag}")
+              f"depth {from_depth} -> {target_depth}  (skipped {jump - 1} levels){tag}")
 
     return target_depth
 
 
-# ── Condition 2: Diligent Learner Non-Parent Backtracking (crossword) ────────
-
+# Condition B/C: recursive search with configurable non-parent backtracking.
 def _diligent_recurse_crossword(env, x, actions, board_history, node_budget, node_snapshots, info,
                                  depth, prune, max_per_state, n_propose, to_print,
                                  backtrack_fn=None):
     """
-    β(c) non-parent backtracking DFS — crossword Condition 2. Mirrors
-    _diligent_recurse in dfs.py: every dead end (no candidates, pruned, or
-    board-complete/exhausted) invokes β(c) instead of always returning to
-    the immediate parent. There's no "solved, stop early" branch here —
-    same as C1, crossword search is anytime; node_snapshots are scored by
-    r_word at the very end in solve_dfs_crossword_nonparent.
+    Crossword version of _diligent_recurse in dfs.py: every dead end asks
+    backtrack_fn where to recover to, instead of always going to the
+    parent. There's no early-stop on solved, since crossword search is
+    anytime - snapshots are scored by r_word at the end.
 
-    Returns the backtrack target depth for this subtree. Each frame
-    restores its own pre-loop env state (board/status/steps) before
-    returning, so by the time a returned bt_depth reaches the frame that
-    owns it, env is already sitting at that ancestor's exact state —
-    no separate snapshot stack needed to "jump" multiple levels.
+    Returns the backtrack target depth. Each frame restores its own env
+    state before returning.
 
-    backtrack_fn: same role as in dfs.py's _diligent_recurse — the ONLY
-    thing that differs between crossword Condition B (_beta_crossword, the
-    default) and Condition C (_fixed_k2_crossword). Everything else here —
-    candidate generation, scoring, pruning, node-budget accounting,
-    recursion order — is identical for both, since they call this exact
-    same function.
+    backtrack_fn is the only thing that changes between Condition B
+    (_beta_crossword, default) and Condition C (_fixed_k2_crossword).
     """
     if backtrack_fn is None:
         backtrack_fn = _beta_crossword
@@ -498,9 +439,8 @@ def _diligent_recurse_crossword(env, x, actions, board_history, node_budget, nod
 
     board, status, steps = env.board.copy(), env.status.copy(), env.steps
     ranked = sorted(candidates_to_scores, key=candidates_to_scores.get, reverse=True)
-    # see matching comment in _recurse_crossword — recorded up front so the
-    # invariant holds regardless of how the loop below exits (early beta
-    # return, max_per_state cap, or budget exhaustion).
+     # Count all ranked candidates before entering the exploration loop. This keeps
+    # the evaluation count consistent even when the loop stops early.
     info['candidates_evaluated'] += len(ranked)
     cnt_per_state = 0
 
@@ -511,18 +451,9 @@ def _diligent_recurse_crossword(env, x, actions, board_history, node_budget, nod
         _, _, _, step_info = env.step(action)
 
         if node_budget[0] > 0 and not any(s == 2 for s in env.status):
-            # Cap check happens BEFORE incrementing cnt_per_state (fixed
-            # off-by-one): previously cnt_per_state was bumped for the
-            # capped-out candidate too, so it was silently excluded from
-            # BOTH nodes_explored (correctly) AND candidates_pruned
-            # (incorrectly, since candidates_pruned = len(ranked) -
-            # cnt_per_state used the inflated cnt_per_state). Checking the
-            # cap first means cnt_per_state ends the loop equal to the
-            # number of candidates actually explored at this node, so the
-            # capped-out candidate now correctly falls into
-            # len(ranked) - cnt_per_state. Explored candidates, their
-            # order, and node_budget consumption are unchanged — this is
-            # instrumentation-only.
+            # Cap check happens before incrementing cnt_per_state, so
+            # cnt_per_state ends the loop equal to the number of candidates
+            # actually explored at this node.
             if cnt_per_state >= max_per_state:
                 env.reset(env.idx, board=board.copy(), status=status.copy(), steps=steps)
                 break
@@ -530,10 +461,9 @@ def _diligent_recurse_crossword(env, x, actions, board_history, node_budget, nod
 
             node_budget[0] -= 1
             info['nodes_explored'] += 1
-            # cascade-detection bookkeeping only (see _beta_crossword) — a
-            # dedicated counter, kept separate from nodes_explored so the
-            # mechanism matches dfs.py's exactly and doesn't depend on
-            # nodes_explored's own accounting semantics staying incremental.
+            # Track explored nodes separately for cascade detection. This counter records
+            # whether any new node has been explored since the previous beta(c)
+            # decision, without changing the main node-exploration statistic.
             info['_live_explore_counter'] = info.get('_live_explore_counter', 0) + 1
             count = env.prompt_status()
             actions.append(action)
@@ -571,15 +501,14 @@ def _diligent_recurse_crossword(env, x, actions, board_history, node_budget, nod
             env.reset(env.idx, board=board.copy(), status=status.copy(), steps=steps)
 
             if bt_depth < depth:
-                # β(c) points above this node — this frame's own state is
-                # already restored above; propagate upward without trying
-                # remaining siblings.
+                # The requested backtrack target is above the current node, so propagate the
+                # request to the caller instead of exploring further siblings.
                 info['candidates_pruned'] += len(ranked) - cnt_per_state
                 if to_print:
                     print(f"{'  ' * depth}[d={depth}] candidates={len(ranked)} evaluated={len(ranked)} "
                           f"passed={cnt_per_state} pruned={len(ranked) - cnt_per_state}")
                 return bt_depth
-            continue  # bt_depth >= depth: absorbed here, try next candidate
+            continue   # The backtrack was handled at this level so try the next candidate.
 
         env.reset(env.idx, board=board.copy(), status=status.copy(), steps=steps)
 
@@ -592,7 +521,7 @@ def _diligent_recurse_crossword(env, x, actions, board_history, node_budget, nod
 
 
 def solve_dfs_crossword_nonparent(args, task, idx, to_print=True):
-    """Diligent Learner (β(c)) non-parent backtracking DFS — crossword Condition 2."""
+    """Condition B: non-parent backtracking DFS for MiniCrosswords, using beta(c)."""
     global claude_prompt
     claude_prompt = partial(claude_prompt, temperature=args.temperature)
     print(claude_prompt)
@@ -616,7 +545,7 @@ def solve_dfs_crossword_nonparent(args, task, idx, to_print=True):
     }
     node_snapshots = []
 
-    x = env.render()  # clue/puzzle description shown to the β(c) model
+    x = env.render()  # clue/puzzle description shown to the beta(c) model
 
     _diligent_recurse_crossword(env, x, [], [], node_budget, node_snapshots, info,
                                  0, prune, max_per_state, n_propose, to_print)
@@ -652,14 +581,8 @@ def solve_dfs_crossword_nonparent(args, task, idx, to_print=True):
 
 def solve_dfs_crossword_fixed_k2(args, task, idx, to_print=True):
     """
-    Fixed k=2 backtracking DFS for MiniCrosswords — Condition C.
-
-    Identical search machinery to solve_dfs_crossword_nonparent (Condition
-    B): same candidate generation, scoring, pruning, node-budget accounting,
-    recursion (_diligent_recurse_crossword) — reused directly, not
-    duplicated. The ONLY difference is the backtrack_fn passed in:
-    _fixed_k2_crossword (target_depth = max(0, from_depth - 2), no LLM
-    call) instead of _beta_crossword.
+    Condition C: same search as solve_dfs_crossword_nonparent (Condition
+    B), but uses _fixed_k2_crossword instead of _beta_crossword.
     """
     global claude_prompt
     claude_prompt = partial(claude_prompt, temperature=args.temperature)
@@ -717,7 +640,7 @@ def solve_dfs_crossword_fixed_k2(args, task, idx, to_print=True):
     return [y], info
 
 
-# ── Condition D: Strict Non-Parent β(c) (crossword) ───────────────────────────
+# Condition D: strict non-parent backtracking using beta(c).
 
 STRICT_NONPARENT_CROSSWORD_BACKTRACK_PROMPT = '''You are solving the following mini crossword:
 {input}
@@ -779,12 +702,9 @@ def _parse_strict_response_crossword(output, from_depth):
 
 def _strict_nonparent_crossword(x, actions, board_history, info, to_print, reason=''):
     """
-    Crossword analogue of _strict_nonparent() in dfs.py — non-parent
-    PREFERRED backtracking. The immediate parent is NEVER a legal target
-    once from_depth >= 2, and D never aborts the puzzle. See
-    _strict_nonparent's docstring in dfs.py for the full rationale;
-    identical here, using from_depth = len(actions) exactly like
-    _beta_crossword.
+    Crossword version of _strict_nonparent() in dfs.py. The immediate
+    parent is never a legal target once from_depth >= 2. See
+    _strict_nonparent in dfs.py for the full logic.
     """
     from_depth = len(actions)
 
@@ -828,9 +748,9 @@ def _strict_nonparent_crossword(x, actions, board_history, info, to_print, reaso
     target_depth, parse_method, unrecoverable = _parse_strict_response_crossword(output, from_depth)
 
     if unrecoverable:
-        # Legal non-parent targets existed, but the model didn't give us a
-        # usable one — use the deterministic strict-non-parent fallback
-        # (deepest legal non-parent ancestor), NEVER the immediate parent.
+        # The model did not provide a valid non-parent target. Use the deepest legal
+        # non-parent ancestor as a deterministic fallback, the immediate parent
+        # is deliberately excluded by the strict condition.
         nonparent_fallback_depth = from_depth - 2
         info['backtracks'].append({
             'from_depth': from_depth,
@@ -854,7 +774,7 @@ def _strict_nonparent_crossword(x, actions, board_history, info, to_print, reaso
         })
         if to_print:
             print(f"{'  ' * from_depth}[STRICT-D NONPARENT-FALLBACK] {reason} — "
-                  f"depth {from_depth} → {nonparent_fallback_depth}  (parse: {parse_method})")
+                  f"depth {from_depth} -> {nonparent_fallback_depth}  (parse: {parse_method})")
         return nonparent_fallback_depth
 
     jump = from_depth - target_depth
@@ -879,26 +799,15 @@ def _strict_nonparent_crossword(x, actions, board_history, info, to_print, reaso
     })
     if to_print:
         print(f"{'  ' * from_depth}[STRICT-D BACKTRACK] {reason} — "
-              f"depth {from_depth} → {target_depth}  (skipped {jump - 1} levels)")
+              f"depth {from_depth} -> {target_depth}  (skipped {jump - 1} levels)")
     return target_depth
 
 
 def solve_dfs_crossword_nonparent_strict(args, task, idx, to_print=True):
     """
-    Strict non-parent β(c) DFS for MiniCrosswords — Condition D. Never
-    selects the immediate parent once from_depth >= 2, and never aborts
-    the search.
-
-    Identical search machinery to solve_dfs_crossword_nonparent (Condition
-    B) and solve_dfs_crossword_fixed_k2 (Condition C): same candidate
-    generation, scoring, pruning, node-budget accounting, recursion
-    (_diligent_recurse_crossword) — reused directly, not duplicated. The
-    ONLY difference is the backtrack_fn: _strict_nonparent_crossword, which
-    forbids the parent as an LLM target and falls back to root (no legal
-    non-parent ancestor, from_depth<=1) or the deterministic
-    strict-non-parent target from_depth-2 (model returns
-    UNRECOVERABLE/invalid/parent, from_depth>=2) — never to the parent,
-    and never aborting the search for the whole puzzle.
+    Condition D: same search as Condition B, but uses
+    _strict_nonparent_crossword so backtracking never lands on the
+    immediate parent.
     """
     global claude_prompt
     claude_prompt = partial(claude_prompt, temperature=args.temperature)

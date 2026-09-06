@@ -4,7 +4,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from tot.models import claude_prompt
 
 
-# ── shared helpers ───────────
+# Shared helpers to evaluate and rank the candidate next steps. 
 def get_value(task, x, y, n_evaluate_sample, cache_value=True):
     value_prompt = task.value_prompt_wrap(x, y)
     if cache_value and value_prompt in task.value_cache:
@@ -33,17 +33,7 @@ def get_values(task, x, ys, n_evaluate_sample, cache_value=True):
 
 
 def _merge_cascade_chain(chain):
-    """
-    Collapse one maximal run of cascaded β(c) calls (see collapse_cascades)
-    into a single logical backtracking episode. Read-only: does not modify
-    the raw event dicts in `chain`, only reads them.
-
-    last['to_depth'] is always a real depth for every condition, including D
-    — since D was revised to fall back to root/parent instead of aborting
-    the puzzle, it no longer produces to_depth=None events. The None-handling
-    below is kept defensively (harmless if ever exercised) but is not
-    currently reachable by any condition.
-    """
+    """Merges a run of cascaded beta(c) calls into one backtracking episode. Doesn't change the input."""
     first, last = chain[0], chain[-1]
     if last.get('to_depth') is None:
         jump = None
@@ -64,23 +54,12 @@ def _merge_cascade_chain(chain):
 
 def collapse_cascades(backtracks):
     """
-    Post-hoc, read-only regrouping of `backtracks` into logical episodes.
-    Does NOT touch the input list/dicts and has no influence whatsoever on
-    the search — it only re-reads what _beta()/_beta_crossword() already
-    recorded.
+    Groups backtrack events into logical episodes after the search is done.
+    Doesn't change the search itself.
 
-    A "cascade chain" is a maximal run of consecutive raw events sharing the
-    same cascade_id — an id assigned at recording time in _beta()/
-    _beta_crossword(): a NEW id starts whenever a β(c) call is not a
-    cascade (i.e. at least one new node-budget-consuming candidate was
-    explored since the previous β(c) call, or this is the very first call),
-    and consecutive calls keep the same id for as long as each one is a
-    cascade (zero new candidates explored since the last call).
-
-    Events without a 'cascade' key (e.g. parent-only backtracks, which are
-    never produced by a β(c) model call at all) are each their own
-    length-1 chain — there is no cascade concept for parent-only recovery,
-    since it never skips a frame without trying its own next candidate.
+    A cascade chain is a run of events sharing the same cascade_id (a new
+    id starts whenever a beta(c) call isn't a cascade). Events with no
+    'cascade' key, like parent-only backtracks, are each their own chain.
     """
     if not backtracks:
         return []
@@ -99,38 +78,14 @@ def collapse_cascades(backtracks):
 
 def summarize_backtracks(backtracks):
     """
-    Aggregate stats over a run's backtrack log — both the raw event stream
-    and (for conditions that use β(c)) a post-hoc cascade-collapsed logical
-    view. Purely a reporting function: it never influences the search, and
-    collapse_cascades() only reads the already-recorded raw events.
+    Computes summary stats for one puzzle's backtrack log: raw counts plus
+    (for beta(c) conditions) the cascade-collapsed view. Doesn't affect
+    the search.
 
-    A backtrack with jump == 1 is "degenerate": it moved exactly one level
-    up, indistinguishable from what parent-only backtracking would have
-    done at that point. Only jump > 1 events are evidence that non-parent
-    (β(c)) backtracking actually diverged from the parent-only baseline —
-    pct_jumps_gt1 / mean_jump_size quantify how much of the search's
-    backtracking was genuinely non-parent vs. accidentally parent-only.
-
-    num_backtracks / mean_jump_size / pct_jumps_gt1 are kept as the
-    original keys (unchanged definition/values) for backward compatibility
-    with Condition 1 (parent-only) callers that predate this cascade
-    instrumentation; num_backtracks_raw / mean_jump_size_raw /
-    pct_jumps_gt1_raw are identical aliases, added alongside the merged and
-    cascade-specific stats below.
-
-    beta_calls / num_cascaded_calls / pct_cascaded_calls /
-    cascade_chain_length_histogram only count events with
-    beta_model_call=True — i.e. actual β(c) model invocations
-    (_beta()/_beta_crossword() reaching the point of calling the LLM), not
-    every entry in `backtracks`. Parent-only conditions never set this flag,
-    so these are correctly 0 for Condition 1.
-
-    cascade_chain_length counts the number of raw β(c) MODEL CALLS composing
-    a logical episode — not the number of stack frames skipped in between
-    them. Skipped frames (where `if bt_depth < depth: return None, bt_depth`
-    fires in _diligent_recurse / _diligent_recurse_crossword) never
-    themselves call the model, so they aren't independently observable
-    "calls" to count; only the β(c) calls that actually happen are counted.
+    jump == 1 means the backtrack went to the parent, same as condition A
+    would do. jump > 1 means it skipped ahead. beta_calls/
+    num_cascaded_calls/pct_cascaded_calls only count real LLM calls
+    (beta_model_call=True), so they're 0 for condition A.
     """
     if not backtracks:
         return {
@@ -143,13 +98,7 @@ def summarize_backtracks(backtracks):
             'num_unrecoverable': 0,
         }
 
-    # Condition D (strict non-parent β(c)) can record events with jump=None
-    # (unrecoverable branches — see _strict_nonparent). num_backtracks_raw
-    # still counts every raw event (including unrecoverable ones), but the
-    # numeric jump stats (mean/pct>1) only make sense over events that
-    # actually have a jump, so those are computed over the filtered subset.
-    # For Conditions A/B/C every event always has a real jump, so this
-    # filter is a no-op for them.
+    # jump is None for unrecoverable branches, so stats use only the rest.
     all_jumps = [b['jump'] for b in backtracks]
     jumps = [j for j in all_jumps if j is not None]
     non_degenerate = [j for j in jumps if j > 1]
@@ -197,21 +146,14 @@ def summarize_backtracks(backtracks):
 
 
 def _is_terminal(task, proposal):
-    """
-    Terminal check for Game24 — this file only handles game24 now
-    (crosswords has its own dfs_crossword.py). Delegates to
-    task.is_terminal(), e.g. Game24Task: return 'left: 24' in y.
-    """
+    """Terminal check for Game24 delegates to task.is_terminal()."""
     return task.is_terminal(proposal)
 
 
 def get_proposals(task, x, y, n_propose=1):
     """
-    Generate candidate next steps for Game24.
-
-    If y is already a terminal state, return [] immediately so neither
-    _recurse_parent nor _diligent_recurse recurses further and solicits
-    phantom recap steps from the model.
+    Generate candidate next steps for Game24. Returns [] immediately if y
+    is already terminal, so callers don't recurse further on a solved state.
     """
     if y and _is_terminal(task, y):
         return []
@@ -219,8 +161,8 @@ def get_proposals(task, x, y, n_propose=1):
     propose_prompt = task.propose_prompt_wrap(x, y)
     raw_outputs = claude_prompt(propose_prompt, n=n_propose, stop=None)
 
-    # Collect 'left:' lines across ALL n_propose outputs so that n_propose > 1
-    # actually produces multiple distinct candidate branches.
+    # Collect 'left:' lines from every output so multiple samples give
+    # multiple candidate branches.
     game24_proposals = []
     seen = set()
     for out in raw_outputs:
@@ -254,18 +196,12 @@ _ANSWER_PATTERN = re.compile(r'ANSWER:\s*(\d+)')
 
 def select_backtrack_target(x, ancestor_ys):
     """
-    Present the full ancestor chain to the model and ask it to identify
-    β(c) — the deepest recoverable prefix of the reasoning path (not
-    merely the last locally-valid step; see BACKTRACK_PROMPT).
-    Returns (selected_y, selected_depth, raw_output, parse_method).
+    Asks the model to pick beta(c), the deepest recoverable step in the
+    ancestor chain (see BACKTRACK_PROMPT). Returns (selected_y,
+    selected_depth, raw_output, parse_method).
 
-    Prefers the structured "ANSWER: <n>" line. Falls back to the last bare
-    number in the response only if that's missing — earlier versions always
-    took the last bare number, which silently picked up the echoed
-    `Step {fail_depth}: FAILED` label from the prompt/response instead of
-    the model's actual answer whenever it added commentary after stating
-    the number, producing a spurious jump == 0 (backtracking to the very
-    step that just failed).
+    Prefers the "ANSWER: <n>" line falls back to the last number in the
+    response if that's missing.
     """
     lines = []
     for i, y in enumerate(ancestor_ys):
@@ -299,26 +235,14 @@ def select_backtrack_target(x, ancestor_ys):
     return ancestor_ys[target_depth], target_depth, output, parse_method
 
 
-# ── Condition 1: Parent-Only Backtracking (baseline) ─────────────────────────
+# Condition 1: Parent-Only Backtracking (baseline) 
 
 def _recurse_parent(task, x, idx, y, depth, T_max, v_th,
                     n_evaluate, n_propose, node_budget, info, to_print):
     """
-    Recursive DFS — Condition 1 (parent-only recovery). Whenever this
-    subtree reaches a dead end (no candidate survives pruning, or a
-    committed candidate fails), control returns to the immediate parent —
-    the recovery point is always exactly one level up, unlike
-    _diligent_recurse, which invokes β(c) to select the recovery point.
-
-    Fix 3 is applied upstream in get_proposals — if y is already terminal,
-    proposals will be [] and this function returns None immediately, preventing
-    phantom recap steps from being generated.
-
-    Fix 1 is applied below — if a proposal is detected as terminal by _is_terminal,
-    it is tested immediately before falling through to the depth-limit check.
-
-    Fix 2 (subtree backtrack recording) is applied after each recursive call
-    that returns None, so that pruning-based backtracks are counted correctly.
+    Condition A: parent-only DFS. Every dead end returns to the immediate
+    parent, one level up, unlike _diligent_recurse, which asks beta(c)
+    where to recover to.
     """
     if node_budget[0] <= 0:
         return None
@@ -332,18 +256,8 @@ def _recurse_parent(task, x, idx, y, depth, T_max, v_th,
     values = get_values(task, x, proposals, n_evaluate)
     ranked = sorted(zip(proposals, values), key=lambda p: p[1], reverse=True)
 
-    # ── shared instrumentation ─────────────────────────────────────────────
-    # candidates_evaluated / nodes_explored / candidates_pruned are all
-    # computed over the FULL ranked list up front, not incrementally inside
-    # the loop below. The loop `return`s as soon as a solution is found, so
-    # it can skip lower-ranked candidates that were nonetheless already
-    # value-evaluated (and already scored pass/fail against v_th) by
-    # get_values() above — counting incrementally in the loop would
-    # undercount both nodes_explored and candidates_pruned whenever the
-    # search short-circuits on a higher-ranked winner. This keeps
-    # candidates_evaluated == nodes_explored + candidates_pruned true by
-    # construction, and is identical in definition/increment-point to
-    # _diligent_recurse below, fixing the prior nodes_explored asymmetry.
+    # candidates_evaluated == nodes_explored + candidates_pruned holds by construction
+
     n_pass = sum(1 for _, v in ranked if v > v_th)
     n_prune = len(ranked) - n_pass
     info['candidates_evaluated'] += len(ranked)
@@ -357,9 +271,8 @@ def _recurse_parent(task, x, idx, y, depth, T_max, v_th,
         if node_budget[0] <= 0:
             break
 
-        # node_budget accounting is unchanged from before this instrumentation
-        # fix — still consumed once per candidate considered here, pass or
-        # fail — so budget-exhaustion timing is identical to prior behavior.
+        # node_budget is consumed once per candidate considered here, pass
+        # or fail.
         node_budget[0] -= 1
 
         if value <= v_th:
@@ -370,11 +283,8 @@ def _recurse_parent(task, x, idx, y, depth, T_max, v_th,
         if to_print:
             print(f"{'  '*depth}[d={depth+1}] {proposal.strip()!r}  score={value:.3f}")
 
-        # ── Fix 1: catch terminal state (e.g. Game24 'left: 24') early ─────────
-        # test_output verifies the Steps trace directly (see verify_steps in
-        # game24.py) — no need to ask the model to regenerate a separate
-        # 'Answer: ...' summary line, which risked hallucinating an
-        # incorrect expression even when the original steps were valid.
+        # Catch terminal state (e.g. Game24 'left: 24') early.
+        # verifies the Steps trace directly (see verify_steps in game24.py).
         if _is_terminal(task, proposal):
             result = task.test_output(idx, proposal)
             if result['r'] == 1:
@@ -390,10 +300,10 @@ def _recurse_parent(task, x, idx, y, depth, T_max, v_th,
                 'rejected_proposal': proposal
             })
             if to_print:
-                print(f"{'  '*(depth+1)}[BACKTRACK parent] depth {depth+1} → {depth}")
+                print(f"{'  '*(depth+1)}[BACKTRACK parent] depth {depth+1} -> {depth}")
             continue
 
-        # ── Standard depth-limit terminal check ───────────────────────────────
+        # Standard depth-limit terminal check
         at_terminal = depth + 1 >= T_max
         if at_terminal:
             result = task.test_output(idx, proposal)
@@ -410,19 +320,16 @@ def _recurse_parent(task, x, idx, y, depth, T_max, v_th,
                 'rejected_proposal': proposal
             })
             if to_print:
-                print(f"{'  '*(depth+1)}[BACKTRACK parent] depth {depth+1} → {depth}")
+                print(f"{'  '*(depth+1)}[BACKTRACK parent] depth {depth+1} -> {depth}")
             continue
 
-        # ── Recurse deeper ─────────────────────────────────────────────────────
+        # Recurse deeper
         sol = _recurse_parent(task, x, idx, proposal, depth + 1,
                               T_max, v_th, n_evaluate, n_propose, node_budget, info, to_print)
         if sol is not None:
             return sol
 
-        # ── Fix 2: record backtrack when subtree is exhausted ─────────────────
-        # Previously missing — parent-only backtracks through pruning were
-        # never counted, giving backtracks=0 even on puzzles where the model
-        # explored and abandoned multiple branches.
+        # Record backtrack when this subtree is exhausted.
         info['backtracks'].append({
             'from_depth': depth + 1,
             'to_depth':   depth,
@@ -432,7 +339,7 @@ def _recurse_parent(task, x, idx, y, depth, T_max, v_th,
             'rejected_proposal': proposal
         })
 
-    return None  # all children exhausted → implicit backtrack to caller
+    return None  # all children exhausted, implicit backtrack made to caller
 
 
 def solve_dfs(args, task, idx, to_print=True):
@@ -464,53 +371,27 @@ def solve_dfs(args, task, idx, to_print=True):
     return ys, {'steps': [], **info}
 
 
-# ── Condition 2: Diligent Learner Non-Parent Backtracking ────────────────────
+# Condition 2: Diligent Learner Non-Parent Backtracking 
 #
-# Implements Shalev-Shwartz & Shashua (2025) "From Reasoning to Super-Intelligence"
-#
-# Two assumptions:
-#   1. γ-GPAC: sample B candidate next steps at each node — at least one
-#              is correct with probability γ  (B = n_generate_sample)
-#   2. β(c) recovery: when all B candidates at a node fail — i.e. the
-#              search has reached a dead end, whether by exhausting an
-#              explored subtree or by every candidate being pruned — the
-#              model identifies β(c) = the deepest recoverable prefix of
-#              the ancestor chain (not merely the last locally-valid
-#              step), and control jumps there directly, bypassing all
-#              intermediate nodes (non-parent recovery).
-#
-# Structural difference vs parent-only:
-#   Parent-only  → every dead end returns control exactly 1 level up (depth - 1)
-#   Diligent     → every dead end invokes β(c); failure propagates up the
-#                  call stack until depth β(c), which may skip many levels
+# 1. Sample B candidate next steps at each node (B = n_generate_sample).
+# 2. When every candidate at a node fails, ask the model for beta(c) - the
+#    deepest recoverable step in the ancestor chain - and jump straight
+#    there instead of just going up one level.
 
 def _diligent_recurse(task, x, idx, y, depth, ancestors,
                       T_max, B, v_th, n_evaluate, node_budget, info, to_print,
                       backtrack_fn=None):
     """
-    Recursive Diligent Learner DFS.
+    Recursive DFS shared by Conditions B, C, and D.
 
-    Fix 3 applies upstream in get_proposals — terminal states return [] so
-    this function returns early without generating phantom steps.
+    backtrack_fn takes the ancestor chain and returns a target depth - it's
+    the only thing that changes between conditions (_beta for B, _fixed_k2
+    for C, _strict_nonparent for D). Everything else in this function is
+    the same for all three.
 
-    Fix 1 applies below — _is_terminal catches solved states before the
-    depth-limit check, consistent with _recurse_parent.
-
-    backtrack_fn: callable with the same interface as _beta() (ancestor
-    chain in, target depth out) — the ONLY thing that differs between
-    Condition B (β(c), backtrack_fn=_beta, the default) and Condition C
-    (fixed k=2, backtrack_fn=_fixed_k2). Everything else in this function —
-    candidate generation, scoring, pruning, node-budget accounting,
-    recursion order — is identical for both conditions, since they call
-    this exact same function. Defaults to _beta so existing callers
-    (solve_dfs_nonparent) are behaviorally unchanged.
-
-    Returns
-    -------
-    (solution_str, None)      — a correct answer was found
-    (None, backtrack_depth)   — subtree failed; caller should absorb if
-                                backtrack_depth >= caller's depth,
-                                or propagate upward if backtrack_depth < caller's depth
+    Returns (solution, None) if solved, or (None, backtrack_depth) if this
+    subtree failed - the caller keeps propagating upward while
+    backtrack_depth is above its own depth.
     """
     if backtrack_fn is None:
         backtrack_fn = _beta
@@ -518,12 +399,10 @@ def _diligent_recurse(task, x, idx, y, depth, ancestors,
     if node_budget[0] <= 0:
         return None, max(0, depth - 1)
 
-    # ── Assumption 1: γ-GPAC — sample B candidate next steps ─────────────────
+    # Sample B candidate next steps
     proposals = get_proposals(task, x, y, n_propose=B)
     if not proposals:
-        # get_proposals returned [] — y is already terminal (Fix 3) or no output.
-        # Dead end: signal failure upward so caller can try siblings or
-        # invoke β(c) to select the recovery point.
+        # No candidates: dead end. Ask backtrack_fn for a recovery point.
         bt_depth = backtrack_fn(x, ancestors + [y], depth, info, to_print, reason='no proposals / already terminal')
         return None, bt_depth
 
@@ -531,11 +410,8 @@ def _diligent_recurse(task, x, idx, y, depth, ancestors,
     ranked = sorted(zip(proposals, values), key=lambda pv: pv[1], reverse=True)
     valid  = [(p, v) for p, v in ranked if v > v_th]
 
-    # ── shared instrumentation: identical definition/increment point to
-    # _recurse_parent above — computed over the full ranked list up front,
-    # not incrementally in the loop below (which can return early once a
-    # solution is found), so candidates_evaluated == nodes_explored +
-    # candidates_pruned holds by construction.
+    # Counted up front, same as _recurse_parent, so candidates_evaluated
+    # always equals nodes_explored + candidates_pruned.
     info['candidates_evaluated'] += len(ranked)
     info['nodes_explored'] += len(valid)
     info['candidates_pruned'] += len(ranked) - len(valid)
@@ -544,9 +420,7 @@ def _diligent_recurse(task, x, idx, y, depth, ancestors,
               f"passed={len(valid)} pruned={len(ranked) - len(valid)}")
 
     if not valid:
-        # ── Dead end: every candidate pruned by the value threshold ──────────
-        # (Assumption 2) β(c) selects the recovery point — the deepest
-        # recoverable prefix — rather than just returning to the parent.
+        # Every candidate was pruned. Ask backtrack_fn where to recover to.
         bt_depth = backtrack_fn(x, ancestors + [y], depth, info, to_print, reason='all pruned')
         return None, bt_depth
 
@@ -556,24 +430,17 @@ def _diligent_recurse(task, x, idx, y, depth, ancestors,
         if node_budget[0] <= 0:
             break
 
-        # node_budget accounting is unchanged from before this instrumentation
-        # fix — still consumed only by candidates that already passed the
-        # threshold (this loop only ever sees `valid` candidates), so
-        # budget-exhaustion timing is identical to prior behavior.
+        # Budget is only spent on candidates that passed pruning.
         node_budget[0] -= 1
-        # cascade-detection bookkeeping only (see _beta) — increments exactly
-        # once per candidate actually committed to here, independent of the
-        # publicly-reported nodes_explored (which is computed in one batch
-        # per node, up front, so it can't tell us in real time whether THIS
-        # specific candidate was tried before the next β(c) call).
+        # Separate counter for cascade detection in _beta - nodes_explored
+        # is only updated once per node, so this tracks progress live.
         info['_live_explore_counter'] = info.get('_live_explore_counter', 0) + 1
 
         if to_print:
             print(f"{'  '*depth}[d={depth+1}] {proposal.strip()[:80]!r}  score={value:.3f}")
 
-        # ── Fix 1: catch terminal state (e.g. Game24 'left: 24') early ─────────
-        # test_output verifies the Steps trace directly (see verify_steps in
-        # game24.py) — no separate 'Answer: ...' regeneration call needed.
+        # Catch terminal state (e.g. Game24 'left: 24') early
+        # verifies the Steps trace directly.
         if _is_terminal(task, proposal):
             result = task.test_output(idx, proposal)
             if result['r'] == 1:
@@ -587,7 +454,7 @@ def _diligent_recurse(task, x, idx, y, depth, ancestors,
                 return None, bt_depth
             continue
 
-        # ── Standard depth-limit terminal check ───────────────────────────────
+        # Standard depth-limit terminal check
         at_terminal = depth + 1 >= T_max
         if at_terminal:
             result = task.test_output(idx, proposal)
@@ -602,7 +469,7 @@ def _diligent_recurse(task, x, idx, y, depth, ancestors,
                 return None, bt_depth
             continue
 
-        # ── Non-terminal: recurse into this candidate ─────────────────────────
+        # Non-terminal: recurse into this candidate 
         sol, bt_depth = _diligent_recurse(
             task, x, idx, proposal, depth + 1,
             new_ancestors, T_max, B, v_th, n_evaluate,
@@ -610,39 +477,29 @@ def _diligent_recurse(task, x, idx, y, depth, ancestors,
         )
 
         if sol is not None:
-            return sol, None            # ── success propagates up ──
+            return sol, None         #if successful, return solution up the chain
 
         if bt_depth is not None and bt_depth < depth:
-            # β(c) is above me — pass the failure upward without trying siblings
+            # Target is above me then pass the failure up without trying siblings
             return None, bt_depth
 
-        # β(c) >= depth → the failure is absorbed here; try next sibling
+        # Target is at or below me then try the next sibling
 
-    # ── Dead end: every candidate at this node has been tried and failed ─────
-    # (subtree exhausted) β(c) selects the recovery point.
+    # All candidates tried and failed. Ask backtrack_fn where to recover to.
     bt_depth = backtrack_fn(x, new_ancestors, depth, info, to_print, reason='all candidates exhausted')
     return None, bt_depth
 
 
 def _beta(x, ancestor_chain, from_depth, info, to_print, reason=''):
     """
-    Identify β(c): the deepest recoverable prefix of the ancestor chain —
-    the point search should restart from, not merely the last locally-valid
-    step. Calls the LLM to locate this recovery point.
-    Records the backtrack event and returns the target depth.
+    Asks the model for beta(c), the deepest recoverable step in the
+    ancestor chain, records the backtrack event, and returns that depth.
 
-    The early return below (len(ancestor_chain) <= 1) does NOT call the
-    model and does NOT append to info['backtracks'] — it's deliberately not
-    tagged beta_model_call, so it's correctly excluded from beta_calls /
-    cascade stats in summarize_backtracks (see docstring there).
+    If there's only the root to go back to, returns 0 without calling the
+    model (not counted as a real beta(c) call).
 
-    Cascade tagging: a call is a "cascade" iff, since the previous ACTUAL
-    β(c) model call in this puzzle, zero new node-budget-consuming
-    candidates were explored — detected by comparing info's
-    '_live_explore_counter' (incremented in _diligent_recurse's loop, see
-    there) against the snapshot taken at the previous β(c) call. This is
-    read from the *actual* recursion/search state (the real commit-point
-    counter), not inferred from depth numbers.
+    A call counts as a "cascade" if no new candidates were explored since
+    the last beta(c) call - tracked with a live counter.
     """
     if len(ancestor_chain) <= 1:
         return 0  # can only go back to root
@@ -684,42 +541,22 @@ def _beta(x, ancestor_chain, from_depth, info, to_print, reason=''):
     if to_print:
         tag = ' [degenerate: same as parent-only]' if degenerate else ''
         cascade_tag = ' [CASCADE]' if cascade else ''
-        print(f"{'  '*from_depth}[β(c) BACKTRACK] {reason} — "
-              f"depth {from_depth} → {bt_depth}  (skipped {jump - 1} levels){tag}{cascade_tag}")
+        print(f"{'  '*from_depth}[beta(c) BACKTRACK] {reason} — "
+              f"depth {from_depth} -> {bt_depth}  (skipped {jump - 1} levels){tag}{cascade_tag}")
 
     return bt_depth
 
 
-# ── Condition C: Fixed k=2 Backtracking (deterministic baseline) ─────────────
+# Condition C: Fixed k=2 Backtracking (deterministic baseline) 
 
 def _fixed_k2(x, ancestor_chain, from_depth, info, to_print, reason='', k=2):
     """
-    Deterministic fixed-jump backtrack target selection — Condition C.
-    Drop-in replacement for _beta() (identical call signature, passed as
-    _diligent_recurse's backtrack_fn), so the search machinery around it —
-    candidate generation, scoring, pruning, node-budget accounting,
-    recursion order — is byte-for-byte identical to Condition B. The ONLY
-    difference is how the target depth is chosen: no LLM call, no prompt,
-    just target_depth = max(0, from_depth - k).
+    Condition C: always jumps back exactly k levels, no LLM call.
+    target_depth = max(0, from_depth - k).
 
-    Mirrors _beta's root-clamp convention exactly: len(ancestor_chain) <= 1
-    means there is nothing above the root to jump to, so it returns 0
-    without recording an event, same as _beta. The max(0, from_depth - k)
-    formula already naturally clamps near-root cases correctly on its own
-    (e.g. from_depth=1 -> max(0, 1-2)=0, jump=1, never jump=2 when only one
-    ancestor level actually exists) — no separate special-casing needed.
-
-    beta_model_call is explicitly set to False (not merely omitted) to
-    distinguish "this condition could in principle have used a model-call
-    mechanism but deliberately doesn't" from parent-only's backtrack events,
-    which never carry the key at all because the concept doesn't apply
-    there architecturally. summarize_backtracks()'s beta_calls/cascade
-    stats only count beta_model_call=True events, so Condition C correctly
-    reports beta_calls=0 and contributes nothing to cascade statistics —
-    cascade is a β(c)-specific concept (see collapse_cascades docstring)
-    and is deliberately not computed for fixed-jump backtracking at all;
-    no cascade/cascade_id/cascade_position/explored_since_previous_beta
-    keys are set on these events.
+    Same call signature as _beta() so it can be used as backtrack_fn.
+    beta_model_call is set to False so summarize_backtracks() correctly
+    reports 0 beta calls for this condition.
     """
     if len(ancestor_chain) <= 1:
         return 0  # can only go back to root — same convention as _beta
@@ -741,27 +578,16 @@ def _fixed_k2(x, ancestor_chain, from_depth, info, to_print, reason='', k=2):
     if to_print:
         tag = ' [degenerate: same as parent-only]' if degenerate else ''
         print(f"{'  '*from_depth}[FIXED-k={k} BACKTRACK] {reason} — "
-              f"depth {from_depth} → {bt_depth}  (skipped {jump - 1} levels){tag}")
+              f"depth {from_depth} -> {bt_depth}  (skipped {jump - 1} levels){tag}")
 
     return bt_depth
 
 
 def solve_dfs_nonparent(args, task, idx, to_print=True):
     """
-    Diligent Learner non-parent backtracking DFS — Condition 2.
-
-    Implements the inference procedure from:
-      Shalev-Shwartz & Shashua (2025) "From Reasoning to Super-Intelligence:
-      A Search-Theoretic Perspective"
-
-    Key properties:
-    - At each node, samples B candidate next steps (γ-GPAC assumption)
-    - At every dead end (all candidates pruned, or an explored subtree
-      exhausted), invokes β(c) to select the recovery point — the deepest
-      recoverable prefix of the ancestor chain — not necessarily the
-      immediate parent
-    - Failure propagates up the recursive call stack, bypassing intermediate
-      nodes, until it reaches the β(c) recovery point
+    Condition B: non-parent backtracking DFS. At every dead end, asks the
+    model for beta(c) - the deepest recoverable step - instead of just
+    going back one level.
     """
     global claude_prompt
     claude_prompt = partial(claude_prompt, temperature=args.temperature)
@@ -798,19 +624,9 @@ def solve_dfs_nonparent(args, task, idx, to_print=True):
 
 def solve_dfs_fixed_k2(args, task, idx, to_print=True):
     """
-    Fixed k=2 backtracking DFS — Condition C (deterministic baseline).
-
-    Identical search machinery to solve_dfs_nonparent (Condition B): same
-    candidate generation (get_proposals), same scoring (get_values), same
-    pruning (v_th), same node-budget accounting, same recursion
-    (_diligent_recurse) — reused directly, not duplicated. The ONLY
-    difference is the backtrack_fn passed to _diligent_recurse: _fixed_k2
-    (target_depth = max(0, from_depth - 2), no LLM call) instead of _beta
-    (LLM-selected target).
-
-    Intended to answer: does intelligent β(c) target selection provide an
-    advantage over simply making a fixed jump of k=2, holding everything
-    else in the search constant?
+    Condition C: same search as solve_dfs_nonparent (Condition B), but
+    uses _fixed_k2 instead of _beta, so backtracking always jumps 2 levels
+    with no model call.
     """
     global claude_prompt
     claude_prompt = partial(claude_prompt, temperature=args.temperature)
@@ -843,18 +659,11 @@ def solve_dfs_fixed_k2(args, task, idx, to_print=True):
     return ys, {'steps': [], **info}
 
 
-# ── Condition D: Strict Non-Parent β(c) (never falls back to parent) ──────────
+# Condition D: Strict Non-Parent beta(c) (never falls back to parent) 
 #
-# The LLM identifies the deepest recoverable ancestor, exactly as in
-# Condition B, EXCEPT the immediate parent is NEVER a legal target once
-# from_depth >= 2. D never aborts the whole puzzle and never selects the
-# parent: when no legal non-parent ancestor exists (from_depth <= 1), it
-# falls back deterministically to root; when legal non-parent ancestors
-# exist (from_depth >= 2) but the model returns UNRECOVERABLE, an
-# out-of-range depth, or the parent itself, it falls back to the
-# deterministic strict-non-parent target from_depth - 2 (the deepest legal
-# non-parent ancestor) — never to the parent. See _strict_nonparent's
-# docstring.
+# Same as Condition B, but the immediate parent is never a legal target
+# once from_depth >= 2. Falls back to root if there's no legal non-parent
+# ancestor, or to from_depth - 2 if the model doesn't give a usable answer.
 
 STRICT_NONPARENT_BACKTRACK_PROMPT = '''You are solving the following problem:
 {input}
@@ -871,7 +680,7 @@ reasoning path.
 The immediate parent (Step {fail_depth} - 1) is NOT an allowed target in this
 condition.
 
-A step is recoverable if a DIFFERENT continuation from that step could still
+A step is recoverable if a DIFFERENT continuation from that step could still 
 reach a correct solution. A step can be locally valid and still be
 unrecoverable if every possible continuation from it leads to failure.
 
@@ -898,14 +707,11 @@ _STRICT_UNRECOVERABLE_PATTERN = re.compile(r'\bUNRECOVERABLE\b', re.IGNORECASE)
 
 def _parse_strict_response(output, from_depth):
     """
-    Parse a Condition D response. Returns (target_depth, parse_method,
-    unrecoverable). target_depth is None iff unrecoverable is True.
+    Parses a Condition D response. Returns (target_depth, parse_method,
+    unrecoverable) - target_depth is None only when unrecoverable is True.
 
-    Deliberately does NOT reuse select_backtrack_target's fallback-to-last-
-    bare-number logic — that fallback exists in B to recover a plausible
-    answer from a slightly malformed response, but for D any ambiguity must
-    resolve to "unrecoverable", never to a guessed number that could
-    accidentally equal the forbidden parent depth.
+    Doesn't fall back to guessing a number like select_backtrack_target
+    does, since a wrong guess could land on the forbidden parent depth.
     """
     match = _STRICT_ANSWER_PATTERN.search(output)
     if match:
@@ -921,37 +727,14 @@ def _parse_strict_response(output, from_depth):
 
 def _strict_nonparent(x, ancestor_chain, from_depth, info, to_print, reason=''):
     """
-    Condition D backtrack target selection — non-parent PREFERRED, and the
-    immediate parent is NEVER a legal target once from_depth >= 2. Same call
-    signature as _beta()/_fixed_k2() (drop-in backtrack_fn for
-    _diligent_recurse).
+    Condition D: picks a non-parent backtrack target. The parent is never
+    a legal answer once from_depth >= 2. Always returns a real depth,
+    never aborts.
 
-    Every path through this function returns a REAL depth >= 0. There is no
-    "unrecoverable, abort the whole puzzle" sentinel: D never terminates a
-    puzzle's search early, and it never falls back to the parent. The two
-    cases:
-
-      1. No legal non-parent ancestor exists (from_depth <= 1): fall back to
-         root (target_depth=0) WITHOUT calling the model — the legal
-         non-parent set {0 .. from_depth-2} is empty by construction, so
-         there is nothing to ask about. This is NOT a failure state; DFS
-         simply continues from the root's own remaining candidates.
-      2. Legal non-parent targets exist (from_depth >= 2). The model may
-         select any 0 <= target <= from_depth-2. If it returns a valid one,
-         use it. If it returns UNRECOVERABLE, an out-of-range depth, or the
-         forbidden parent (from_depth-1) itself, use the deterministic
-         strict-non-parent fallback target_depth = from_depth - 2 — the
-         deepest legal non-parent ancestor. This keeps the invariant
-         target_depth <= from_depth - 2 (hence target_depth != from_depth-1)
-         true for every from_depth >= 2 event, regardless of what the model
-         says.
-
-    Because every return value is a real depth, the caller's existing
-    `if bt_depth < depth: return None, bt_depth` propagation logic in
-    _diligent_recurse — completely unmodified — does the actual fallback for
-    us: returning depth 0 (case 1) or from_depth-2 (case 2 fallback) is
-    itself sufficient for normal upward propagation to land exactly there,
-    the same mechanism B and C already rely on.
+    If from_depth <= 1 there's no non-parent ancestor to pick, so it falls
+    back to root without asking the model. Otherwise the model picks a
+    depth between 0 and from_depth-2; if it fails to give a usable one,
+    falls back to from_depth - 2.
     """
     if from_depth <= 1:
         target_depth = 0
@@ -1023,7 +806,7 @@ def _strict_nonparent(x, ancestor_chain, from_depth, info, to_print, reason=''):
         })
         if to_print:
             print(f"{'  '*from_depth}[STRICT-D NONPARENT-FALLBACK] {reason} — "
-                  f"depth {from_depth} → {nonparent_fallback_depth}  (parse: {parse_method})")
+                  f"depth {from_depth} -> {nonparent_fallback_depth}  (parse: {parse_method})")
         return nonparent_fallback_depth
 
     jump = from_depth - target_depth
@@ -1048,24 +831,14 @@ def _strict_nonparent(x, ancestor_chain, from_depth, info, to_print, reason=''):
     })
     if to_print:
         print(f"{'  '*from_depth}[STRICT-D BACKTRACK] {reason} — "
-              f"depth {from_depth} → {target_depth}  (skipped {jump - 1} levels)")
+              f"depth {from_depth} -> {target_depth}  (skipped {jump - 1} levels)")
     return target_depth
 
 
 def solve_dfs_nonparent_strict(args, task, idx, to_print=True):
     """
-    Strict non-parent β(c) DFS — Condition D. Never selects the immediate
-    parent once from_depth >= 2, and never aborts the search.
-
-    Identical search machinery to solve_dfs_nonparent (Condition B) and
-    solve_dfs_fixed_k2 (Condition C): same candidate generation, scoring,
-    pruning, node-budget accounting, recursion (_diligent_recurse) — reused
-    directly, not duplicated. The ONLY difference is the backtrack_fn:
-    _strict_nonparent, which forbids the immediate parent as an LLM target
-    and falls back to root (no legal non-parent ancestor exists, from_depth
-    <= 1) or to the deterministic strict-non-parent target from_depth - 2
-    (model returns UNRECOVERABLE/invalid/parent, from_depth >= 2) — never
-    to the parent, and never aborting the search for the whole puzzle.
+    Condition D: same search as Condition B, but uses _strict_nonparent so
+    backtracking never lands on the immediate parent.
     """
     global claude_prompt
     claude_prompt = partial(claude_prompt, temperature=args.temperature)

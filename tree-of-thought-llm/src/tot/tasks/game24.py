@@ -13,10 +13,7 @@ def get_current_numbers(y: str) -> str:
 
 _STEP_LINE = re.compile(r'^([-\d./]+)\s*([+\-*/])\s*([-\d./]+)\s*=\s*([-\d./]+)\s*\(left:')
 
-# Strips a leading bullet/dash marker ("- ", "• ", "* ") some samples prepend
-# to an otherwise-valid step line. Requires whitespace right after the
-# marker, so a genuine negative first operand ("-5 + ..." — no space) is
-# left untouched and still parses as a negative number, not stripped.
+
 _LEADING_MARKER = re.compile(r'^[-•*]\s+')
 
 _STEP_OPS = {
@@ -29,20 +26,12 @@ _STEP_OPS = {
 
 def verify_steps(problem: str, output: str):
     """
-    Simulate the step-by-step number pool from the puzzle's original
-    numbers and check it against a 'Steps:' trace directly, instead of
-    trusting a separately-generated 'Answer: ...' summary line.
+    Checks the step-by-step trace in the output by redoing each step
+    on the original numbers, rather than trusting a separate answer line.
 
-    A summary line asks the model to re-derive the combined expression
-    from scratch in a second, independent call — which can hallucinate
-    (e.g. reusing the same value from two different pool slots) even when
-    the original step-by-step trace was completely valid. Simulating the
-    trace itself only trusts arithmetic that was already produced.
-
-    Returns True/False if a step trace ('... (left: ...)' lines) is
-    present, or None if there's nothing to verify (e.g. a naive/standard
-    baseline output with no step trace) so the caller can fall back to
-    checking the final expression line instead.
+    Returns True or False if a step trace is found, or None if there
+    is no trace to check, so the caller can fall back to checking the
+    final answer line instead.
     """
     lines = [line.strip() for line in output.strip().split('\n') if line.strip()]
     step_lines = [line for line in lines if '(left:' in line]
@@ -116,18 +105,15 @@ class Game24Task(Task):
         if verified is not None:
             return {'r': int(verified)}
 
-        # No step trace present (e.g. naive/standard baseline output) —
-        # fall back to checking the final expression line directly.
+        # no step trace found, so check the final answer line instead
         expression = output.strip().split('\n')[-1].lower().replace('answer: ', '').split('=')[0]
         numbers = re.findall(r'\d+', expression)
         problem_numbers = re.findall(r'\d+', self.data[idx])
         if sorted(numbers) != sorted(problem_numbers):
             return {'r': 0}
         try:
-            # print(sympy.simplify(expression))
             return {'r': int(sympy.simplify(expression) == 24)}
         except Exception as e:
-            # print(e)
             return {'r': 0}
             
     @staticmethod
@@ -150,9 +136,6 @@ class Game24Task(Task):
 
     @staticmethod
     def value_prompt_wrap(x: str, y: str) -> str:
-        # dfs/dfs_nonparent only ever pass y built from get_proposals(), whose
-        # candidates always end in a '(left: ...)' line by construction — the
-        # last-step (no 'left:') branch is unreachable on that path.
         current_numbers = get_current_numbers(y)
         return value_prompt.format(input=current_numbers)
     
@@ -161,6 +144,6 @@ class Game24Task(Task):
         if len(y.strip().split('\n')) == 4 and 'answer' not in y.lower():
             return 0
         value_names = [_.split('\n')[-1] for _ in value_outputs]
-        value_map = {'impossible': 0.001, 'likely': 1, 'sure': 20}  # TODO: ad hoc
+        value_map = {'impossible': 0.001, 'likely': 1, 'sure': 20}
         value = sum(value * value_names.count(name) for name, value in value_map.items())
         return value

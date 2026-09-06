@@ -26,7 +26,7 @@ class MiniCrosswordsEnv:
         self.ans = ['_____'] * 10
         self.ans_gt = self.get_ans(self.board_gt)
         self.steps = 0
-        self.status = [0] * 10  # 0: unfilled; 1: filled; 2: filled then changed
+        self.status = [0] * 10  # 0: unfilled, 1: filled, 2: filled then changed
         if board is not None:
             self.board = board
             self.ans = self.get_ans(self.board)
@@ -40,7 +40,6 @@ class MiniCrosswordsEnv:
     def prompt_status(self):
         count = {'sure': 0, 'maybe': 0, 'impossible': 0}
         for ans, data, status in zip(self.ans, self.data, self.status):
-            # if status != 0: continue
             if ans.count('_') >= 4: continue
             ans = ' '.join(ans.lower())
             line = f'{data}: {ans}'
@@ -50,12 +49,8 @@ class MiniCrosswordsEnv:
             else:
                 res = claude_prompt(prompt)[0]
                 self.prompt_status_cache[prompt] = res
-            # print(line)
-            # print(res)
-            # print()
             res = res.split('\n')[-1].strip()
             if res in count: count[res] += 1
-        # print(count)
         return count
     
     def render_gt_board(self):
@@ -72,11 +67,9 @@ class MiniCrosswordsEnv:
 
     def render_clues(self, status=None):
         s = ""
-        # s += "Horizontal:\n"
         for i in range(5):
             if status is None or self.status[i] == status:
                 s += 'h' + str(i+1) + '. ' + self.data[i] + '\n'
-        # s += "Vertical:\n"
         for i in range(5, 10):
             if status is None or self.status[i] == status:
                 s += 'v' + str(i-5+1) + '. ' + self.data[i] + '\n'
@@ -84,11 +77,11 @@ class MiniCrosswordsEnv:
     
     def render_ans(self, status=None):
         s = ""
-        # s += "Horizontal:\n"
+      
         for i in range(5):
             if status is None or self.status[i] == status:
                 s += 'h' + str(i+1) + '. ' + self.data[i] + ': ' + self.ans[i] + '\n'
-        # s += "Vertical:\n"
+
         for i in range(5, 10):
             if status is None or self.status[i] == status:
                 s += 'v' + str(i-5+1) + '. ' + self.data[i] + ': ' + self.ans[i] + '\n'
@@ -96,11 +89,11 @@ class MiniCrosswordsEnv:
     
     def render_gt_ans(self, status=None):
         s = ""
-        # s += "Horizontal:\n"
+
         for i in range(5):
             if status is None or self.status[i] == status:
                 s += 'h' + str(i+1) + '. ' + self.data[i] + ': ' + self.ans_gt[i] + '\n'
-        # s += "Vertical:\n"
+
         for i in range(5, 10):
             if status is None or self.status[i] == status:
                 s += 'v' + str(i-5+1) + '. ' + self.data[i] + ': ' + self.ans_gt[i] + '\n'
@@ -136,12 +129,12 @@ class MiniCrosswordsEnv:
         elif pos.startswith('v'):
             idx = int(pos[1:]) - 1
             self.board[idx::5] = list(word.upper())
-            idx += 5  # for later status update
+            idx += 5  # shift index so it points to the vertical slot for status update
         else:
             return 'Invalid! Position should be h1-h5 or v1-v5', 0, False, {}
         
         self.new_ans = self.get_ans(self.board)
-        # self.status = [2 if (status == 1 and ans != new_ans) else status for status, ans, new_ans in zip(self.status, self.ans, self.new_ans)]
+
         self.status = [2 if any(letter != new_letter and letter != '_' for letter, new_letter in zip(ans, new_ans)) else status for status, ans, new_ans in zip(self.status, self.ans, self.new_ans)]
         self.status[idx] = 1
         self.ans = self.new_ans
@@ -169,7 +162,7 @@ class MiniCrosswordsTask(Task):
         for idx in range(len(self.env)):
             self.env.reset(idx)
             self.xs.append(self.env.render_clues())
-        self.steps = 10  # TODO: variable steps??
+        self.steps = 10
         self.cache_proposals = {}
 
     def __len__(self) -> int:
@@ -178,14 +171,6 @@ class MiniCrosswordsTask(Task):
     def get_input(self, idx: int) -> str:
         self.env.reset(idx)
         return self.env.render_clues()
-    
-    # def test_output(self, idx: int, output: str):  # TODO: r_word for now
-    #     self.env.reset(idx)
-    #     info = {'r_word': 0}
-    #     for line in output.split('\n'):
-    #         if line.startswith('h') or line.startswith('v'):
-    #             _, _, _, info = self.env.step(line)
-    #     return info['r_word']
     
     def test_output(self, idx: int, output: str):
         self.env.reset(idx)
@@ -218,7 +203,7 @@ class MiniCrosswordsTask(Task):
         return propose_prompt.format(input=self.env.render())
     
     def propose_outputs_unwrap(self, x: str, y: str, outputs: list, n_max_propose: int) -> list:
-        confidence_to_value = {'certain': 1, 'high': 0.5, 'medium': 0.2, 'low': 0.1}  # TODO: ad hoc
+        confidence_to_value = {'certain': 1, 'high': 0.5, 'medium': 0.2, 'low': 0.1}
         proposals_to_scores = {}
         for output in outputs:
             lines = output.split('\n')
@@ -240,7 +225,7 @@ class MiniCrosswordsTask(Task):
     
     def evaluate(self, x: str, y: str, n_evaluate_sample: int) -> int:
         self.set_status(x, y)
-        assert n_evaluate_sample == 1 # TODO: ad hoc
+        assert n_evaluate_sample == 1
         count = {'sure': 0, 'maybe': 0, 'impossible': 0}
         for ans, data, status in zip(self.env.ans, self.env.data, self.env.status):
             if ans.count('_') >= 4: continue
