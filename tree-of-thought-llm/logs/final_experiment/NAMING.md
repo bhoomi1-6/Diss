@@ -20,7 +20,7 @@ since they're global CLI flags).
 
 ```
 game24_A_parent_bedrock_B3_E1_budget30_vth0.5_900_1000_20260817_120000.json
-crosswords_D_strict_nonparent_bedrock_B5_E1_budget100_vth0.5_maxstate3_pruneTrue_0_20_20260817_120500.json
+crosswords_D_strict_nonparent_bedrock_B5_E1_budget50_vth0.5_maxstate3_pruneTrue_0_20_20260817_120500.json
 ```
 
 ## Condition directory names

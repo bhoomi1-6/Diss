@@ -1,0 +1,7049 @@
+[
+  {
+    "nodes_explored": 16,
+    "candidates_evaluated": 69,
+    "candidates_pruned": 53,
+    "backtracks": [
+      {
+        "from_depth": 3,
+        "to_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 5 word(s) marked impossible",
+        "rejected_action": "h1. noted",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 3,
+        "to_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 4 word(s) marked impossible",
+        "rejected_action": "h3. tumid",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 2,
+        "to_depth": 0,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "no candidates proposed",
+        "rejected_action": "v1. amass",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 2,
+        "to_depth": 0,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "no candidates proposed",
+        "rejected_action": "h2. motor",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 5,
+        "to_depth": 3,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 3 word(s) marked impossible",
+        "rejected_action": "h1. avoid",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 4,
+        "to_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "no candidates proposed",
+        "rejected_action": "h5. sneer",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 3,
+        "to_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 1 word(s) marked impossible",
+        "rejected_action": "h3. radii",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 2,
+        "to_depth": 0,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 1 word(s) marked impossible",
+        "rejected_action": "h1. timed",
+        "beta_model_call": false
+      }
+    ],
+    "solution": {
+      "actions": [
+        "v5. drier",
+        "h4. salle",
+        "h2. motor",
+        "v1. amass",
+        "h1. avoid"
+      ],
+      "board": "AVOIDMOTORA___ISALLES___R",
+      "r_word": 0.3,
+      "r_letter": 0.6,
+      "r_game": false
+    },
+    "method": "dfs_crossword_fixed_k2",
+    "_live_explore_counter": 16,
+    "num_backtracks": 8,
+    "mean_jump_size": 2.0,
+    "pct_jumps_gt1": 1.0,
+    "num_backtracks_raw": 8,
+    "mean_jump_size_raw": 2.0,
+    "pct_jumps_gt1_raw": 1.0,
+    "num_logical_backtracks": 8,
+    "mean_jump_size_merged": 2.0,
+    "pct_jumps_gt1_merged": 1.0,
+    "beta_calls": 0,
+    "num_cascaded_calls": 0,
+    "pct_cascaded_calls": 0.0,
+    "cascade_chain_length_histogram": {},
+    "backtracks_merged": [
+      {
+        "origin_depth": 3,
+        "final_target_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 5 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 3,
+            "to_depth": 1,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 5 word(s) marked impossible",
+            "rejected_action": "h1. noted",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 3,
+        "final_target_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 4 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 3,
+            "to_depth": 1,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 4 word(s) marked impossible",
+            "rejected_action": "h3. tumid",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 2,
+        "final_target_depth": 0,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "no candidates proposed"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 2,
+            "to_depth": 0,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "no candidates proposed",
+            "rejected_action": "v1. amass",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 2,
+        "final_target_depth": 0,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "no candidates proposed"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 2,
+            "to_depth": 0,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "no candidates proposed",
+            "rejected_action": "h2. motor",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 5,
+        "final_target_depth": 3,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 3 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 5,
+            "to_depth": 3,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 3 word(s) marked impossible",
+            "rejected_action": "h1. avoid",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 4,
+        "final_target_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "no candidates proposed"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 4,
+            "to_depth": 2,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "no candidates proposed",
+            "rejected_action": "h5. sneer",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 3,
+        "final_target_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 1 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 3,
+            "to_depth": 1,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 1 word(s) marked impossible",
+            "rejected_action": "h3. radii",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 2,
+        "final_target_depth": 0,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 1 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 2,
+            "to_depth": 0,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 1 word(s) marked impossible",
+            "rejected_action": "h1. timed",
+            "beta_model_call": false
+          }
+        ]
+      }
+    ],
+    "num_unrecoverable": 0,
+    "selection_method": "deepest",
+    "max_depth": 5,
+    "selected_depth": 5,
+    "selection_tie": false,
+    "idx": 0,
+    "ys": [
+      "A V O I D\nM O T O R\nA _ _ _ I\nS A L L E\nS _ _ _ R"
+    ],
+    "infos": [
+      {
+        "r_letter": 0.6,
+        "r_word": 0.3,
+        "r_game": false,
+        "r": 0.3
+      }
+    ],
+    "usage_this_puzzle": {
+      "completion_tokens": 60007,
+      "prompt_tokens": 49952,
+      "cost": 0.349987
+    },
+    "usage_so_far": {
+      "completion_tokens": 60007,
+      "prompt_tokens": 49952,
+      "cost": 0.349987
+    },
+    "config": {
+      "backend": "bedrock",
+      "temperature": 0,
+      "task": "crosswords",
+      "task_start_index": 0,
+      "task_end_index": 20,
+      "naive_run": false,
+      "prompt_sample": null,
+      "method_generate": null,
+      "method_evaluate": null,
+      "method_select": "greedy",
+      "n_generate_sample": 5,
+      "n_evaluate_sample": 1,
+      "n_select_sample": 1,
+      "method_search": "dfs_crossword_fixed_k2",
+      "v_th": 0.5,
+      "node_budget": 50,
+      "verbose": true,
+      "max_per_state": 3,
+      "no_prune": false,
+      "crossword_file": "mini0505_0_100_5.json",
+      "selection_method": "deepest"
+    }
+  },
+  {
+    "nodes_explored": 40,
+    "candidates_evaluated": 174,
+    "candidates_pruned": 134,
+    "backtracks": [
+      {
+        "from_depth": 5,
+        "to_depth": 3,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 2 word(s) marked impossible",
+        "rejected_action": "h3. inane",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 4,
+        "to_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 1 word(s) marked impossible",
+        "rejected_action": "v4. filer",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 3,
+        "to_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "no candidates proposed",
+        "rejected_action": "v5. yearn",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 5,
+        "to_depth": 3,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 1 word(s) marked impossible",
+        "rejected_action": "h3. igala",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 5,
+        "to_depth": 3,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 2 word(s) marked impossible",
+        "rejected_action": "v1. arise",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 4,
+        "to_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 4 word(s) marked impossible",
+        "rejected_action": "h1. steep",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 5,
+        "to_depth": 3,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 2 word(s) marked impossible",
+        "rejected_action": "h3. inane",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 4,
+        "to_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 1 word(s) marked impossible",
+        "rejected_action": "v4. filer",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 3,
+        "to_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 1 word(s) marked impossible",
+        "rejected_action": "h1. reedy",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 4,
+        "to_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 1 word(s) marked impossible",
+        "rejected_action": "v3. evade",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 3,
+        "to_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 1 word(s) marked impossible",
+        "rejected_action": "v3. evade",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 1,
+        "to_depth": 0,
+        "jump": 1,
+        "degenerate": true,
+        "reason": "all candidates exhausted",
+        "rejected_action": "h4. seder",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 4,
+        "to_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 1 word(s) marked impossible",
+        "rejected_action": "v3. evade",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 3,
+        "to_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 1 word(s) marked impossible",
+        "rejected_action": "v3. evade",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 4,
+        "to_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 1 word(s) marked impossible",
+        "rejected_action": "v3. evade",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 4,
+        "to_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "no candidates proposed",
+        "rejected_action": "h4. seder",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 3,
+        "to_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 1 word(s) marked impossible",
+        "rejected_action": "v3. evade",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 3,
+        "to_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "no candidates proposed",
+        "rejected_action": "h4. seder",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 1,
+        "to_depth": 0,
+        "jump": 1,
+        "degenerate": true,
+        "reason": "all candidates exhausted",
+        "rejected_action": "v4. filer",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 3,
+        "to_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 3 word(s) marked impossible",
+        "rejected_action": "h1. dried",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 2,
+        "to_depth": 0,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 4 word(s) marked impossible",
+        "rejected_action": "h1. parch",
+        "beta_model_call": false
+      }
+    ],
+    "solution": {
+      "actions": [
+        "h4. seder",
+        "v1. arise",
+        "v3. evade",
+        "h2. rival",
+        "h3. inane"
+      ],
+      "board": "A_E__RIVALINANESEDERE_E__",
+      "r_word": 0.3,
+      "r_letter": 0.52,
+      "r_game": false
+    },
+    "method": "dfs_crossword_fixed_k2",
+    "_live_explore_counter": 40,
+    "num_backtracks": 21,
+    "mean_jump_size": 1.9047619047619047,
+    "pct_jumps_gt1": 0.9047619047619048,
+    "num_backtracks_raw": 21,
+    "mean_jump_size_raw": 1.9047619047619047,
+    "pct_jumps_gt1_raw": 0.9047619047619048,
+    "num_logical_backtracks": 21,
+    "mean_jump_size_merged": 1.9047619047619047,
+    "pct_jumps_gt1_merged": 0.9047619047619048,
+    "beta_calls": 0,
+    "num_cascaded_calls": 0,
+    "pct_cascaded_calls": 0.0,
+    "cascade_chain_length_histogram": {},
+    "backtracks_merged": [
+      {
+        "origin_depth": 5,
+        "final_target_depth": 3,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 2 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 5,
+            "to_depth": 3,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 2 word(s) marked impossible",
+            "rejected_action": "h3. inane",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 4,
+        "final_target_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 1 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 4,
+            "to_depth": 2,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 1 word(s) marked impossible",
+            "rejected_action": "v4. filer",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 3,
+        "final_target_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "no candidates proposed"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 3,
+            "to_depth": 1,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "no candidates proposed",
+            "rejected_action": "v5. yearn",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 5,
+        "final_target_depth": 3,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 1 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 5,
+            "to_depth": 3,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 1 word(s) marked impossible",
+            "rejected_action": "h3. igala",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 5,
+        "final_target_depth": 3,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 2 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 5,
+            "to_depth": 3,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 2 word(s) marked impossible",
+            "rejected_action": "v1. arise",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 4,
+        "final_target_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 4 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 4,
+            "to_depth": 2,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 4 word(s) marked impossible",
+            "rejected_action": "h1. steep",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 5,
+        "final_target_depth": 3,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 2 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 5,
+            "to_depth": 3,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 2 word(s) marked impossible",
+            "rejected_action": "h3. inane",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 4,
+        "final_target_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 1 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 4,
+            "to_depth": 2,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 1 word(s) marked impossible",
+            "rejected_action": "v4. filer",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 3,
+        "final_target_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 1 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 3,
+            "to_depth": 1,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 1 word(s) marked impossible",
+            "rejected_action": "h1. reedy",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 4,
+        "final_target_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 1 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 4,
+            "to_depth": 2,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 1 word(s) marked impossible",
+            "rejected_action": "v3. evade",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 3,
+        "final_target_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 1 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 3,
+            "to_depth": 1,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 1 word(s) marked impossible",
+            "rejected_action": "v3. evade",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 1,
+        "final_target_depth": 0,
+        "jump": 1,
+        "degenerate": true,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "all candidates exhausted"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 1,
+            "to_depth": 0,
+            "jump": 1,
+            "degenerate": true,
+            "reason": "all candidates exhausted",
+            "rejected_action": "h4. seder",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 4,
+        "final_target_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 1 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 4,
+            "to_depth": 2,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 1 word(s) marked impossible",
+            "rejected_action": "v3. evade",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 3,
+        "final_target_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 1 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 3,
+            "to_depth": 1,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 1 word(s) marked impossible",
+            "rejected_action": "v3. evade",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 4,
+        "final_target_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 1 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 4,
+            "to_depth": 2,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 1 word(s) marked impossible",
+            "rejected_action": "v3. evade",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 4,
+        "final_target_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "no candidates proposed"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 4,
+            "to_depth": 2,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "no candidates proposed",
+            "rejected_action": "h4. seder",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 3,
+        "final_target_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 1 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 3,
+            "to_depth": 1,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 1 word(s) marked impossible",
+            "rejected_action": "v3. evade",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 3,
+        "final_target_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "no candidates proposed"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 3,
+            "to_depth": 1,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "no candidates proposed",
+            "rejected_action": "h4. seder",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 1,
+        "final_target_depth": 0,
+        "jump": 1,
+        "degenerate": true,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "all candidates exhausted"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 1,
+            "to_depth": 0,
+            "jump": 1,
+            "degenerate": true,
+            "reason": "all candidates exhausted",
+            "rejected_action": "v4. filer",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 3,
+        "final_target_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 3 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 3,
+            "to_depth": 1,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 3 word(s) marked impossible",
+            "rejected_action": "h1. dried",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 2,
+        "final_target_depth": 0,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 4 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 2,
+            "to_depth": 0,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 4 word(s) marked impossible",
+            "rejected_action": "h1. parch",
+            "beta_model_call": false
+          }
+        ]
+      }
+    ],
+    "num_unrecoverable": 0,
+    "selection_method": "deepest",
+    "max_depth": 5,
+    "selected_depth": 5,
+    "selection_tie": true,
+    "idx": 1,
+    "ys": [
+      "A _ E _ _\nR I V A L\nI N A N E\nS E D E R\nE _ E _ _"
+    ],
+    "infos": [
+      {
+        "r_letter": 0.52,
+        "r_word": 0.3,
+        "r_game": false,
+        "r": 0.3
+      }
+    ],
+    "usage_this_puzzle": {
+      "completion_tokens": 108439,
+      "prompt_tokens": 93605,
+      "cost": 0.6357999999999999
+    },
+    "usage_so_far": {
+      "completion_tokens": 168446,
+      "prompt_tokens": 143557,
+      "cost": 0.985787
+    },
+    "config": {
+      "backend": "bedrock",
+      "temperature": 0,
+      "task": "crosswords",
+      "task_start_index": 0,
+      "task_end_index": 20,
+      "naive_run": false,
+      "prompt_sample": null,
+      "method_generate": null,
+      "method_evaluate": null,
+      "method_select": "greedy",
+      "n_generate_sample": 5,
+      "n_evaluate_sample": 1,
+      "n_select_sample": 1,
+      "method_search": "dfs_crossword_fixed_k2",
+      "v_th": 0.5,
+      "node_budget": 50,
+      "verbose": true,
+      "max_per_state": 3,
+      "no_prune": false,
+      "crossword_file": "mini0505_0_100_5.json",
+      "selection_method": "deepest"
+    }
+  },
+  {
+    "nodes_explored": 49,
+    "candidates_evaluated": 254,
+    "candidates_pruned": 205,
+    "backtracks": [
+      {
+        "from_depth": 3,
+        "to_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 2 word(s) marked impossible",
+        "rejected_action": "h4. fetch",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 5,
+        "to_depth": 3,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 1 word(s) marked impossible",
+        "rejected_action": "v3. being",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 4,
+        "to_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 4 word(s) marked impossible",
+        "rejected_action": "h2. briar",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 4,
+        "to_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "no candidates proposed",
+        "rejected_action": "v3. being",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 5,
+        "to_depth": 3,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 1 word(s) marked impossible",
+        "rejected_action": "v3. being",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 4,
+        "to_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "no candidates proposed",
+        "rejected_action": "h2. urena",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 2,
+        "to_depth": 0,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "all candidates exhausted",
+        "rejected_action": "v2. error",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 3,
+        "to_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 2 word(s) marked impossible",
+        "rejected_action": "h5. argol",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 5,
+        "to_depth": 3,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 5 word(s) marked impossible",
+        "rejected_action": "h4. foils",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 4,
+        "to_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 3 word(s) marked impossible",
+        "rejected_action": "h5. argol",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 6,
+        "to_depth": 4,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 1 word(s) marked impossible",
+        "rejected_action": "h5. argal",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 6,
+        "to_depth": 4,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 1 word(s) marked impossible",
+        "rejected_action": "h1. bebop",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 5,
+        "to_depth": 3,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 1 word(s) marked impossible",
+        "rejected_action": "v1. buffo",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 5,
+        "to_depth": 3,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 1 word(s) marked impossible",
+        "rejected_action": "v3. being",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 6,
+        "to_depth": 4,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 2 word(s) marked impossible",
+        "rejected_action": "v4. onaga",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 5,
+        "to_depth": 3,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 4 word(s) marked impossible",
+        "rejected_action": "h4. forte",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 3,
+        "to_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "all candidates exhausted",
+        "rejected_action": "h2. urena",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 3,
+        "to_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "no candidates proposed",
+        "rejected_action": "h1. bebop",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 1,
+        "to_depth": 0,
+        "jump": 1,
+        "degenerate": true,
+        "reason": "all candidates exhausted",
+        "rejected_action": "h3. friar",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 5,
+        "to_depth": 3,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 3 word(s) marked impossible",
+        "rejected_action": "v1. bubba",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 4,
+        "to_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "no candidates proposed",
+        "rejected_action": "h3. friar",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 4,
+        "to_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "no candidates proposed",
+        "rejected_action": "v3. being",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 5,
+        "to_depth": 3,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 3 word(s) marked impossible",
+        "rejected_action": "v1. bubba",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 4,
+        "to_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 2 word(s) marked impossible",
+        "rejected_action": "h3. friar",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 2,
+        "to_depth": 0,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "all candidates exhausted",
+        "rejected_action": "v2. error",
+        "beta_model_call": false
+      }
+    ],
+    "solution": {
+      "actions": [
+        "h3. friar",
+        "v2. error",
+        "h2. urena",
+        "v3. being",
+        "h1. bebop",
+        "h5. argal"
+      ],
+      "board": "BEBOPURENAFRIAR_ON__ARGAL",
+      "r_word": 0.5,
+      "r_letter": 0.84,
+      "r_game": false
+    },
+    "method": "dfs_crossword_fixed_k2",
+    "_live_explore_counter": 49,
+    "num_backtracks": 25,
+    "mean_jump_size": 1.96,
+    "pct_jumps_gt1": 0.96,
+    "num_backtracks_raw": 25,
+    "mean_jump_size_raw": 1.96,
+    "pct_jumps_gt1_raw": 0.96,
+    "num_logical_backtracks": 25,
+    "mean_jump_size_merged": 1.96,
+    "pct_jumps_gt1_merged": 0.96,
+    "beta_calls": 0,
+    "num_cascaded_calls": 0,
+    "pct_cascaded_calls": 0.0,
+    "cascade_chain_length_histogram": {},
+    "backtracks_merged": [
+      {
+        "origin_depth": 3,
+        "final_target_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 2 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 3,
+            "to_depth": 1,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 2 word(s) marked impossible",
+            "rejected_action": "h4. fetch",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 5,
+        "final_target_depth": 3,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 1 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 5,
+            "to_depth": 3,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 1 word(s) marked impossible",
+            "rejected_action": "v3. being",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 4,
+        "final_target_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 4 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 4,
+            "to_depth": 2,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 4 word(s) marked impossible",
+            "rejected_action": "h2. briar",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 4,
+        "final_target_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "no candidates proposed"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 4,
+            "to_depth": 2,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "no candidates proposed",
+            "rejected_action": "v3. being",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 5,
+        "final_target_depth": 3,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 1 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 5,
+            "to_depth": 3,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 1 word(s) marked impossible",
+            "rejected_action": "v3. being",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 4,
+        "final_target_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "no candidates proposed"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 4,
+            "to_depth": 2,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "no candidates proposed",
+            "rejected_action": "h2. urena",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 2,
+        "final_target_depth": 0,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "all candidates exhausted"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 2,
+            "to_depth": 0,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "all candidates exhausted",
+            "rejected_action": "v2. error",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 3,
+        "final_target_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 2 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 3,
+            "to_depth": 1,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 2 word(s) marked impossible",
+            "rejected_action": "h5. argol",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 5,
+        "final_target_depth": 3,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 5 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 5,
+            "to_depth": 3,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 5 word(s) marked impossible",
+            "rejected_action": "h4. foils",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 4,
+        "final_target_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 3 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 4,
+            "to_depth": 2,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 3 word(s) marked impossible",
+            "rejected_action": "h5. argol",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 6,
+        "final_target_depth": 4,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 1 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 6,
+            "to_depth": 4,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 1 word(s) marked impossible",
+            "rejected_action": "h5. argal",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 6,
+        "final_target_depth": 4,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 1 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 6,
+            "to_depth": 4,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 1 word(s) marked impossible",
+            "rejected_action": "h1. bebop",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 5,
+        "final_target_depth": 3,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 1 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 5,
+            "to_depth": 3,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 1 word(s) marked impossible",
+            "rejected_action": "v1. buffo",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 5,
+        "final_target_depth": 3,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 1 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 5,
+            "to_depth": 3,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 1 word(s) marked impossible",
+            "rejected_action": "v3. being",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 6,
+        "final_target_depth": 4,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 2 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 6,
+            "to_depth": 4,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 2 word(s) marked impossible",
+            "rejected_action": "v4. onaga",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 5,
+        "final_target_depth": 3,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 4 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 5,
+            "to_depth": 3,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 4 word(s) marked impossible",
+            "rejected_action": "h4. forte",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 3,
+        "final_target_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "all candidates exhausted"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 3,
+            "to_depth": 1,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "all candidates exhausted",
+            "rejected_action": "h2. urena",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 3,
+        "final_target_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "no candidates proposed"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 3,
+            "to_depth": 1,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "no candidates proposed",
+            "rejected_action": "h1. bebop",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 1,
+        "final_target_depth": 0,
+        "jump": 1,
+        "degenerate": true,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "all candidates exhausted"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 1,
+            "to_depth": 0,
+            "jump": 1,
+            "degenerate": true,
+            "reason": "all candidates exhausted",
+            "rejected_action": "h3. friar",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 5,
+        "final_target_depth": 3,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 3 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 5,
+            "to_depth": 3,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 3 word(s) marked impossible",
+            "rejected_action": "v1. bubba",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 4,
+        "final_target_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "no candidates proposed"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 4,
+            "to_depth": 2,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "no candidates proposed",
+            "rejected_action": "h3. friar",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 4,
+        "final_target_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "no candidates proposed"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 4,
+            "to_depth": 2,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "no candidates proposed",
+            "rejected_action": "v3. being",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 5,
+        "final_target_depth": 3,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 3 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 5,
+            "to_depth": 3,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 3 word(s) marked impossible",
+            "rejected_action": "v1. bubba",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 4,
+        "final_target_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 2 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 4,
+            "to_depth": 2,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 2 word(s) marked impossible",
+            "rejected_action": "h3. friar",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 2,
+        "final_target_depth": 0,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "all candidates exhausted"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 2,
+            "to_depth": 0,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "all candidates exhausted",
+            "rejected_action": "v2. error",
+            "beta_model_call": false
+          }
+        ]
+      }
+    ],
+    "num_unrecoverable": 0,
+    "selection_method": "deepest",
+    "max_depth": 6,
+    "selected_depth": 6,
+    "selection_tie": true,
+    "idx": 2,
+    "ys": [
+      "B E B O P\nU R E N A\nF R I A R\n_ O N _ _\nA R G A L"
+    ],
+    "infos": [
+      {
+        "r_letter": 0.84,
+        "r_word": 0.5,
+        "r_game": false,
+        "r": 0.5
+      }
+    ],
+    "usage_this_puzzle": {
+      "completion_tokens": 160806,
+      "prompt_tokens": 115614,
+      "cost": 0.9196440000000001
+    },
+    "usage_so_far": {
+      "completion_tokens": 329252,
+      "prompt_tokens": 259171,
+      "cost": 1.905431
+    },
+    "config": {
+      "backend": "bedrock",
+      "temperature": 0,
+      "task": "crosswords",
+      "task_start_index": 0,
+      "task_end_index": 20,
+      "naive_run": false,
+      "prompt_sample": null,
+      "method_generate": null,
+      "method_evaluate": null,
+      "method_select": "greedy",
+      "n_generate_sample": 5,
+      "n_evaluate_sample": 1,
+      "n_select_sample": 1,
+      "method_search": "dfs_crossword_fixed_k2",
+      "v_th": 0.5,
+      "node_budget": 50,
+      "verbose": true,
+      "max_per_state": 3,
+      "no_prune": false,
+      "crossword_file": "mini0505_0_100_5.json",
+      "selection_method": "deepest"
+    }
+  },
+  {
+    "nodes_explored": 0,
+    "candidates_evaluated": 0,
+    "candidates_pruned": 0,
+    "backtracks": [],
+    "solution": null,
+    "method": "dfs_crossword_fixed_k2",
+    "num_backtracks": 0,
+    "mean_jump_size": 0.0,
+    "pct_jumps_gt1": 0.0,
+    "num_backtracks_raw": 0,
+    "mean_jump_size_raw": 0.0,
+    "pct_jumps_gt1_raw": 0.0,
+    "num_logical_backtracks": 0,
+    "mean_jump_size_merged": 0.0,
+    "pct_jumps_gt1_merged": 0.0,
+    "beta_calls": 0,
+    "num_cascaded_calls": 0,
+    "pct_cascaded_calls": 0.0,
+    "cascade_chain_length_histogram": {},
+    "backtracks_merged": [],
+    "num_unrecoverable": 0,
+    "selection_method": "deepest",
+    "max_depth": null,
+    "selected_depth": null,
+    "selection_tie": null,
+    "idx": 3,
+    "ys": [
+      "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _"
+    ],
+    "infos": [
+      {
+        "r_letter": 0.0,
+        "r_word": 0.0,
+        "r_game": false,
+        "r": 0.0
+      }
+    ],
+    "usage_this_puzzle": {
+      "completion_tokens": 3224,
+      "prompt_tokens": 1385,
+      "cost": 0.017504999999999882
+    },
+    "usage_so_far": {
+      "completion_tokens": 332476,
+      "prompt_tokens": 260556,
+      "cost": 1.922936
+    },
+    "config": {
+      "backend": "bedrock",
+      "temperature": 0,
+      "task": "crosswords",
+      "task_start_index": 0,
+      "task_end_index": 20,
+      "naive_run": false,
+      "prompt_sample": null,
+      "method_generate": null,
+      "method_evaluate": null,
+      "method_select": "greedy",
+      "n_generate_sample": 5,
+      "n_evaluate_sample": 1,
+      "n_select_sample": 1,
+      "method_search": "dfs_crossword_fixed_k2",
+      "v_th": 0.5,
+      "node_budget": 50,
+      "verbose": true,
+      "max_per_state": 3,
+      "no_prune": false,
+      "crossword_file": "mini0505_0_100_5.json",
+      "selection_method": "deepest"
+    }
+  },
+  {
+    "nodes_explored": 36,
+    "candidates_evaluated": 192,
+    "candidates_pruned": 156,
+    "backtracks": [
+      {
+        "from_depth": 3,
+        "to_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 2 word(s) marked impossible",
+        "rejected_action": "h1. elect",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 5,
+        "to_depth": 3,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 1 word(s) marked impossible",
+        "rejected_action": "v2. heron",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 4,
+        "to_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 1 word(s) marked impossible",
+        "rejected_action": "v2. heron",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 3,
+        "to_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 1 word(s) marked impossible",
+        "rejected_action": "h1. elect",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 4,
+        "to_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 2 word(s) marked impossible",
+        "rejected_action": "h1. sheer",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 4,
+        "to_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 1 word(s) marked impossible",
+        "rejected_action": "v1. chess",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 4,
+        "to_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "all candidates exhausted",
+        "rejected_action": "h2. helix",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 2,
+        "to_depth": 0,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "all candidates exhausted",
+        "rejected_action": "v2. heron",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 3,
+        "to_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 5 word(s) marked impossible",
+        "rejected_action": "h1. cylix",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 3,
+        "to_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 1 word(s) marked impossible",
+        "rejected_action": "v2. heron",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 4,
+        "to_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 2 word(s) marked impossible",
+        "rejected_action": "h1. chose",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 3,
+        "to_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "no candidates proposed",
+        "rejected_action": "h3. erose",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 1,
+        "to_depth": 0,
+        "jump": 1,
+        "degenerate": true,
+        "reason": "all candidates exhausted",
+        "rejected_action": "v1. chess",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 3,
+        "to_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 1 word(s) marked impossible",
+        "rejected_action": "v2. heron",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 5,
+        "to_depth": 3,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 1 word(s) marked impossible",
+        "rejected_action": "v2. heron",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 4,
+        "to_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 1 word(s) marked impossible",
+        "rejected_action": "v2. heron",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 3,
+        "to_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 1 word(s) marked impossible",
+        "rejected_action": "h1. elect",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 3,
+        "to_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 2 word(s) marked impossible",
+        "rejected_action": "h2. ogive",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 1,
+        "to_depth": 0,
+        "jump": 1,
+        "degenerate": true,
+        "reason": "all candidates exhausted",
+        "rejected_action": "h3. erose",
+        "beta_model_call": false
+      }
+    ],
+    "solution": {
+      "actions": [
+        "v3. elope",
+        "h3. erose",
+        "v1. chess",
+        "h2. helix",
+        "v2. heron"
+      ],
+      "board": "CHE__HELIXEROSESOP__SNE__",
+      "r_word": 0.5,
+      "r_letter": 0.76,
+      "r_game": false
+    },
+    "method": "dfs_crossword_fixed_k2",
+    "_live_explore_counter": 36,
+    "num_backtracks": 19,
+    "mean_jump_size": 1.894736842105263,
+    "pct_jumps_gt1": 0.8947368421052632,
+    "num_backtracks_raw": 19,
+    "mean_jump_size_raw": 1.894736842105263,
+    "pct_jumps_gt1_raw": 0.8947368421052632,
+    "num_logical_backtracks": 19,
+    "mean_jump_size_merged": 1.894736842105263,
+    "pct_jumps_gt1_merged": 0.8947368421052632,
+    "beta_calls": 0,
+    "num_cascaded_calls": 0,
+    "pct_cascaded_calls": 0.0,
+    "cascade_chain_length_histogram": {},
+    "backtracks_merged": [
+      {
+        "origin_depth": 3,
+        "final_target_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 2 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 3,
+            "to_depth": 1,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 2 word(s) marked impossible",
+            "rejected_action": "h1. elect",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 5,
+        "final_target_depth": 3,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 1 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 5,
+            "to_depth": 3,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 1 word(s) marked impossible",
+            "rejected_action": "v2. heron",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 4,
+        "final_target_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 1 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 4,
+            "to_depth": 2,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 1 word(s) marked impossible",
+            "rejected_action": "v2. heron",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 3,
+        "final_target_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 1 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 3,
+            "to_depth": 1,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 1 word(s) marked impossible",
+            "rejected_action": "h1. elect",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 4,
+        "final_target_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 2 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 4,
+            "to_depth": 2,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 2 word(s) marked impossible",
+            "rejected_action": "h1. sheer",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 4,
+        "final_target_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 1 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 4,
+            "to_depth": 2,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 1 word(s) marked impossible",
+            "rejected_action": "v1. chess",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 4,
+        "final_target_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "all candidates exhausted"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 4,
+            "to_depth": 2,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "all candidates exhausted",
+            "rejected_action": "h2. helix",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 2,
+        "final_target_depth": 0,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "all candidates exhausted"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 2,
+            "to_depth": 0,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "all candidates exhausted",
+            "rejected_action": "v2. heron",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 3,
+        "final_target_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 5 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 3,
+            "to_depth": 1,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 5 word(s) marked impossible",
+            "rejected_action": "h1. cylix",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 3,
+        "final_target_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 1 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 3,
+            "to_depth": 1,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 1 word(s) marked impossible",
+            "rejected_action": "v2. heron",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 4,
+        "final_target_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 2 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 4,
+            "to_depth": 2,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 2 word(s) marked impossible",
+            "rejected_action": "h1. chose",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 3,
+        "final_target_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "no candidates proposed"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 3,
+            "to_depth": 1,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "no candidates proposed",
+            "rejected_action": "h3. erose",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 1,
+        "final_target_depth": 0,
+        "jump": 1,
+        "degenerate": true,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "all candidates exhausted"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 1,
+            "to_depth": 0,
+            "jump": 1,
+            "degenerate": true,
+            "reason": "all candidates exhausted",
+            "rejected_action": "v1. chess",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 3,
+        "final_target_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 1 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 3,
+            "to_depth": 1,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 1 word(s) marked impossible",
+            "rejected_action": "v2. heron",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 5,
+        "final_target_depth": 3,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 1 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 5,
+            "to_depth": 3,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 1 word(s) marked impossible",
+            "rejected_action": "v2. heron",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 4,
+        "final_target_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 1 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 4,
+            "to_depth": 2,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 1 word(s) marked impossible",
+            "rejected_action": "v2. heron",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 3,
+        "final_target_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 1 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 3,
+            "to_depth": 1,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 1 word(s) marked impossible",
+            "rejected_action": "h1. elect",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 3,
+        "final_target_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 2 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 3,
+            "to_depth": 1,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 2 word(s) marked impossible",
+            "rejected_action": "h2. ogive",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 1,
+        "final_target_depth": 0,
+        "jump": 1,
+        "degenerate": true,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "all candidates exhausted"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 1,
+            "to_depth": 0,
+            "jump": 1,
+            "degenerate": true,
+            "reason": "all candidates exhausted",
+            "rejected_action": "h3. erose",
+            "beta_model_call": false
+          }
+        ]
+      }
+    ],
+    "num_unrecoverable": 0,
+    "selection_method": "deepest",
+    "max_depth": 5,
+    "selected_depth": 5,
+    "selection_tie": true,
+    "idx": 4,
+    "ys": [
+      "C H E _ _\nH E L I X\nE R O S E\nS O P _ _\nS N E _ _"
+    ],
+    "infos": [
+      {
+        "r_letter": 0.76,
+        "r_word": 0.5,
+        "r_game": false,
+        "r": 0.5
+      }
+    ],
+    "usage_this_puzzle": {
+      "completion_tokens": 101046,
+      "prompt_tokens": 81309,
+      "cost": 0.5865389999999997
+    },
+    "usage_so_far": {
+      "completion_tokens": 433522,
+      "prompt_tokens": 341865,
+      "cost": 2.5094749999999997
+    },
+    "config": {
+      "backend": "bedrock",
+      "temperature": 0,
+      "task": "crosswords",
+      "task_start_index": 0,
+      "task_end_index": 20,
+      "naive_run": false,
+      "prompt_sample": null,
+      "method_generate": null,
+      "method_evaluate": null,
+      "method_select": "greedy",
+      "n_generate_sample": 5,
+      "n_evaluate_sample": 1,
+      "n_select_sample": 1,
+      "method_search": "dfs_crossword_fixed_k2",
+      "v_th": 0.5,
+      "node_budget": 50,
+      "verbose": true,
+      "max_per_state": 3,
+      "no_prune": false,
+      "crossword_file": "mini0505_0_100_5.json",
+      "selection_method": "deepest"
+    }
+  },
+  {
+    "nodes_explored": 10,
+    "candidates_evaluated": 36,
+    "candidates_pruned": 26,
+    "backtracks": [
+      {
+        "from_depth": 1,
+        "to_depth": 0,
+        "jump": 1,
+        "degenerate": true,
+        "reason": "no candidates proposed",
+        "rejected_action": "h2. penny",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 2,
+        "to_depth": 0,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 2 word(s) marked impossible",
+        "rejected_action": "h1. elect",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 3,
+        "to_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 1 word(s) marked impossible",
+        "rejected_action": "h4. slink",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 3,
+        "to_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 4 word(s) marked impossible",
+        "rejected_action": "h1. chose",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 3,
+        "to_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "no candidates proposed",
+        "rejected_action": "v2. hello",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 1,
+        "to_depth": 0,
+        "jump": 1,
+        "degenerate": true,
+        "reason": "all candidates exhausted",
+        "rejected_action": "v1. crush",
+        "beta_model_call": false
+      }
+    ],
+    "solution": {
+      "actions": [
+        "v1. crush",
+        "h1. chose",
+        "h4. slink"
+      ],
+      "board": "CHOSER____U____SLINKH____",
+      "r_word": 0.1,
+      "r_letter": 0.4,
+      "r_game": false
+    },
+    "method": "dfs_crossword_fixed_k2",
+    "_live_explore_counter": 10,
+    "num_backtracks": 6,
+    "mean_jump_size": 1.6666666666666667,
+    "pct_jumps_gt1": 0.6666666666666666,
+    "num_backtracks_raw": 6,
+    "mean_jump_size_raw": 1.6666666666666667,
+    "pct_jumps_gt1_raw": 0.6666666666666666,
+    "num_logical_backtracks": 6,
+    "mean_jump_size_merged": 1.6666666666666667,
+    "pct_jumps_gt1_merged": 0.6666666666666666,
+    "beta_calls": 0,
+    "num_cascaded_calls": 0,
+    "pct_cascaded_calls": 0.0,
+    "cascade_chain_length_histogram": {},
+    "backtracks_merged": [
+      {
+        "origin_depth": 1,
+        "final_target_depth": 0,
+        "jump": 1,
+        "degenerate": true,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "no candidates proposed"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 1,
+            "to_depth": 0,
+            "jump": 1,
+            "degenerate": true,
+            "reason": "no candidates proposed",
+            "rejected_action": "h2. penny",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 2,
+        "final_target_depth": 0,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 2 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 2,
+            "to_depth": 0,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 2 word(s) marked impossible",
+            "rejected_action": "h1. elect",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 3,
+        "final_target_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 1 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 3,
+            "to_depth": 1,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 1 word(s) marked impossible",
+            "rejected_action": "h4. slink",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 3,
+        "final_target_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 4 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 3,
+            "to_depth": 1,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 4 word(s) marked impossible",
+            "rejected_action": "h1. chose",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 3,
+        "final_target_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "no candidates proposed"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 3,
+            "to_depth": 1,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "no candidates proposed",
+            "rejected_action": "v2. hello",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 1,
+        "final_target_depth": 0,
+        "jump": 1,
+        "degenerate": true,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "all candidates exhausted"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 1,
+            "to_depth": 0,
+            "jump": 1,
+            "degenerate": true,
+            "reason": "all candidates exhausted",
+            "rejected_action": "v1. crush",
+            "beta_model_call": false
+          }
+        ]
+      }
+    ],
+    "num_unrecoverable": 0,
+    "selection_method": "deepest",
+    "max_depth": 3,
+    "selected_depth": 3,
+    "selection_tie": true,
+    "idx": 5,
+    "ys": [
+      "C H O S E\nR _ _ _ _\nU _ _ _ _\nS L I N K\nH _ _ _ _"
+    ],
+    "infos": [
+      {
+        "r_letter": 0.4,
+        "r_word": 0.1,
+        "r_game": false,
+        "r": 0.1
+      }
+    ],
+    "usage_this_puzzle": {
+      "completion_tokens": 41937,
+      "prompt_tokens": 27396,
+      "cost": 0.23708100000000032
+    },
+    "usage_so_far": {
+      "completion_tokens": 475459,
+      "prompt_tokens": 369261,
+      "cost": 2.746556
+    },
+    "config": {
+      "backend": "bedrock",
+      "temperature": 0,
+      "task": "crosswords",
+      "task_start_index": 0,
+      "task_end_index": 20,
+      "naive_run": false,
+      "prompt_sample": null,
+      "method_generate": null,
+      "method_evaluate": null,
+      "method_select": "greedy",
+      "n_generate_sample": 5,
+      "n_evaluate_sample": 1,
+      "n_select_sample": 1,
+      "method_search": "dfs_crossword_fixed_k2",
+      "v_th": 0.5,
+      "node_budget": 50,
+      "verbose": true,
+      "max_per_state": 3,
+      "no_prune": false,
+      "crossword_file": "mini0505_0_100_5.json",
+      "selection_method": "deepest"
+    }
+  },
+  {
+    "nodes_explored": 10,
+    "candidates_evaluated": 58,
+    "candidates_pruned": 48,
+    "backtracks": [
+      {
+        "from_depth": 2,
+        "to_depth": 0,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 1 word(s) marked impossible",
+        "rejected_action": "h5. karst",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 2,
+        "to_depth": 0,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "no candidates proposed",
+        "rejected_action": "h5. karst",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 4,
+        "to_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "no candidates proposed",
+        "rejected_action": "h5. karst",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 3,
+        "to_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "no candidates proposed",
+        "rejected_action": "h5. karst",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 2,
+        "to_depth": 0,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "no candidates proposed",
+        "rejected_action": "v3. debar",
+        "beta_model_call": false
+      }
+    ],
+    "solution": {
+      "actions": [
+        "h4. amate",
+        "v1. croak",
+        "h3. ombre",
+        "h5. karst"
+      ],
+      "board": "C____R____OMBREAMATEKARST",
+      "r_word": 0.4,
+      "r_letter": 0.68,
+      "r_game": false
+    },
+    "method": "dfs_crossword_fixed_k2",
+    "_live_explore_counter": 10,
+    "num_backtracks": 5,
+    "mean_jump_size": 2.0,
+    "pct_jumps_gt1": 1.0,
+    "num_backtracks_raw": 5,
+    "mean_jump_size_raw": 2.0,
+    "pct_jumps_gt1_raw": 1.0,
+    "num_logical_backtracks": 5,
+    "mean_jump_size_merged": 2.0,
+    "pct_jumps_gt1_merged": 1.0,
+    "beta_calls": 0,
+    "num_cascaded_calls": 0,
+    "pct_cascaded_calls": 0.0,
+    "cascade_chain_length_histogram": {},
+    "backtracks_merged": [
+      {
+        "origin_depth": 2,
+        "final_target_depth": 0,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 1 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 2,
+            "to_depth": 0,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 1 word(s) marked impossible",
+            "rejected_action": "h5. karst",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 2,
+        "final_target_depth": 0,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "no candidates proposed"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 2,
+            "to_depth": 0,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "no candidates proposed",
+            "rejected_action": "h5. karst",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 4,
+        "final_target_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "no candidates proposed"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 4,
+            "to_depth": 2,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "no candidates proposed",
+            "rejected_action": "h5. karst",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 3,
+        "final_target_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "no candidates proposed"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 3,
+            "to_depth": 1,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "no candidates proposed",
+            "rejected_action": "h5. karst",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 2,
+        "final_target_depth": 0,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "no candidates proposed"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 2,
+            "to_depth": 0,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "no candidates proposed",
+            "rejected_action": "v3. debar",
+            "beta_model_call": false
+          }
+        ]
+      }
+    ],
+    "num_unrecoverable": 0,
+    "selection_method": "deepest",
+    "max_depth": 4,
+    "selected_depth": 4,
+    "selection_tie": false,
+    "idx": 6,
+    "ys": [
+      "C _ _ _ _\nR _ _ _ _\nO M B R E\nA M A T E\nK A R S T"
+    ],
+    "infos": [
+      {
+        "r_letter": 0.68,
+        "r_word": 0.4,
+        "r_game": false,
+        "r": 0.4
+      }
+    ],
+    "usage_this_puzzle": {
+      "completion_tokens": 52330,
+      "prompt_tokens": 37544,
+      "cost": 0.29919399999999996
+    },
+    "usage_so_far": {
+      "completion_tokens": 527789,
+      "prompt_tokens": 406805,
+      "cost": 3.04575
+    },
+    "config": {
+      "backend": "bedrock",
+      "temperature": 0,
+      "task": "crosswords",
+      "task_start_index": 0,
+      "task_end_index": 20,
+      "naive_run": false,
+      "prompt_sample": null,
+      "method_generate": null,
+      "method_evaluate": null,
+      "method_select": "greedy",
+      "n_generate_sample": 5,
+      "n_evaluate_sample": 1,
+      "n_select_sample": 1,
+      "method_search": "dfs_crossword_fixed_k2",
+      "v_th": 0.5,
+      "node_budget": 50,
+      "verbose": true,
+      "max_per_state": 3,
+      "no_prune": false,
+      "crossword_file": "mini0505_0_100_5.json",
+      "selection_method": "deepest"
+    }
+  },
+  {
+    "nodes_explored": 0,
+    "candidates_evaluated": 0,
+    "candidates_pruned": 0,
+    "backtracks": [],
+    "solution": null,
+    "method": "dfs_crossword_fixed_k2",
+    "num_backtracks": 0,
+    "mean_jump_size": 0.0,
+    "pct_jumps_gt1": 0.0,
+    "num_backtracks_raw": 0,
+    "mean_jump_size_raw": 0.0,
+    "pct_jumps_gt1_raw": 0.0,
+    "num_logical_backtracks": 0,
+    "mean_jump_size_merged": 0.0,
+    "pct_jumps_gt1_merged": 0.0,
+    "beta_calls": 0,
+    "num_cascaded_calls": 0,
+    "pct_cascaded_calls": 0.0,
+    "cascade_chain_length_histogram": {},
+    "backtracks_merged": [],
+    "num_unrecoverable": 0,
+    "selection_method": "deepest",
+    "max_depth": null,
+    "selected_depth": null,
+    "selection_tie": null,
+    "idx": 7,
+    "ys": [
+      "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _"
+    ],
+    "infos": [
+      {
+        "r_letter": 0.0,
+        "r_word": 0.0,
+        "r_game": false,
+        "r": 0.0
+      }
+    ],
+    "usage_this_puzzle": {
+      "completion_tokens": 4836,
+      "prompt_tokens": 1310,
+      "cost": 0.025490000000000013
+    },
+    "usage_so_far": {
+      "completion_tokens": 532625,
+      "prompt_tokens": 408115,
+      "cost": 3.07124
+    },
+    "config": {
+      "backend": "bedrock",
+      "temperature": 0,
+      "task": "crosswords",
+      "task_start_index": 0,
+      "task_end_index": 20,
+      "naive_run": false,
+      "prompt_sample": null,
+      "method_generate": null,
+      "method_evaluate": null,
+      "method_select": "greedy",
+      "n_generate_sample": 5,
+      "n_evaluate_sample": 1,
+      "n_select_sample": 1,
+      "method_search": "dfs_crossword_fixed_k2",
+      "v_th": 0.5,
+      "node_budget": 50,
+      "verbose": true,
+      "max_per_state": 3,
+      "no_prune": false,
+      "crossword_file": "mini0505_0_100_5.json",
+      "selection_method": "deepest"
+    }
+  },
+  {
+    "nodes_explored": 0,
+    "candidates_evaluated": 0,
+    "candidates_pruned": 0,
+    "backtracks": [],
+    "solution": null,
+    "method": "dfs_crossword_fixed_k2",
+    "num_backtracks": 0,
+    "mean_jump_size": 0.0,
+    "pct_jumps_gt1": 0.0,
+    "num_backtracks_raw": 0,
+    "mean_jump_size_raw": 0.0,
+    "pct_jumps_gt1_raw": 0.0,
+    "num_logical_backtracks": 0,
+    "mean_jump_size_merged": 0.0,
+    "pct_jumps_gt1_merged": 0.0,
+    "beta_calls": 0,
+    "num_cascaded_calls": 0,
+    "pct_cascaded_calls": 0.0,
+    "cascade_chain_length_histogram": {},
+    "backtracks_merged": [],
+    "num_unrecoverable": 0,
+    "selection_method": "deepest",
+    "max_depth": null,
+    "selected_depth": null,
+    "selection_tie": null,
+    "idx": 8,
+    "ys": [
+      "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _"
+    ],
+    "infos": [
+      {
+        "r_letter": 0.0,
+        "r_word": 0.0,
+        "r_game": false,
+        "r": 0.0
+      }
+    ],
+    "usage_this_puzzle": {
+      "completion_tokens": 2735,
+      "prompt_tokens": 1345,
+      "cost": 0.015020000000000255
+    },
+    "usage_so_far": {
+      "completion_tokens": 535360,
+      "prompt_tokens": 409460,
+      "cost": 3.0862600000000002
+    },
+    "config": {
+      "backend": "bedrock",
+      "temperature": 0,
+      "task": "crosswords",
+      "task_start_index": 0,
+      "task_end_index": 20,
+      "naive_run": false,
+      "prompt_sample": null,
+      "method_generate": null,
+      "method_evaluate": null,
+      "method_select": "greedy",
+      "n_generate_sample": 5,
+      "n_evaluate_sample": 1,
+      "n_select_sample": 1,
+      "method_search": "dfs_crossword_fixed_k2",
+      "v_th": 0.5,
+      "node_budget": 50,
+      "verbose": true,
+      "max_per_state": 3,
+      "no_prune": false,
+      "crossword_file": "mini0505_0_100_5.json",
+      "selection_method": "deepest"
+    }
+  },
+  {
+    "nodes_explored": 23,
+    "candidates_evaluated": 104,
+    "candidates_pruned": 81,
+    "backtracks": [
+      {
+        "from_depth": 5,
+        "to_depth": 3,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "no candidates proposed",
+        "rejected_action": "h2. venue",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 4,
+        "to_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 4 word(s) marked impossible",
+        "rejected_action": "h2. eyrie",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 4,
+        "to_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "no candidates proposed",
+        "rejected_action": "h1. eruct",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 3,
+        "to_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "no candidates proposed",
+        "rejected_action": "v1. evade",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 3,
+        "to_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "no candidates proposed",
+        "rejected_action": "v1. evade",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 5,
+        "to_depth": 3,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 2 word(s) marked impossible",
+        "rejected_action": "v1. evade",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 4,
+        "to_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 2 word(s) marked impossible",
+        "rejected_action": "v1. evade",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 4,
+        "to_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "no candidates proposed",
+        "rejected_action": "h1. eruct",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 4,
+        "to_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "no candidates proposed",
+        "rejected_action": "h1. eruct",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 2,
+        "to_depth": 0,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "all candidates exhausted",
+        "rejected_action": "h4. dipso",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 1,
+        "to_depth": 0,
+        "jump": 1,
+        "degenerate": true,
+        "reason": "no candidates proposed",
+        "rejected_action": "h1. belch",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 2,
+        "to_depth": 0,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 3 word(s) marked impossible",
+        "rejected_action": "h1. eruct",
+        "beta_model_call": false
+      }
+    ],
+    "solution": {
+      "actions": [
+        "v5. tenor",
+        "h5. enter",
+        "h1. eruct",
+        "v1. evade",
+        "h2. venue"
+      ],
+      "board": "ERUCTVENUEA___ND___OENTER",
+      "r_word": 0.5,
+      "r_letter": 0.76,
+      "r_game": false
+    },
+    "method": "dfs_crossword_fixed_k2",
+    "_live_explore_counter": 23,
+    "num_backtracks": 12,
+    "mean_jump_size": 1.9166666666666667,
+    "pct_jumps_gt1": 0.9166666666666666,
+    "num_backtracks_raw": 12,
+    "mean_jump_size_raw": 1.9166666666666667,
+    "pct_jumps_gt1_raw": 0.9166666666666666,
+    "num_logical_backtracks": 12,
+    "mean_jump_size_merged": 1.9166666666666667,
+    "pct_jumps_gt1_merged": 0.9166666666666666,
+    "beta_calls": 0,
+    "num_cascaded_calls": 0,
+    "pct_cascaded_calls": 0.0,
+    "cascade_chain_length_histogram": {},
+    "backtracks_merged": [
+      {
+        "origin_depth": 5,
+        "final_target_depth": 3,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "no candidates proposed"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 5,
+            "to_depth": 3,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "no candidates proposed",
+            "rejected_action": "h2. venue",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 4,
+        "final_target_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 4 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 4,
+            "to_depth": 2,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 4 word(s) marked impossible",
+            "rejected_action": "h2. eyrie",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 4,
+        "final_target_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "no candidates proposed"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 4,
+            "to_depth": 2,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "no candidates proposed",
+            "rejected_action": "h1. eruct",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 3,
+        "final_target_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "no candidates proposed"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 3,
+            "to_depth": 1,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "no candidates proposed",
+            "rejected_action": "v1. evade",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 3,
+        "final_target_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "no candidates proposed"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 3,
+            "to_depth": 1,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "no candidates proposed",
+            "rejected_action": "v1. evade",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 5,
+        "final_target_depth": 3,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 2 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 5,
+            "to_depth": 3,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 2 word(s) marked impossible",
+            "rejected_action": "v1. evade",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 4,
+        "final_target_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 2 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 4,
+            "to_depth": 2,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 2 word(s) marked impossible",
+            "rejected_action": "v1. evade",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 4,
+        "final_target_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "no candidates proposed"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 4,
+            "to_depth": 2,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "no candidates proposed",
+            "rejected_action": "h1. eruct",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 4,
+        "final_target_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "no candidates proposed"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 4,
+            "to_depth": 2,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "no candidates proposed",
+            "rejected_action": "h1. eruct",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 2,
+        "final_target_depth": 0,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "all candidates exhausted"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 2,
+            "to_depth": 0,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "all candidates exhausted",
+            "rejected_action": "h4. dipso",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 1,
+        "final_target_depth": 0,
+        "jump": 1,
+        "degenerate": true,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "no candidates proposed"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 1,
+            "to_depth": 0,
+            "jump": 1,
+            "degenerate": true,
+            "reason": "no candidates proposed",
+            "rejected_action": "h1. belch",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 2,
+        "final_target_depth": 0,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 3 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 2,
+            "to_depth": 0,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 3 word(s) marked impossible",
+            "rejected_action": "h1. eruct",
+            "beta_model_call": false
+          }
+        ]
+      }
+    ],
+    "num_unrecoverable": 0,
+    "selection_method": "deepest",
+    "max_depth": 5,
+    "selected_depth": 5,
+    "selection_tie": true,
+    "idx": 9,
+    "ys": [
+      "E R U C T\nV E N U E\nA _ _ _ N\nD _ _ _ O\nE N T E R"
+    ],
+    "infos": [
+      {
+        "r_letter": 0.76,
+        "r_word": 0.5,
+        "r_game": false,
+        "r": 0.5
+      }
+    ],
+    "usage_this_puzzle": {
+      "completion_tokens": 94015,
+      "prompt_tokens": 63836,
+      "cost": 0.533911
+    },
+    "usage_so_far": {
+      "completion_tokens": 94015,
+      "prompt_tokens": 63836,
+      "cost": 0.533911
+    },
+    "config": {
+      "backend": "bedrock",
+      "temperature": 0,
+      "task": "crosswords",
+      "task_start_index": 9,
+      "task_end_index": 20,
+      "naive_run": false,
+      "prompt_sample": null,
+      "method_generate": null,
+      "method_evaluate": null,
+      "method_select": "greedy",
+      "n_generate_sample": 5,
+      "n_evaluate_sample": 1,
+      "n_select_sample": 1,
+      "method_search": "dfs_crossword_fixed_k2",
+      "v_th": 0.5,
+      "node_budget": 50,
+      "verbose": true,
+      "resume": false,
+      "max_per_state": 3,
+      "no_prune": false,
+      "crossword_file": "mini0505_0_100_5.json",
+      "selection_method": "deepest"
+    }
+  },
+  {
+    "nodes_explored": 0,
+    "candidates_evaluated": 0,
+    "candidates_pruned": 0,
+    "backtracks": [],
+    "solution": null,
+    "method": "dfs_crossword_fixed_k2",
+    "num_backtracks": 0,
+    "mean_jump_size": 0.0,
+    "pct_jumps_gt1": 0.0,
+    "num_backtracks_raw": 0,
+    "mean_jump_size_raw": 0.0,
+    "pct_jumps_gt1_raw": 0.0,
+    "num_logical_backtracks": 0,
+    "mean_jump_size_merged": 0.0,
+    "pct_jumps_gt1_merged": 0.0,
+    "beta_calls": 0,
+    "num_cascaded_calls": 0,
+    "pct_cascaded_calls": 0.0,
+    "cascade_chain_length_histogram": {},
+    "backtracks_merged": [],
+    "num_unrecoverable": 0,
+    "selection_method": "deepest",
+    "max_depth": null,
+    "selected_depth": null,
+    "selection_tie": null,
+    "idx": 10,
+    "ys": [
+      "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _"
+    ],
+    "infos": [
+      {
+        "r_letter": 0.0,
+        "r_word": 0.0,
+        "r_game": false,
+        "r": 0.0
+      }
+    ],
+    "usage_this_puzzle": {
+      "completion_tokens": 3207,
+      "prompt_tokens": 1430,
+      "cost": 0.017464999999999953
+    },
+    "usage_so_far": {
+      "completion_tokens": 97222,
+      "prompt_tokens": 65266,
+      "cost": 0.551376
+    },
+    "config": {
+      "backend": "bedrock",
+      "temperature": 0,
+      "task": "crosswords",
+      "task_start_index": 9,
+      "task_end_index": 20,
+      "naive_run": false,
+      "prompt_sample": null,
+      "method_generate": null,
+      "method_evaluate": null,
+      "method_select": "greedy",
+      "n_generate_sample": 5,
+      "n_evaluate_sample": 1,
+      "n_select_sample": 1,
+      "method_search": "dfs_crossword_fixed_k2",
+      "v_th": 0.5,
+      "node_budget": 50,
+      "verbose": true,
+      "resume": false,
+      "max_per_state": 3,
+      "no_prune": false,
+      "crossword_file": "mini0505_0_100_5.json",
+      "selection_method": "deepest"
+    }
+  },
+  {
+    "nodes_explored": 50,
+    "candidates_evaluated": 220,
+    "candidates_pruned": 170,
+    "backtracks": [
+      {
+        "from_depth": 1,
+        "to_depth": 0,
+        "jump": 1,
+        "degenerate": true,
+        "reason": "no candidates proposed",
+        "rejected_action": "h1. horde",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 5,
+        "to_depth": 3,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "no candidates proposed",
+        "rejected_action": "v5. enemy",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 6,
+        "to_depth": 4,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 2 word(s) marked impossible",
+        "rejected_action": "v3. smite",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 6,
+        "to_depth": 4,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "no candidates proposed",
+        "rejected_action": "h3. osage",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 5,
+        "to_depth": 3,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "no candidates proposed",
+        "rejected_action": "v3. amate",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 5,
+        "to_depth": 3,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 4 word(s) marked impossible",
+        "rejected_action": "h1. horde",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 3,
+        "to_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "all candidates exhausted",
+        "rejected_action": "h5. ewery",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 2,
+        "to_depth": 0,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 1 word(s) marked impossible",
+        "rejected_action": "h1. grape",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 6,
+        "to_depth": 4,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "no candidates proposed",
+        "rejected_action": "h2. reman",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 6,
+        "to_depth": 4,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "no candidates proposed",
+        "rejected_action": "v2. resow",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 6,
+        "to_depth": 4,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "no candidates proposed",
+        "rejected_action": "v5. enemy",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 4,
+        "to_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "all candidates exhausted",
+        "rejected_action": "h5. ewery",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 6,
+        "to_depth": 4,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 2 word(s) marked impossible",
+        "rejected_action": "v3. smite",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 6,
+        "to_depth": 4,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "no candidates proposed",
+        "rejected_action": "h3. osage",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 5,
+        "to_depth": 3,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "no candidates proposed",
+        "rejected_action": "v3. amate",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 6,
+        "to_depth": 4,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "no candidates proposed",
+        "rejected_action": "h2. reman",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 6,
+        "to_depth": 4,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "no candidates proposed",
+        "rejected_action": "v2. resow",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 6,
+        "to_depth": 4,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "no candidates proposed",
+        "rejected_action": "v5. enemy",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 4,
+        "to_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "all candidates exhausted",
+        "rejected_action": "h3. osage",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 6,
+        "to_depth": 4,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "no candidates proposed",
+        "rejected_action": "h5. ewery",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 6,
+        "to_depth": 4,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "no candidates proposed",
+        "rejected_action": "h2. reman",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 5,
+        "to_depth": 3,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 2 word(s) marked impossible",
+        "rejected_action": "v1. troth",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 6,
+        "to_depth": 4,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "no candidates proposed",
+        "rejected_action": "h2. reman",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 4,
+        "to_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "all candidates exhausted",
+        "rejected_action": "h5. ewery",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 2,
+        "to_depth": 0,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "all candidates exhausted",
+        "rejected_action": "h4. totem",
+        "beta_model_call": false
+      }
+    ],
+    "solution": {
+      "actions": [
+        "h4. totem",
+        "h2. reman",
+        "h5. ewery",
+        "v4. pager",
+        "v1. grate",
+        "v3. smite"
+      ],
+      "board": "G_SP_REMANA_IG_TOTEMEWERY",
+      "r_word": 0.4,
+      "r_letter": 0.68,
+      "r_game": false
+    },
+    "method": "dfs_crossword_fixed_k2",
+    "_live_explore_counter": 50,
+    "num_backtracks": 25,
+    "mean_jump_size": 1.96,
+    "pct_jumps_gt1": 0.96,
+    "num_backtracks_raw": 25,
+    "mean_jump_size_raw": 1.96,
+    "pct_jumps_gt1_raw": 0.96,
+    "num_logical_backtracks": 25,
+    "mean_jump_size_merged": 1.96,
+    "pct_jumps_gt1_merged": 0.96,
+    "beta_calls": 0,
+    "num_cascaded_calls": 0,
+    "pct_cascaded_calls": 0.0,
+    "cascade_chain_length_histogram": {},
+    "backtracks_merged": [
+      {
+        "origin_depth": 1,
+        "final_target_depth": 0,
+        "jump": 1,
+        "degenerate": true,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "no candidates proposed"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 1,
+            "to_depth": 0,
+            "jump": 1,
+            "degenerate": true,
+            "reason": "no candidates proposed",
+            "rejected_action": "h1. horde",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 5,
+        "final_target_depth": 3,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "no candidates proposed"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 5,
+            "to_depth": 3,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "no candidates proposed",
+            "rejected_action": "v5. enemy",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 6,
+        "final_target_depth": 4,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 2 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 6,
+            "to_depth": 4,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 2 word(s) marked impossible",
+            "rejected_action": "v3. smite",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 6,
+        "final_target_depth": 4,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "no candidates proposed"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 6,
+            "to_depth": 4,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "no candidates proposed",
+            "rejected_action": "h3. osage",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 5,
+        "final_target_depth": 3,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "no candidates proposed"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 5,
+            "to_depth": 3,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "no candidates proposed",
+            "rejected_action": "v3. amate",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 5,
+        "final_target_depth": 3,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 4 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 5,
+            "to_depth": 3,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 4 word(s) marked impossible",
+            "rejected_action": "h1. horde",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 3,
+        "final_target_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "all candidates exhausted"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 3,
+            "to_depth": 1,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "all candidates exhausted",
+            "rejected_action": "h5. ewery",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 2,
+        "final_target_depth": 0,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 1 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 2,
+            "to_depth": 0,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 1 word(s) marked impossible",
+            "rejected_action": "h1. grape",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 6,
+        "final_target_depth": 4,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "no candidates proposed"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 6,
+            "to_depth": 4,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "no candidates proposed",
+            "rejected_action": "h2. reman",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 6,
+        "final_target_depth": 4,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "no candidates proposed"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 6,
+            "to_depth": 4,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "no candidates proposed",
+            "rejected_action": "v2. resow",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 6,
+        "final_target_depth": 4,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "no candidates proposed"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 6,
+            "to_depth": 4,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "no candidates proposed",
+            "rejected_action": "v5. enemy",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 4,
+        "final_target_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "all candidates exhausted"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 4,
+            "to_depth": 2,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "all candidates exhausted",
+            "rejected_action": "h5. ewery",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 6,
+        "final_target_depth": 4,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 2 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 6,
+            "to_depth": 4,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 2 word(s) marked impossible",
+            "rejected_action": "v3. smite",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 6,
+        "final_target_depth": 4,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "no candidates proposed"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 6,
+            "to_depth": 4,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "no candidates proposed",
+            "rejected_action": "h3. osage",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 5,
+        "final_target_depth": 3,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "no candidates proposed"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 5,
+            "to_depth": 3,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "no candidates proposed",
+            "rejected_action": "v3. amate",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 6,
+        "final_target_depth": 4,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "no candidates proposed"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 6,
+            "to_depth": 4,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "no candidates proposed",
+            "rejected_action": "h2. reman",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 6,
+        "final_target_depth": 4,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "no candidates proposed"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 6,
+            "to_depth": 4,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "no candidates proposed",
+            "rejected_action": "v2. resow",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 6,
+        "final_target_depth": 4,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "no candidates proposed"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 6,
+            "to_depth": 4,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "no candidates proposed",
+            "rejected_action": "v5. enemy",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 4,
+        "final_target_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "all candidates exhausted"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 4,
+            "to_depth": 2,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "all candidates exhausted",
+            "rejected_action": "h3. osage",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 6,
+        "final_target_depth": 4,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "no candidates proposed"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 6,
+            "to_depth": 4,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "no candidates proposed",
+            "rejected_action": "h5. ewery",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 6,
+        "final_target_depth": 4,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "no candidates proposed"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 6,
+            "to_depth": 4,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "no candidates proposed",
+            "rejected_action": "h2. reman",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 5,
+        "final_target_depth": 3,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 2 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 5,
+            "to_depth": 3,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 2 word(s) marked impossible",
+            "rejected_action": "v1. troth",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 6,
+        "final_target_depth": 4,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "no candidates proposed"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 6,
+            "to_depth": 4,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "no candidates proposed",
+            "rejected_action": "h2. reman",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 4,
+        "final_target_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "all candidates exhausted"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 4,
+            "to_depth": 2,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "all candidates exhausted",
+            "rejected_action": "h5. ewery",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 2,
+        "final_target_depth": 0,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "all candidates exhausted"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 2,
+            "to_depth": 0,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "all candidates exhausted",
+            "rejected_action": "h4. totem",
+            "beta_model_call": false
+          }
+        ]
+      }
+    ],
+    "num_unrecoverable": 0,
+    "selection_method": "deepest",
+    "max_depth": 6,
+    "selected_depth": 6,
+    "selection_tie": true,
+    "idx": 11,
+    "ys": [
+      "G _ S P _\nR E M A N\nA _ I G _\nT O T E M\nE W E R Y"
+    ],
+    "infos": [
+      {
+        "r_letter": 0.68,
+        "r_word": 0.4,
+        "r_game": false,
+        "r": 0.4
+      }
+    ],
+    "usage_this_puzzle": {
+      "completion_tokens": 131505,
+      "prompt_tokens": 94534,
+      "cost": 0.7520589999999999
+    },
+    "usage_so_far": {
+      "completion_tokens": 228727,
+      "prompt_tokens": 159800,
+      "cost": 1.303435
+    },
+    "config": {
+      "backend": "bedrock",
+      "temperature": 0,
+      "task": "crosswords",
+      "task_start_index": 9,
+      "task_end_index": 20,
+      "naive_run": false,
+      "prompt_sample": null,
+      "method_generate": null,
+      "method_evaluate": null,
+      "method_select": "greedy",
+      "n_generate_sample": 5,
+      "n_evaluate_sample": 1,
+      "n_select_sample": 1,
+      "method_search": "dfs_crossword_fixed_k2",
+      "v_th": 0.5,
+      "node_budget": 50,
+      "verbose": true,
+      "resume": false,
+      "max_per_state": 3,
+      "no_prune": false,
+      "crossword_file": "mini0505_0_100_5.json",
+      "selection_method": "deepest"
+    }
+  },
+  {
+    "nodes_explored": 23,
+    "candidates_evaluated": 89,
+    "candidates_pruned": 66,
+    "backtracks": [
+      {
+        "from_depth": 3,
+        "to_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "no candidates proposed",
+        "rejected_action": "h5. eider",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 4,
+        "to_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 2 word(s) marked impossible",
+        "rejected_action": "h2. lorry",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 3,
+        "to_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 1 word(s) marked impossible",
+        "rejected_action": "h3. tokay",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 5,
+        "to_depth": 3,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 1 word(s) marked impossible",
+        "rejected_action": "h4. raise",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 4,
+        "to_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 1 word(s) marked impossible",
+        "rejected_action": "h3. agame",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 4,
+        "to_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 1 word(s) marked impossible",
+        "rejected_action": "h4. raise",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 3,
+        "to_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 4 word(s) marked impossible",
+        "rejected_action": "h2. gleam",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 1,
+        "to_depth": 0,
+        "jump": 1,
+        "degenerate": true,
+        "reason": "all candidates exhausted",
+        "rejected_action": "h1. grove",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 1,
+        "to_depth": 0,
+        "jump": 1,
+        "degenerate": true,
+        "reason": "no candidates proposed",
+        "rejected_action": "h2. alert",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 3,
+        "to_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 1 word(s) marked impossible",
+        "rejected_action": "v1. angry",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 3,
+        "to_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 4 word(s) marked impossible",
+        "rejected_action": "h5. eider",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 3,
+        "to_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 1 word(s) marked impossible",
+        "rejected_action": "v4. ankle",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 1,
+        "to_depth": 0,
+        "jump": 1,
+        "degenerate": true,
+        "reason": "all candidates exhausted",
+        "rejected_action": "h3. gecko",
+        "beta_model_call": false
+      }
+    ],
+    "solution": {
+      "actions": [
+        "h1. grove",
+        "v5. emeer",
+        "v1. glare",
+        "h5. eider",
+        "h4. raise"
+      ],
+      "board": "GROVEL___MA___ERAISEEIDER",
+      "r_word": 0.4,
+      "r_letter": 0.64,
+      "r_game": false
+    },
+    "method": "dfs_crossword_fixed_k2",
+    "_live_explore_counter": 23,
+    "num_backtracks": 13,
+    "mean_jump_size": 1.7692307692307692,
+    "pct_jumps_gt1": 0.7692307692307693,
+    "num_backtracks_raw": 13,
+    "mean_jump_size_raw": 1.7692307692307692,
+    "pct_jumps_gt1_raw": 0.7692307692307693,
+    "num_logical_backtracks": 13,
+    "mean_jump_size_merged": 1.7692307692307692,
+    "pct_jumps_gt1_merged": 0.7692307692307693,
+    "beta_calls": 0,
+    "num_cascaded_calls": 0,
+    "pct_cascaded_calls": 0.0,
+    "cascade_chain_length_histogram": {},
+    "backtracks_merged": [
+      {
+        "origin_depth": 3,
+        "final_target_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "no candidates proposed"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 3,
+            "to_depth": 1,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "no candidates proposed",
+            "rejected_action": "h5. eider",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 4,
+        "final_target_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 2 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 4,
+            "to_depth": 2,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 2 word(s) marked impossible",
+            "rejected_action": "h2. lorry",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 3,
+        "final_target_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 1 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 3,
+            "to_depth": 1,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 1 word(s) marked impossible",
+            "rejected_action": "h3. tokay",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 5,
+        "final_target_depth": 3,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 1 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 5,
+            "to_depth": 3,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 1 word(s) marked impossible",
+            "rejected_action": "h4. raise",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 4,
+        "final_target_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 1 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 4,
+            "to_depth": 2,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 1 word(s) marked impossible",
+            "rejected_action": "h3. agame",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 4,
+        "final_target_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 1 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 4,
+            "to_depth": 2,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 1 word(s) marked impossible",
+            "rejected_action": "h4. raise",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 3,
+        "final_target_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 4 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 3,
+            "to_depth": 1,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 4 word(s) marked impossible",
+            "rejected_action": "h2. gleam",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 1,
+        "final_target_depth": 0,
+        "jump": 1,
+        "degenerate": true,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "all candidates exhausted"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 1,
+            "to_depth": 0,
+            "jump": 1,
+            "degenerate": true,
+            "reason": "all candidates exhausted",
+            "rejected_action": "h1. grove",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 1,
+        "final_target_depth": 0,
+        "jump": 1,
+        "degenerate": true,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "no candidates proposed"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 1,
+            "to_depth": 0,
+            "jump": 1,
+            "degenerate": true,
+            "reason": "no candidates proposed",
+            "rejected_action": "h2. alert",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 3,
+        "final_target_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 1 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 3,
+            "to_depth": 1,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 1 word(s) marked impossible",
+            "rejected_action": "v1. angry",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 3,
+        "final_target_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 4 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 3,
+            "to_depth": 1,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 4 word(s) marked impossible",
+            "rejected_action": "h5. eider",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 3,
+        "final_target_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 1 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 3,
+            "to_depth": 1,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 1 word(s) marked impossible",
+            "rejected_action": "v4. ankle",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 1,
+        "final_target_depth": 0,
+        "jump": 1,
+        "degenerate": true,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "all candidates exhausted"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 1,
+            "to_depth": 0,
+            "jump": 1,
+            "degenerate": true,
+            "reason": "all candidates exhausted",
+            "rejected_action": "h3. gecko",
+            "beta_model_call": false
+          }
+        ]
+      }
+    ],
+    "num_unrecoverable": 0,
+    "selection_method": "deepest",
+    "max_depth": 5,
+    "selected_depth": 5,
+    "selection_tie": false,
+    "idx": 12,
+    "ys": [
+      "G R O V E\nL _ _ _ M\nA _ _ _ E\nR A I S E\nE I D E R"
+    ],
+    "infos": [
+      {
+        "r_letter": 0.64,
+        "r_word": 0.4,
+        "r_game": false,
+        "r": 0.4
+      }
+    ],
+    "usage_this_puzzle": {
+      "completion_tokens": 81736,
+      "prompt_tokens": 73380,
+      "cost": 0.48206000000000016
+    },
+    "usage_so_far": {
+      "completion_tokens": 310463,
+      "prompt_tokens": 233180,
+      "cost": 1.785495
+    },
+    "config": {
+      "backend": "bedrock",
+      "temperature": 0,
+      "task": "crosswords",
+      "task_start_index": 9,
+      "task_end_index": 20,
+      "naive_run": false,
+      "prompt_sample": null,
+      "method_generate": null,
+      "method_evaluate": null,
+      "method_select": "greedy",
+      "n_generate_sample": 5,
+      "n_evaluate_sample": 1,
+      "n_select_sample": 1,
+      "method_search": "dfs_crossword_fixed_k2",
+      "v_th": 0.5,
+      "node_budget": 50,
+      "verbose": true,
+      "resume": false,
+      "max_per_state": 3,
+      "no_prune": false,
+      "crossword_file": "mini0505_0_100_5.json",
+      "selection_method": "deepest"
+    }
+  },
+  {
+    "nodes_explored": 10,
+    "candidates_evaluated": 54,
+    "candidates_pruned": 44,
+    "backtracks": [
+      {
+        "from_depth": 4,
+        "to_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 5 word(s) marked impossible",
+        "rejected_action": "h1. culla",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 3,
+        "to_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 1 word(s) marked impossible",
+        "rejected_action": "h4. inner",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 2,
+        "to_depth": 0,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "no candidates proposed",
+        "rejected_action": "v1. raver",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 2,
+        "to_depth": 0,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "no candidates proposed",
+        "rejected_action": "h3. uvula",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 2,
+        "to_depth": 0,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "no candidates proposed",
+        "rejected_action": "h1. glade",
+        "beta_model_call": false
+      }
+    ],
+    "solution": {
+      "actions": [
+        "h3. velum",
+        "v1. cavil",
+        "h2. alula",
+        "h1. culla"
+      ],
+      "board": "CULLAALULAVELUMI____L____",
+      "r_word": 0.0,
+      "r_letter": 0.0,
+      "r_game": false
+    },
+    "method": "dfs_crossword_fixed_k2",
+    "_live_explore_counter": 10,
+    "num_backtracks": 5,
+    "mean_jump_size": 2.0,
+    "pct_jumps_gt1": 1.0,
+    "num_backtracks_raw": 5,
+    "mean_jump_size_raw": 2.0,
+    "pct_jumps_gt1_raw": 1.0,
+    "num_logical_backtracks": 5,
+    "mean_jump_size_merged": 2.0,
+    "pct_jumps_gt1_merged": 1.0,
+    "beta_calls": 0,
+    "num_cascaded_calls": 0,
+    "pct_cascaded_calls": 0.0,
+    "cascade_chain_length_histogram": {},
+    "backtracks_merged": [
+      {
+        "origin_depth": 4,
+        "final_target_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 5 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 4,
+            "to_depth": 2,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 5 word(s) marked impossible",
+            "rejected_action": "h1. culla",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 3,
+        "final_target_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 1 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 3,
+            "to_depth": 1,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 1 word(s) marked impossible",
+            "rejected_action": "h4. inner",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 2,
+        "final_target_depth": 0,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "no candidates proposed"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 2,
+            "to_depth": 0,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "no candidates proposed",
+            "rejected_action": "v1. raver",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 2,
+        "final_target_depth": 0,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "no candidates proposed"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 2,
+            "to_depth": 0,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "no candidates proposed",
+            "rejected_action": "h3. uvula",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 2,
+        "final_target_depth": 0,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "no candidates proposed"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 2,
+            "to_depth": 0,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "no candidates proposed",
+            "rejected_action": "h1. glade",
+            "beta_model_call": false
+          }
+        ]
+      }
+    ],
+    "num_unrecoverable": 0,
+    "selection_method": "deepest",
+    "max_depth": 4,
+    "selected_depth": 4,
+    "selection_tie": false,
+    "idx": 13,
+    "ys": [
+      "C U L L A\nA L U L A\nV E L U M\nI _ _ _ _\nL _ _ _ _"
+    ],
+    "infos": [
+      {
+        "r_letter": 0.0,
+        "r_word": 0.0,
+        "r_game": false,
+        "r": 0.0
+      }
+    ],
+    "usage_this_puzzle": {
+      "completion_tokens": 46322,
+      "prompt_tokens": 33515,
+      "cost": 0.2651250000000003
+    },
+    "usage_so_far": {
+      "completion_tokens": 356785,
+      "prompt_tokens": 266695,
+      "cost": 2.0506200000000003
+    },
+    "config": {
+      "backend": "bedrock",
+      "temperature": 0,
+      "task": "crosswords",
+      "task_start_index": 9,
+      "task_end_index": 20,
+      "naive_run": false,
+      "prompt_sample": null,
+      "method_generate": null,
+      "method_evaluate": null,
+      "method_select": "greedy",
+      "n_generate_sample": 5,
+      "n_evaluate_sample": 1,
+      "n_select_sample": 1,
+      "method_search": "dfs_crossword_fixed_k2",
+      "v_th": 0.5,
+      "node_budget": 50,
+      "verbose": true,
+      "resume": false,
+      "max_per_state": 3,
+      "no_prune": false,
+      "crossword_file": "mini0505_0_100_5.json",
+      "selection_method": "deepest"
+    }
+  },
+  {
+    "nodes_explored": 15,
+    "candidates_evaluated": 105,
+    "candidates_pruned": 90,
+    "backtracks": [
+      {
+        "from_depth": 3,
+        "to_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 1 word(s) marked impossible",
+        "rejected_action": "h3. abate",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 2,
+        "to_depth": 0,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 2 word(s) marked impossible",
+        "rejected_action": "h5. nipas",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 2,
+        "to_depth": 0,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 1 word(s) marked impossible",
+        "rejected_action": "h3. abase",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 4,
+        "to_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 3 word(s) marked impossible",
+        "rejected_action": "h4. rinse",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 3,
+        "to_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 1 word(s) marked impossible",
+        "rejected_action": "h5. attap",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 3,
+        "to_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 4 word(s) marked impossible",
+        "rejected_action": "h1. orbit",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 3,
+        "to_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 4 word(s) marked impossible",
+        "rejected_action": "h3. orate",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 1,
+        "to_depth": 0,
+        "jump": 1,
+        "degenerate": true,
+        "reason": "all candidates exhausted",
+        "rejected_action": "h2. mulct",
+        "beta_model_call": false
+      }
+    ],
+    "solution": {
+      "actions": [
+        "h2. mulct",
+        "v3. alant",
+        "h3. abate",
+        "h4. rinse"
+      ],
+      "board": "__A__MULCTABATERINSE__T__",
+      "r_word": 0.2,
+      "r_letter": 0.48,
+      "r_game": false
+    },
+    "method": "dfs_crossword_fixed_k2",
+    "_live_explore_counter": 15,
+    "num_backtracks": 8,
+    "mean_jump_size": 1.875,
+    "pct_jumps_gt1": 0.875,
+    "num_backtracks_raw": 8,
+    "mean_jump_size_raw": 1.875,
+    "pct_jumps_gt1_raw": 0.875,
+    "num_logical_backtracks": 8,
+    "mean_jump_size_merged": 1.875,
+    "pct_jumps_gt1_merged": 0.875,
+    "beta_calls": 0,
+    "num_cascaded_calls": 0,
+    "pct_cascaded_calls": 0.0,
+    "cascade_chain_length_histogram": {},
+    "backtracks_merged": [
+      {
+        "origin_depth": 3,
+        "final_target_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 1 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 3,
+            "to_depth": 1,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 1 word(s) marked impossible",
+            "rejected_action": "h3. abate",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 2,
+        "final_target_depth": 0,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 2 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 2,
+            "to_depth": 0,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 2 word(s) marked impossible",
+            "rejected_action": "h5. nipas",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 2,
+        "final_target_depth": 0,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 1 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 2,
+            "to_depth": 0,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 1 word(s) marked impossible",
+            "rejected_action": "h3. abase",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 4,
+        "final_target_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 3 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 4,
+            "to_depth": 2,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 3 word(s) marked impossible",
+            "rejected_action": "h4. rinse",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 3,
+        "final_target_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 1 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 3,
+            "to_depth": 1,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 1 word(s) marked impossible",
+            "rejected_action": "h5. attap",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 3,
+        "final_target_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 4 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 3,
+            "to_depth": 1,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 4 word(s) marked impossible",
+            "rejected_action": "h1. orbit",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 3,
+        "final_target_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 4 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 3,
+            "to_depth": 1,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 4 word(s) marked impossible",
+            "rejected_action": "h3. orate",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 1,
+        "final_target_depth": 0,
+        "jump": 1,
+        "degenerate": true,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "all candidates exhausted"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 1,
+            "to_depth": 0,
+            "jump": 1,
+            "degenerate": true,
+            "reason": "all candidates exhausted",
+            "rejected_action": "h2. mulct",
+            "beta_model_call": false
+          }
+        ]
+      }
+    ],
+    "num_unrecoverable": 0,
+    "selection_method": "deepest",
+    "max_depth": 4,
+    "selected_depth": 4,
+    "selection_tie": false,
+    "idx": 14,
+    "ys": [
+      "_ _ A _ _\nM U L C T\nA B A T E\nR I N S E\n_ _ T _ _"
+    ],
+    "infos": [
+      {
+        "r_letter": 0.48,
+        "r_word": 0.2,
+        "r_game": false,
+        "r": 0.2
+      }
+    ],
+    "usage_this_puzzle": {
+      "completion_tokens": 46865,
+      "prompt_tokens": 52286,
+      "cost": 0.2866109999999997
+    },
+    "usage_so_far": {
+      "completion_tokens": 403650,
+      "prompt_tokens": 318981,
+      "cost": 2.337231
+    },
+    "config": {
+      "backend": "bedrock",
+      "temperature": 0,
+      "task": "crosswords",
+      "task_start_index": 9,
+      "task_end_index": 20,
+      "naive_run": false,
+      "prompt_sample": null,
+      "method_generate": null,
+      "method_evaluate": null,
+      "method_select": "greedy",
+      "n_generate_sample": 5,
+      "n_evaluate_sample": 1,
+      "n_select_sample": 1,
+      "method_search": "dfs_crossword_fixed_k2",
+      "v_th": 0.5,
+      "node_budget": 50,
+      "verbose": true,
+      "resume": false,
+      "max_per_state": 3,
+      "no_prune": false,
+      "crossword_file": "mini0505_0_100_5.json",
+      "selection_method": "deepest"
+    }
+  },
+  {
+    "nodes_explored": 0,
+    "candidates_evaluated": 0,
+    "candidates_pruned": 0,
+    "backtracks": [],
+    "solution": null,
+    "method": "dfs_crossword_fixed_k2",
+    "num_backtracks": 0,
+    "mean_jump_size": 0.0,
+    "pct_jumps_gt1": 0.0,
+    "num_backtracks_raw": 0,
+    "mean_jump_size_raw": 0.0,
+    "pct_jumps_gt1_raw": 0.0,
+    "num_logical_backtracks": 0,
+    "mean_jump_size_merged": 0.0,
+    "pct_jumps_gt1_merged": 0.0,
+    "beta_calls": 0,
+    "num_cascaded_calls": 0,
+    "pct_cascaded_calls": 0.0,
+    "cascade_chain_length_histogram": {},
+    "backtracks_merged": [],
+    "num_unrecoverable": 0,
+    "selection_method": "deepest",
+    "max_depth": null,
+    "selected_depth": null,
+    "selection_tie": null,
+    "idx": 15,
+    "ys": [
+      "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _"
+    ],
+    "infos": [
+      {
+        "r_letter": 0.0,
+        "r_word": 0.0,
+        "r_game": false,
+        "r": 0.0
+      }
+    ],
+    "usage_this_puzzle": {
+      "completion_tokens": 3152,
+      "prompt_tokens": 1395,
+      "cost": 0.017155000000000253
+    },
+    "usage_so_far": {
+      "completion_tokens": 406802,
+      "prompt_tokens": 320376,
+      "cost": 2.3543860000000003
+    },
+    "config": {
+      "backend": "bedrock",
+      "temperature": 0,
+      "task": "crosswords",
+      "task_start_index": 9,
+      "task_end_index": 20,
+      "naive_run": false,
+      "prompt_sample": null,
+      "method_generate": null,
+      "method_evaluate": null,
+      "method_select": "greedy",
+      "n_generate_sample": 5,
+      "n_evaluate_sample": 1,
+      "n_select_sample": 1,
+      "method_search": "dfs_crossword_fixed_k2",
+      "v_th": 0.5,
+      "node_budget": 50,
+      "verbose": true,
+      "resume": false,
+      "max_per_state": 3,
+      "no_prune": false,
+      "crossword_file": "mini0505_0_100_5.json",
+      "selection_method": "deepest"
+    }
+  },
+  {
+    "nodes_explored": 0,
+    "candidates_evaluated": 0,
+    "candidates_pruned": 0,
+    "backtracks": [],
+    "solution": null,
+    "method": "dfs_crossword_fixed_k2",
+    "num_backtracks": 0,
+    "mean_jump_size": 0.0,
+    "pct_jumps_gt1": 0.0,
+    "num_backtracks_raw": 0,
+    "mean_jump_size_raw": 0.0,
+    "pct_jumps_gt1_raw": 0.0,
+    "num_logical_backtracks": 0,
+    "mean_jump_size_merged": 0.0,
+    "pct_jumps_gt1_merged": 0.0,
+    "beta_calls": 0,
+    "num_cascaded_calls": 0,
+    "pct_cascaded_calls": 0.0,
+    "cascade_chain_length_histogram": {},
+    "backtracks_merged": [],
+    "num_unrecoverable": 0,
+    "selection_method": "deepest",
+    "max_depth": null,
+    "selected_depth": null,
+    "selection_tie": null,
+    "idx": 16,
+    "ys": [
+      "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _"
+    ],
+    "infos": [
+      {
+        "r_letter": 0.0,
+        "r_word": 0.0,
+        "r_game": false,
+        "r": 0.0
+      }
+    ],
+    "usage_this_puzzle": {
+      "completion_tokens": 3722,
+      "prompt_tokens": 1255,
+      "cost": 0.0198649999999998
+    },
+    "usage_so_far": {
+      "completion_tokens": 410524,
+      "prompt_tokens": 321631,
+      "cost": 2.374251
+    },
+    "config": {
+      "backend": "bedrock",
+      "temperature": 0,
+      "task": "crosswords",
+      "task_start_index": 9,
+      "task_end_index": 20,
+      "naive_run": false,
+      "prompt_sample": null,
+      "method_generate": null,
+      "method_evaluate": null,
+      "method_select": "greedy",
+      "n_generate_sample": 5,
+      "n_evaluate_sample": 1,
+      "n_select_sample": 1,
+      "method_search": "dfs_crossword_fixed_k2",
+      "v_th": 0.5,
+      "node_budget": 50,
+      "verbose": true,
+      "resume": false,
+      "max_per_state": 3,
+      "no_prune": false,
+      "crossword_file": "mini0505_0_100_5.json",
+      "selection_method": "deepest"
+    }
+  },
+  {
+    "nodes_explored": 0,
+    "candidates_evaluated": 0,
+    "candidates_pruned": 0,
+    "backtracks": [],
+    "solution": null,
+    "method": "dfs_crossword_fixed_k2",
+    "num_backtracks": 0,
+    "mean_jump_size": 0.0,
+    "pct_jumps_gt1": 0.0,
+    "num_backtracks_raw": 0,
+    "mean_jump_size_raw": 0.0,
+    "pct_jumps_gt1_raw": 0.0,
+    "num_logical_backtracks": 0,
+    "mean_jump_size_merged": 0.0,
+    "pct_jumps_gt1_merged": 0.0,
+    "beta_calls": 0,
+    "num_cascaded_calls": 0,
+    "pct_cascaded_calls": 0.0,
+    "cascade_chain_length_histogram": {},
+    "backtracks_merged": [],
+    "num_unrecoverable": 0,
+    "selection_method": "deepest",
+    "max_depth": null,
+    "selected_depth": null,
+    "selection_tie": null,
+    "idx": 17,
+    "ys": [
+      "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _"
+    ],
+    "infos": [
+      {
+        "r_letter": 0.0,
+        "r_word": 0.0,
+        "r_game": false,
+        "r": 0.0
+      }
+    ],
+    "usage_this_puzzle": {
+      "completion_tokens": 3479,
+      "prompt_tokens": 1440,
+      "cost": 0.018835000000000157
+    },
+    "usage_so_far": {
+      "completion_tokens": 414003,
+      "prompt_tokens": 323071,
+      "cost": 2.3930860000000003
+    },
+    "config": {
+      "backend": "bedrock",
+      "temperature": 0,
+      "task": "crosswords",
+      "task_start_index": 9,
+      "task_end_index": 20,
+      "naive_run": false,
+      "prompt_sample": null,
+      "method_generate": null,
+      "method_evaluate": null,
+      "method_select": "greedy",
+      "n_generate_sample": 5,
+      "n_evaluate_sample": 1,
+      "n_select_sample": 1,
+      "method_search": "dfs_crossword_fixed_k2",
+      "v_th": 0.5,
+      "node_budget": 50,
+      "verbose": true,
+      "resume": false,
+      "max_per_state": 3,
+      "no_prune": false,
+      "crossword_file": "mini0505_0_100_5.json",
+      "selection_method": "deepest"
+    }
+  },
+  {
+    "nodes_explored": 50,
+    "candidates_evaluated": 195,
+    "candidates_pruned": 145,
+    "backtracks": [
+      {
+        "from_depth": 4,
+        "to_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 1 word(s) marked impossible",
+        "rejected_action": "h3. pills",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 4,
+        "to_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 1 word(s) marked impossible",
+        "rejected_action": "h2. irade",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 3,
+        "to_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 1 word(s) marked impossible",
+        "rejected_action": "h2. irade",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 2,
+        "to_depth": 0,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 1 word(s) marked impossible",
+        "rejected_action": "h4. haler",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 3,
+        "to_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 1 word(s) marked impossible",
+        "rejected_action": "h1. pipit",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 6,
+        "to_depth": 4,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 1 word(s) marked impossible",
+        "rejected_action": "h1. pipit",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 5,
+        "to_depth": 3,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "no candidates proposed",
+        "rejected_action": "v3. palla",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 5,
+        "to_depth": 3,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 2 word(s) marked impossible",
+        "rejected_action": "h3. silla",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 6,
+        "to_depth": 4,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 1 word(s) marked impossible",
+        "rejected_action": "h1. pipit",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 5,
+        "to_depth": 3,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "no candidates proposed",
+        "rejected_action": "v3. palla",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 3,
+        "to_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "all candidates exhausted",
+        "rejected_action": "v4. idler",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 4,
+        "to_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "no candidates proposed",
+        "rejected_action": "h5. unary",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 6,
+        "to_depth": 4,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "no candidates proposed",
+        "rejected_action": "h1. pipit",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 6,
+        "to_depth": 4,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "no candidates proposed",
+        "rejected_action": "v4. idler",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 7,
+        "to_depth": 5,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 2 word(s) marked impossible",
+        "rejected_action": "h1. pipit",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 10,
+        "to_depth": 8,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "board complete (10/10 slots filled)",
+        "rejected_action": "v2. irian",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 10,
+        "to_depth": 8,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "board complete (10/10 slots filled)",
+        "rejected_action": "v1. pishu",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 8,
+        "to_depth": 6,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "all candidates exhausted",
+        "rejected_action": "v4. idler",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 6,
+        "to_depth": 4,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "all candidates exhausted",
+        "rejected_action": "h5. unary",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 4,
+        "to_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "all candidates exhausted",
+        "rejected_action": "h3. silla",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 3,
+        "to_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 1 word(s) marked impossible",
+        "rejected_action": "h1. pipit",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 1,
+        "to_depth": 0,
+        "jump": 1,
+        "degenerate": true,
+        "reason": "all candidates exhausted",
+        "rejected_action": "h2. irade",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 5,
+        "to_depth": 3,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 1 word(s) marked impossible",
+        "rejected_action": "h1. pipit",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 4,
+        "to_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 1 word(s) marked impossible",
+        "rejected_action": "h1. pipit",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 2,
+        "to_depth": 0,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "all candidates exhausted",
+        "rejected_action": "v4. idler",
+        "beta_model_call": false
+      }
+    ],
+    "solution": {
+      "actions": [
+        "h2. irade",
+        "v3. palla",
+        "v5. teary",
+        "h3. silla",
+        "h4. haler",
+        "h5. unary",
+        "h1. pipit",
+        "v4. idler",
+        "v1. pishu",
+        "v2. irian"
+      ],
+      "board": "PIPITIRADESILLAHALERUNARY",
+      "r_word": 1.0,
+      "r_letter": 1.0,
+      "r_game": true
+    },
+    "method": "dfs_crossword_fixed_k2",
+    "_live_explore_counter": 50,
+    "num_backtracks": 25,
+    "mean_jump_size": 1.96,
+    "pct_jumps_gt1": 0.96,
+    "num_backtracks_raw": 25,
+    "mean_jump_size_raw": 1.96,
+    "pct_jumps_gt1_raw": 0.96,
+    "num_logical_backtracks": 25,
+    "mean_jump_size_merged": 1.96,
+    "pct_jumps_gt1_merged": 0.96,
+    "beta_calls": 0,
+    "num_cascaded_calls": 0,
+    "pct_cascaded_calls": 0.0,
+    "cascade_chain_length_histogram": {},
+    "backtracks_merged": [
+      {
+        "origin_depth": 4,
+        "final_target_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 1 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 4,
+            "to_depth": 2,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 1 word(s) marked impossible",
+            "rejected_action": "h3. pills",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 4,
+        "final_target_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 1 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 4,
+            "to_depth": 2,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 1 word(s) marked impossible",
+            "rejected_action": "h2. irade",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 3,
+        "final_target_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 1 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 3,
+            "to_depth": 1,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 1 word(s) marked impossible",
+            "rejected_action": "h2. irade",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 2,
+        "final_target_depth": 0,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 1 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 2,
+            "to_depth": 0,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 1 word(s) marked impossible",
+            "rejected_action": "h4. haler",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 3,
+        "final_target_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 1 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 3,
+            "to_depth": 1,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 1 word(s) marked impossible",
+            "rejected_action": "h1. pipit",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 6,
+        "final_target_depth": 4,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 1 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 6,
+            "to_depth": 4,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 1 word(s) marked impossible",
+            "rejected_action": "h1. pipit",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 5,
+        "final_target_depth": 3,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "no candidates proposed"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 5,
+            "to_depth": 3,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "no candidates proposed",
+            "rejected_action": "v3. palla",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 5,
+        "final_target_depth": 3,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 2 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 5,
+            "to_depth": 3,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 2 word(s) marked impossible",
+            "rejected_action": "h3. silla",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 6,
+        "final_target_depth": 4,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 1 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 6,
+            "to_depth": 4,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 1 word(s) marked impossible",
+            "rejected_action": "h1. pipit",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 5,
+        "final_target_depth": 3,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "no candidates proposed"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 5,
+            "to_depth": 3,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "no candidates proposed",
+            "rejected_action": "v3. palla",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 3,
+        "final_target_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "all candidates exhausted"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 3,
+            "to_depth": 1,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "all candidates exhausted",
+            "rejected_action": "v4. idler",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 4,
+        "final_target_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "no candidates proposed"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 4,
+            "to_depth": 2,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "no candidates proposed",
+            "rejected_action": "h5. unary",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 6,
+        "final_target_depth": 4,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "no candidates proposed"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 6,
+            "to_depth": 4,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "no candidates proposed",
+            "rejected_action": "h1. pipit",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 6,
+        "final_target_depth": 4,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "no candidates proposed"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 6,
+            "to_depth": 4,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "no candidates proposed",
+            "rejected_action": "v4. idler",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 7,
+        "final_target_depth": 5,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 2 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 7,
+            "to_depth": 5,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 2 word(s) marked impossible",
+            "rejected_action": "h1. pipit",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 10,
+        "final_target_depth": 8,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "board complete (10/10 slots filled)"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 10,
+            "to_depth": 8,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "board complete (10/10 slots filled)",
+            "rejected_action": "v2. irian",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 10,
+        "final_target_depth": 8,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "board complete (10/10 slots filled)"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 10,
+            "to_depth": 8,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "board complete (10/10 slots filled)",
+            "rejected_action": "v1. pishu",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 8,
+        "final_target_depth": 6,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "all candidates exhausted"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 8,
+            "to_depth": 6,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "all candidates exhausted",
+            "rejected_action": "v4. idler",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 6,
+        "final_target_depth": 4,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "all candidates exhausted"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 6,
+            "to_depth": 4,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "all candidates exhausted",
+            "rejected_action": "h5. unary",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 4,
+        "final_target_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "all candidates exhausted"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 4,
+            "to_depth": 2,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "all candidates exhausted",
+            "rejected_action": "h3. silla",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 3,
+        "final_target_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 1 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 3,
+            "to_depth": 1,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 1 word(s) marked impossible",
+            "rejected_action": "h1. pipit",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 1,
+        "final_target_depth": 0,
+        "jump": 1,
+        "degenerate": true,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "all candidates exhausted"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 1,
+            "to_depth": 0,
+            "jump": 1,
+            "degenerate": true,
+            "reason": "all candidates exhausted",
+            "rejected_action": "h2. irade",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 5,
+        "final_target_depth": 3,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 1 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 5,
+            "to_depth": 3,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 1 word(s) marked impossible",
+            "rejected_action": "h1. pipit",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 4,
+        "final_target_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 1 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 4,
+            "to_depth": 2,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 1 word(s) marked impossible",
+            "rejected_action": "h1. pipit",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 2,
+        "final_target_depth": 0,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "all candidates exhausted"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 2,
+            "to_depth": 0,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "all candidates exhausted",
+            "rejected_action": "v4. idler",
+            "beta_model_call": false
+          }
+        ]
+      }
+    ],
+    "num_unrecoverable": 0,
+    "selection_method": "deepest",
+    "max_depth": 10,
+    "selected_depth": 10,
+    "selection_tie": true,
+    "idx": 18,
+    "ys": [
+      "P I P I T\nI R A D E\nS I L L A\nH A L E R\nU N A R Y"
+    ],
+    "infos": [
+      {
+        "r_letter": 1.0,
+        "r_word": 1.0,
+        "r_game": true,
+        "r": 1.0
+      }
+    ],
+    "usage_this_puzzle": {
+      "completion_tokens": 142878,
+      "prompt_tokens": 118162,
+      "cost": 0.8325519999999997
+    },
+    "usage_so_far": {
+      "completion_tokens": 556881,
+      "prompt_tokens": 441233,
+      "cost": 3.225638
+    },
+    "config": {
+      "backend": "bedrock",
+      "temperature": 0,
+      "task": "crosswords",
+      "task_start_index": 9,
+      "task_end_index": 20,
+      "naive_run": false,
+      "prompt_sample": null,
+      "method_generate": null,
+      "method_evaluate": null,
+      "method_select": "greedy",
+      "n_generate_sample": 5,
+      "n_evaluate_sample": 1,
+      "n_select_sample": 1,
+      "method_search": "dfs_crossword_fixed_k2",
+      "v_th": 0.5,
+      "node_budget": 50,
+      "verbose": true,
+      "resume": false,
+      "max_per_state": 3,
+      "no_prune": false,
+      "crossword_file": "mini0505_0_100_5.json",
+      "selection_method": "deepest"
+    }
+  },
+  {
+    "nodes_explored": 16,
+    "candidates_evaluated": 74,
+    "candidates_pruned": 58,
+    "backtracks": [
+      {
+        "from_depth": 2,
+        "to_depth": 0,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "no candidates proposed",
+        "rejected_action": "v2. ricer",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 4,
+        "to_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 4 word(s) marked impossible",
+        "rejected_action": "h2. uteri",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 4,
+        "to_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 1 word(s) marked impossible",
+        "rejected_action": "h5. tress",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 3,
+        "to_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 1 word(s) marked impossible",
+        "rejected_action": "v3. irony",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 4,
+        "to_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "pruned: 1 word(s) marked impossible",
+        "rejected_action": "h5. tress",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 3,
+        "to_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "no candidates proposed",
+        "rejected_action": "h5. tread",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 2,
+        "to_depth": 0,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "no candidates proposed",
+        "rejected_action": "h2. simar",
+        "beta_model_call": false
+      },
+      {
+        "from_depth": 2,
+        "to_depth": 0,
+        "jump": 2,
+        "degenerate": false,
+        "reason": "no candidates proposed",
+        "rejected_action": "h1. print",
+        "beta_model_call": false
+      }
+    ],
+    "solution": {
+      "actions": [
+        "h4. sense",
+        "h1. print",
+        "v1. pulse",
+        "h2. uteri"
+      ],
+      "board": "PRINTUTERIL____SENSEE____",
+      "r_word": 0.2,
+      "r_letter": 0.4,
+      "r_game": false
+    },
+    "method": "dfs_crossword_fixed_k2",
+    "_live_explore_counter": 16,
+    "num_backtracks": 8,
+    "mean_jump_size": 2.0,
+    "pct_jumps_gt1": 1.0,
+    "num_backtracks_raw": 8,
+    "mean_jump_size_raw": 2.0,
+    "pct_jumps_gt1_raw": 1.0,
+    "num_logical_backtracks": 8,
+    "mean_jump_size_merged": 2.0,
+    "pct_jumps_gt1_merged": 1.0,
+    "beta_calls": 0,
+    "num_cascaded_calls": 0,
+    "pct_cascaded_calls": 0.0,
+    "cascade_chain_length_histogram": {},
+    "backtracks_merged": [
+      {
+        "origin_depth": 2,
+        "final_target_depth": 0,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "no candidates proposed"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 2,
+            "to_depth": 0,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "no candidates proposed",
+            "rejected_action": "v2. ricer",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 4,
+        "final_target_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 4 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 4,
+            "to_depth": 2,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 4 word(s) marked impossible",
+            "rejected_action": "h2. uteri",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 4,
+        "final_target_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 1 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 4,
+            "to_depth": 2,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 1 word(s) marked impossible",
+            "rejected_action": "h5. tress",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 3,
+        "final_target_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 1 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 3,
+            "to_depth": 1,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 1 word(s) marked impossible",
+            "rejected_action": "v3. irony",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 4,
+        "final_target_depth": 2,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "pruned: 1 word(s) marked impossible"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 4,
+            "to_depth": 2,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "pruned: 1 word(s) marked impossible",
+            "rejected_action": "h5. tress",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 3,
+        "final_target_depth": 1,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "no candidates proposed"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 3,
+            "to_depth": 1,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "no candidates proposed",
+            "rejected_action": "h5. tread",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 2,
+        "final_target_depth": 0,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "no candidates proposed"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 2,
+            "to_depth": 0,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "no candidates proposed",
+            "rejected_action": "h2. simar",
+            "beta_model_call": false
+          }
+        ]
+      },
+      {
+        "origin_depth": 2,
+        "final_target_depth": 0,
+        "jump": 2,
+        "degenerate": false,
+        "cascade_chain_length": 1,
+        "reasons": [
+          "no candidates proposed"
+        ],
+        "raw_events": [
+          {
+            "from_depth": 2,
+            "to_depth": 0,
+            "jump": 2,
+            "degenerate": false,
+            "reason": "no candidates proposed",
+            "rejected_action": "h1. print",
+            "beta_model_call": false
+          }
+        ]
+      }
+    ],
+    "num_unrecoverable": 0,
+    "selection_method": "deepest",
+    "max_depth": 4,
+    "selected_depth": 4,
+    "selection_tie": true,
+    "idx": 19,
+    "ys": [
+      "P R I N T\nU T E R I\nL _ _ _ _\nS E N S E\nE _ _ _ _"
+    ],
+    "infos": [
+      {
+        "r_letter": 0.4,
+        "r_word": 0.2,
+        "r_game": false,
+        "r": 0.2
+      }
+    ],
+    "usage_this_puzzle": {
+      "completion_tokens": 61514,
+      "prompt_tokens": 45891,
+      "cost": 0.35346100000000025
+    },
+    "usage_so_far": {
+      "completion_tokens": 618395,
+      "prompt_tokens": 487124,
+      "cost": 3.5790990000000003
+    },
+    "config": {
+      "backend": "bedrock",
+      "temperature": 0,
+      "task": "crosswords",
+      "task_start_index": 9,
+      "task_end_index": 20,
+      "naive_run": false,
+      "prompt_sample": null,
+      "method_generate": null,
+      "method_evaluate": null,
+      "method_select": "greedy",
+      "n_generate_sample": 5,
+      "n_evaluate_sample": 1,
+      "n_select_sample": 1,
+      "method_search": "dfs_crossword_fixed_k2",
+      "v_th": 0.5,
+      "node_budget": 50,
+      "verbose": true,
+      "resume": false,
+      "max_per_state": 3,
+      "no_prune": false,
+      "crossword_file": "mini0505_0_100_5.json",
+      "selection_method": "deepest"
+    }
+  }
+]

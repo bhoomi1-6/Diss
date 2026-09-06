@@ -39,19 +39,19 @@
     "crossword_file": "mini0505_0_100_5.json",
     "n_generate_sample": 5,
     "n_evaluate_sample": 1,
-    "node_budget": 100,
+    "node_budget": 50,
     "max_per_state": 3,
     "v_th": 0.5,
     "pruning_enabled": true,
     "temperature": 0,
     "backend": "bedrock",
     "selection_method": "deepest",
-    "cli_command_template": "python run.py --task crosswords --method_search <A|B|C|D method_search value> --crossword_file mini0505_0_100_5.json --task_start_index 0 --task_end_index 20 --n_generate_sample 5 --node_budget 100 --max_per_state 3 --backend bedrock --verbose"
+    "cli_command_template": "python run.py --task crosswords --method_search <A|B|C|D method_search value> --crossword_file mini0505_0_100_5.json --task_start_index 0 --task_end_index 20 --n_generate_sample 5 --node_budget 50 --max_per_state 3 --backend bedrock --verbose"
   },
 
   "_confirmed_decisions": {
     "game24_n_generate_sample_and_node_budget": "Explicitly finalized in this session: n_generate_sample=3, node_budget=50 for all four Game24 conditions.",
-    "crossword_n_generate_sample_and_node_budget": "Explicitly finalized in this session: n_generate_sample=5, node_budget=100, max_per_state=3 for all four Crossword conditions -- matches the original ToT paper's stated crossword setup.",
+    "crossword_n_generate_sample_and_node_budget": "Explicitly finalized in this session: n_generate_sample=5, node_budget=50, max_per_state=3 for all four Crossword conditions. node_budget was reduced from the paper-matching value of 100 to 50 (matching Game24's budget) to conserve AWS Bedrock credits; max_per_state=3 was kept unchanged.",
     "v_th": "Explicitly confirmed earlier this session: 'Keep v_th=0.5 ... treat v_th as a fixed common parameter rather than introduce another experimental variable.'",
     "n_evaluate_sample": "Explicitly confirmed alongside v_th in the same decision (both benchmarks: 1).",
     "backend_and_temperature": "bedrock / temperature=0 have been used consistently and without exception across every pilot/dev run in this project; never overridden.",
