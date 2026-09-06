@@ -1,94 +1,166 @@
-# Official Repo of Tree of Thoughts (ToT)
+# Tree of Thoughts: Backtracking Mechanisms in DFS Search (Dissertation Fork)
 
-<p>
-    <a href="https://badge.fury.io/py/tree-of-thoughts-llm">
-        <img src="https://badge.fury.io/py/tree-of-thoughts-llm.svg">
-    </a>
-    <a href="https://www.python.org/">
-        <img alt="Build" src="https://img.shields.io/badge/Python-3.7+-1f425f.svg?color=purple">
-    </a>
-    <a href="https://copyright.princeton.edu/policy">
-        <img alt="License" src="https://img.shields.io/badge/License-MIT-blue">
-    </a>
-    <a href="https://zenodo.org/badge/latestdoi/642099326">
-        <img src="https://zenodo.org/badge/642099326.svg">
-    </a>
-</p>
+This repository is a dissertation project built on top of the official
+[Tree of Thoughts (ToT)](https://github.com/princeton-nlp/tree-of-thought-llm)
+codebase. It studies how an LLM-based DFS search backtracks when it fails
+down a branch: specifically, whether letting the model choose *how far* to
+jump back up the tree (rather than always retreating one level to the
+parent) changes search efficiency and solution quality.
 
-![teaser](pics/teaser.png)
+The original ToT paper's BFS/naive-sampling code, tasks, and prompts are
+unchanged and still run as documented below. The additions specific to
+this dissertation are the four DFS backtracking conditions (A/B/C/D)
+implemented in [`src/tot/methods/dfs.py`](src/tot/methods/dfs.py) (Game
+of 24) and [`src/tot/methods/dfs_crossward.py`](src/tot/methods/dfs_crossward.py)
+(Mini Crosswords), the AWS Bedrock backend in
+[`src/tot/models.py`](src/tot/models.py), and the experiment-management
+scripts and logs described below.
 
-Official implementation for paper [Tree of Thoughts: Deliberate Problem Solving with Large Language Models](https://arxiv.org/abs/2305.10601) with code, prompts, model outputs.
-Also check [its tweet thread](https://twitter.com/ShunyuYao12/status/1659357547474681857) in 1min.
+> **Note on live reproduction:** the AWS Bedrock inference profile used for
+> this dissertation's runs has since been deleted, and the associated AWS
+> credits are exhausted. The setup and commands below are correct and were
+> used to produce every result in `logs/final_experiment/`, but re-running
+> them requires your own AWS account with Bedrock model access and a new
+> inference profile/model ARN (see Setup, step 2-3) — the code itself is
+> not tied to my account. The complete raw logs and summaries for all four
+> conditions on both benchmarks are committed under `logs/final_experiment/`
+> so the results can be verified and re-analyzed without needing to re-run
+> any LLM calls.
 
+## The four backtracking conditions
 
+Both benchmarks implement the same four conditions via `--method_search`:
 
+| Condition | `--method_search` (game24 / crosswords) | Behaviour |
+|---|---|---|
+| **A — Parent** | `dfs` / `dfs_crossword` | Always backtracks exactly one level, to the immediate parent. No model call for backtracking. |
+| **B — β(c), unconstrained** | `dfs_nonparent` / `dfs_crossword_nonparent` | Model is asked to choose which ancestor to jump back to; the parent is an allowed answer. |
+| **C — Fixed k=2** | `dfs_fixed_k2` / `dfs_crossword_fixed_k2` | Deterministically jumps back exactly 2 levels. **No model call at all** — this is the only condition that is model-free. |
+| **D — β(c), constrained** | `dfs_nonparent_strict` / `dfs_crossword_nonparent_strict` | Model chooses an ancestor as in B, but the parent is rejected as an illegal answer; falls back deterministically (to the nearest legal ancestor, or the root) only when the model returns an invalid/unparseable/parent response. Still a model call every step — **this condition is model-guided, just constrained**, not "non-model." |
 
+A and C never call the model to decide where to backtrack; B and D do.
+The axis that actually separates C and D from B in the results is
+*whether a parent-equivalent jump can ever occur* (C and D structurally
+avoid it; B's prompt allows it and the model uses it often) — not a
+model/non-model split, since D is model-guided.
 
 ## Setup
-1. Set up OpenAI API key and store in environment variable ``OPENAI_API_KEY`` (see [here](https://help.openai.com/en/articles/5112595-best-practices-for-api-key-safety)). 
 
-2. Install `tot` package in two ways:
-- Option 1: Install from PyPI
+1. **Clone and create a virtual environment**
+   ```bash
+   git clone <this-repo-url>
+   cd tree-of-thought-llm
+   python3 -m venv venv
+   source venv/bin/activate
+   pip install -r requirements.txt
+   pip install -e .   # installs the `tot` package
+   ```
+
+2. **Configure AWS Bedrock access.** This fork calls Claude through AWS
+   Bedrock rather than the OpenAI API. You need:
+   - AWS credentials with `bedrock:InvokeModel` permission, available via
+     the normal AWS credential chain (e.g. `aws configure`, an
+     `AWS_PROFILE`, or environment variables `AWS_ACCESS_KEY_ID` /
+     `AWS_SECRET_ACCESS_KEY`).
+   - A Bedrock model ID or application inference profile ARN for a Claude
+     model, in a region where you have model access enabled.
+
+3. **Set the model ARN.** Copy the example env file and fill in your own
+   values — do not hardcode this in source, it identifies your AWS
+   account:
+   ```bash
+   cp .env.example .env
+   ```
+   Then edit `.env`:
+   ```
+   BEDROCK_MODEL_ARN=arn:aws:bedrock:<region>:<your-account-id>:application-inference-profile/<your-profile-id>
+   BEDROCK_REGION=us-east-1
+   ```
+   `.env` is gitignored and loaded automatically (`src/tot/models.py`
+   calls `load_dotenv()`).
+
+4. **Smoke-test the setup** on 2 puzzles before running anything large:
+   ```bash
+   ./scripts/run_small_demo.sh game24
+   ./scripts/run_small_demo.sh crosswords
+   ```
+
+## Reproducing the dissertation experiments
+
+Each condition is run via `run.py` with `--task {game24,crosswords}` and
+the corresponding `--method_search` value from the table above. The
+configuration actually used for the final experiment (puzzle ranges,
+sample counts, node budget, pruning, etc.) is recorded in
+[`logs/final_experiment/EXPERIMENT_MANIFEST.json`](logs/final_experiment/EXPERIMENT_MANIFEST.json),
+including the exact CLI command template for each benchmark. In summary:
+
 ```bash
-pip install tree-of-thoughts-llm
+# Game of 24, puzzles 900-999, all four conditions:
+python run.py --task game24 --method_search dfs                    --task_start_index 900 --task_end_index 1000 --n_generate_sample 3 --node_budget 50 --backend bedrock --verbose
+python run.py --task game24 --method_search dfs_nonparent          --task_start_index 900 --task_end_index 1000 --n_generate_sample 3 --node_budget 50 --backend bedrock --verbose
+python run.py --task game24 --method_search dfs_fixed_k2           --task_start_index 900 --task_end_index 1000 --n_generate_sample 3 --node_budget 50 --backend bedrock --verbose
+python run.py --task game24 --method_search dfs_nonparent_strict   --task_start_index 900 --task_end_index 1000 --n_generate_sample 3 --node_budget 50 --backend bedrock --verbose
+
+# Mini Crosswords, 20-puzzle held-out set, all four conditions:
+python run.py --task crosswords --method_search dfs_crossword                  --crossword_file mini0505_0_100_5.json --task_start_index 0 --task_end_index 20 --n_generate_sample 5 --node_budget 50 --max_per_state 3 --backend bedrock --verbose
+python run.py --task crosswords --method_search dfs_crossword_nonparent        --crossword_file mini0505_0_100_5.json --task_start_index 0 --task_end_index 20 --n_generate_sample 5 --node_budget 50 --max_per_state 3 --backend bedrock --verbose
+python run.py --task crosswords --method_search dfs_crossword_fixed_k2         --crossword_file mini0505_0_100_5.json --task_start_index 0 --task_end_index 20 --n_generate_sample 5 --node_budget 50 --max_per_state 3 --backend bedrock --verbose
+python run.py --task crosswords --method_search dfs_crossword_nonparent_strict --crossword_file mini0505_0_100_5.json --task_start_index 0 --task_end_index 20 --n_generate_sample 5 --node_budget 50 --max_per_state 3 --backend bedrock --verbose
 ```
-- Option 2: Install from source
+
+`v_th` (pruning threshold, 0.5) and `n_evaluate_sample` (1) are left at
+their `run.py` defaults for both benchmarks, per the manifest. Add
+`--resume` to any command to skip puzzle indices already recorded in that
+run's checkpoint file, if a run was interrupted.
+
+### Recording a run under the final-experiment naming convention
+
+Rather than calling `run.py` directly for a run you want to keep,
+use the wrapper, which copies the new log files it produced into
+`logs/final_experiment/<task>/<condition>/` under the standardized
+filename described in
+[`logs/final_experiment/NAMING.md`](logs/final_experiment/NAMING.md)
+(your originals in `logs/<task>/` are left untouched):
+
 ```bash
-git clone https://github.com/princeton-nlp/tree-of-thought-llm
-cd tree-of-thought-llm
-pip install -r requirements.txt
-pip install -e .  # install `tot` package
+python scripts/run_final_experiment.py --task game24 --method_search dfs_nonparent \
+    --task_start_index 900 --task_end_index 1000 --n_generate_sample 3 \
+    --node_budget 50 --backend bedrock --verbose
 ```
 
+## Logs and results
 
-## Quick Start
-The following minimal script will attempt to solve the game of 24 with `4 5 6 10` (might be a bit slow as it's using GPT-4):
-```python
-import argparse
-from tot.methods.bfs import solve
-from tot.tasks.game24 import Game24Task
+- `logs/<task>/` — raw output of every `run.py` invocation (pilot runs,
+  dev runs, and final runs alike), named by `run.py` itself.
+- `logs/final_experiment/<task>/<condition>/` — the curated final-run
+  logs for each of the four conditions, one detail JSON + one summary
+  JSON per condition (crosswords also gets a concise per-puzzle
+  `_summary.json`; see `NAMING.md` for the exact convention).
+- `logs/final_experiment/EXPERIMENT_MANIFEST.json` — the intended
+  configuration matrix for the final experiment (puzzle ranges, sample
+  counts, node budget, pruning, selection method) with the reasoning
+  behind each confirmed choice.
 
-args = argparse.Namespace(backend='gpt-4', temperature=0.7, task='game24', naive_run=False, prompt_sample=None, method_generate='propose', method_evaluate='value', method_select='greedy', n_generate_sample=1, n_evaluate_sample=3, n_select_sample=5)
+## Statistical analysis
 
-task = Game24Task()
-ys, infos = solve(args, task, 900)
-print(ys[0])
-```
+The notebooks in [`statistical_analysis/`](statistical_analysis/) consume
+the logs under `logs/final_experiment/` to produce the per-benchmark and
+cross-benchmark results used in the dissertation:
+- `Statistical_analysis_game24.ipynb`
+- `Statistical_analysis_crosswards.ipynb`
+- `Statistical_analysis_cross_benchmark.ipynb`
 
-And the output would be something like (note it's not deterministic, and sometimes the output can be wrong):
-```
-10 - 4 = 6 (left: 5 6 6)
-5 * 6 = 30 (left: 6 30)
-30 - 6 = 24 (left: 24)
-Answer: (5 * (10 - 4)) - 6 = 24
-```
+## Adding a new task
 
-## Paper Experiments
+Unchanged from upstream ToT — see the original instructions:
+* Add a task class in `tot/tasks/` and its data files in `tot/data/`
+  (see `tot/tasks/game24.py`), and register it in `tot/tasks/__init__.py`.
+* Add task-specific prompts in `tot/prompts/` (see `tot/prompts/game24.py`).
 
-Run experiments via ``sh scripts/{game24, text, crosswords}/{standard_sampling, cot_sampling, bfs}.sh``, except in crosswords we use a DFS algorithm for ToT, which can be run via ``scripts/crosswords/search_crosswords-dfs.ipynb``.
+## Citation
 
-The very simple ``run.py`` implements the ToT + BFS algorithm, as well as the naive IO/CoT sampling. Some key arguments:
-
-- ``--naive_run``: if True, run naive IO/CoT sampling instead of ToT + BFS.
--  ``--prompt_sample`` (choices=[``standard``, ``cot``]): sampling prompt
-- ``--method_generate`` (choices=[``sample``, ``propose``]): thought generator, whether to sample independent thoughts (used in Creative Writing) or propose sequential thoughts (used in Game of 24)
-- ``--method_evaluate`` (choices=[``value``, ``vote``]): state evaluator, whether to use the value states independently (used in Game of 24) or vote on states together (used in Creative Writing)
-- ``--n_generate_sample``: number of times to prompt for thought generation
-- ``--n_evaluate_sample``: number of times to prompt for state evaluation
-- ``--n_select_sample``: number of states to keep from each step (i.e. ``b`` in the paper's ToT + BFS algorithm)
-
-
-
-## Paper Trajectories
-``logs/`` contains all the trajectories from the paper's experiments, except for ``logs/game24/gpt-4_0.7_propose1_value3_greedy5_start900_end1000.json`` which was reproduced after the paper (as the original experiment was done in a notebook) and achieved a 69\% score instead of the original 74\% score due to randomness in GPT decoding. We hope to aggregate multiple runs in the future to account for sampling randomness and update the paper, but this shouldn't affect the main conclusions of the paper.
-
-## How to Add A New Task
-Setting up a new task is easy, and mainly involves two steps.
-* Set up a new task class in ``tot/tasks/`` and task files in ``tot/data/``. See ``tot/tasks/game24.py`` for an example. Add the task to ``tot/tasks/__init__.py``.
-* Set up task-specific prompts in ``tot/prompts/``. See ``tot/prompts/game24.py`` for an example. Depending on the nature of the task, choose ``--method_generate`` (choices=[``sample``, ``propose``]) and ``--method_evaluate`` (choices=[``value``, ``vote``]) and their corresponding prompts. 
-
-## Citations
-Please cite the paper and star this repo if you use ToT and find it interesting/useful, thanks! Feel free to contact shunyuyao.cs@gmail.com or open an issue if you have any questions.
+This work builds directly on the Tree of Thoughts paper and codebase.
+If you use this repository, please cite the original paper:
 
 ```bibtex
 @misc{yao2023tree,
@@ -100,3 +172,6 @@ Please cite the paper and star this repo if you use ToT and find it interesting/
       primaryClass={cs.CL}
 }
 ```
+
+Paper: [arxiv.org/abs/2305.10601](https://arxiv.org/abs/2305.10601)
+Original codebase: [github.com/princeton-nlp/tree-of-thought-llm](https://github.com/princeton-nlp/tree-of-thought-llm)
