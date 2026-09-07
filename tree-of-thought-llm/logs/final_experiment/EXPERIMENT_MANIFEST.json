@@ -1,6 +1,5 @@
 {
-  "_comment": "Intended matrix for the FINAL dissertation experiment. Game24 and Crosswords have SEPARATE configuration blocks -- they are deliberately NOT unified under one shared schema, because Game24 has no max_per_state parameter at all (the search has no per-state branching cap) and must never carry one, even as N/A-by-convention in a shared object. This file is NOT a launch trigger; no A/B/C/D batch has been run from it.",
-
+  "_comment": "Intended matrix for the FINAL dissertation experiment. Game24 and Crosswords have SEPARATE configuration blocks"
   "experiment_matrix": {
     "game24": {
       "A_parent":            { "puzzle_range": "900-999", "method_search": "dfs" },
