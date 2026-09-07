@@ -38,12 +38,6 @@ Both benchmarks implement the same four conditions via `--method_search`:
 | **C — Fixed k=2** | `dfs_fixed_k2` / `dfs_crossword_fixed_k2` | Deterministically jumps back exactly 2 levels. **No model call at all** — this is the only condition that is model-free. |
 | **D — β(c), constrained** | `dfs_nonparent_strict` / `dfs_crossword_nonparent_strict` | Model chooses an ancestor as in B, but the parent is rejected as an illegal answer; falls back deterministically (to the nearest legal ancestor, or the root) only when the model returns an invalid/unparseable/parent response. Still a model call every step — **this condition is model-guided, just constrained**, not "non-model." |
 
-A and C never call the model to decide where to backtrack; B and D do.
-The axis that actually separates C and D from B in the results is
-*whether a parent-equivalent jump can ever occur* (C and D structurally
-avoid it; B's prompt allows it and the model uses it often) — not a
-model/non-model split, since D is model-guided.
-
 ## Setup
 
 1. **Clone and create a virtual environment**
