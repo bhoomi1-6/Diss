@@ -1,4 +1,4 @@
-# Tree of Thoughts: Backtracking Mechanisms in DFS Search (Dissertation Fork)
+# Dissertation Fork
 
 This repository is a dissertation project built on top of the official
 [Tree of Thoughts (ToT)](https://github.com/princeton-nlp/tree-of-thought-llm)
